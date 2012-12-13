@@ -1,0 +1,10 @@
+@import url(item.css);
+@import url(colors.css);
+
+#xootagsCloud {
+    margin:                0 auto;
+    border:                1px solid #ccc;
+    border-radius:         3px;
+    width:                 100%;
+    min-height:            150px;
+}

@@ -1,0 +1,19 @@
+<span class="red bold">3.00 ALPHA</span> -> JEN Laurent (Aka Dugris)
+December 1st, 2012 
+<span class="red bold">For XOOPS 2.6+</span>
+
+2.30 RC -> Taiwen Jiang (DJ
+October 12th, 2008
+For XOOPS 2.3+
+
+2.0 -> Taiwen Jiang (DJ
+May 4th, 2008
+For XOOPS 2.3.0
+
+
+1.60
+Jan 3rd, 2007
+Added global search
+
+Oct 29th, 2006
+Minor bugfix by Gizmhail

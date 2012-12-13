@@ -1,0 +1,21 @@
+<{includeq file='module:xootags|xootags_css.html'}>
+
+<{if $moduletitle != ''}>
+    <fieldset>
+        <legend><{$moduletitle}></legend>
+    </fieldset>
+<{/if}>
+
+<{if $welcome}>
+    <div class="xootagsMsg">
+        <{$welcome}>
+    </div>
+<{/if}>
+
+<{$xoopaginate->display()}>
+<{if $xootags_main_mode == "cloud"}>
+    <{includeq file='module:xootags|xootags_cloud.html'}>
+<{elseif $xootags_main_mode == "blog"}>
+    <{includeq file='module:xootags|xootags_blog.html'}>
+<{/if}>
+<{$xoopaginate->display()}>

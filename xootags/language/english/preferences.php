@@ -32,7 +32,7 @@ define("_XOO_CONFIG_DISPLAY_MODE",         "Display mode of the main page");
 define("_XOO_CONFIG_MODE_BLOG",            "Blog");
 define("_XOO_CONFIG_MODE_CLOUD",           "Cloud");
 define("_XOO_CONFIG_MODE_JQUERY",          "Cloud (jquery)");
-define("_XOO_CONFIG_LIMIT_TAG_MAIN",       "Number to display");
+define("_XOO_CONFIG_LIMIT_MAIN",           "Number tags on the main page<br />(0 = no limit)");
 define("_XOO_CONFIG_FONT_MAX",             "Maximum font-size(%) for display");
 define("_XOO_CONFIG_FONT_MIN",             "Minimum font-size(%) for display");
 

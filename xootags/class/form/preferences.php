@@ -72,7 +72,7 @@ class XooTagsPreferencesForm extends XoopsThemeForm
         $category_mode->addOption('cloud',  _XOO_CONFIG_MODE_CLOUD);
         $this->addElement( $category_mode );
         // limit per page
-        $this->addElement( new XoopsFormText(_XOO_CONFIG_LIMIT_TAG_MAIN, 'xootags_limit_tag_main', 1, 10, $xootags_limit_tag_main) );
+        $this->addElement( new XoopsFormText(_XOO_CONFIG_LIMIT_MAIN, 'xootags_limit_tag_main', 1, 10, $xootags_limit_tag_main) );
         // font size
         $this->addElement( new XoopsFormText(_XOO_CONFIG_FONT_MAX, 'xootags_font_max', 1, 10, $xootags_font_max) );
         $this->addElement( new XoopsFormText(_XOO_CONFIG_FONT_MIN, 'xootags_font_min', 1, 10, $xootags_font_min) );

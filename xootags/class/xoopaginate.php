@@ -1,6 +1,6 @@
 <?php
 /**
- * Xoopager : Page navigation manager
+ * Xoopaginate : Page navigation manager
  *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -23,7 +23,7 @@ class Xoopaginate
     private $first = false;
     private $last  = false;
 
-    public function __construct($total_items, $items_perpage, $current_start, $start_name = 'start', $extra_arg = '', $offset = 4)
+    public function __construct($total_items, $items_perpage, $current_start, $start_name = 'start', $extra_arg = '', $offset = 1)
     {        $this->total = intval($total_items);
         $this->perpage = intval($items_perpage);
         $this->current = intval($current_start);

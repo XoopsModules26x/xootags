@@ -51,7 +51,7 @@ foreach( $tags as $k => $tag) {    $tags[$k]['font'] = empty($tags_interval) ? 
 }
 
 // Page navigation
-$paginate = new Xoopaginate($tags_count, $Xootags_config['xootags_limit_tag_main'], $start, 'start', '', 1);
+$paginate = new Xoopaginate($tags_count, $Xootags_config['xootags_limit_tag_main'], $start, 'start', '');
 
 $xoops->tpl()->assign('tags', $tags);
 include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'footer.php';

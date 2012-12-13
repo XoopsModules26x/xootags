@@ -1,0 +1,10 @@
+<style type="text/css">
+<{foreachq from=$tags item=tag name=foo}>
+    .tag<{$tag.tag_id}> {font-size: <{$tag.font}>%; line-height: auto;}
+
+    <{foreachq from=$tag.modules item=module}>
+        .xootags-ico-<{$module.dirname}> {background-image: url('<{$module.image}>');}
+    <{/foreach}>
+
+<{/foreach}>
+</style>

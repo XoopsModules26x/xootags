@@ -76,7 +76,7 @@ function xootags_cloud_edit($options)
 
     $block_form = new XoopsFormElementTray('&nbsp;', '<br />');
     // limit per page
-    $block_form->addElement( new XoopsFormText(_XOO_CONFIG_LIMIT_TAG_MAIN, 'options[0]', 1, 10, $options[0] ) );
+    $block_form->addElement( new XoopsFormText(_XOO_CONFIG_LIMIT_MAIN, 'options[0]', 1, 10, $options[0] ) );
     // font size
     $block_form->addElement( new XoopsFormText(_XOO_CONFIG_FONT_MIN, 'options[1]', 1, 10, $options[1]) );
     $block_form->addElement( new XoopsFormText(_XOO_CONFIG_FONT_MAX, 'options[2]', 1, 10, $options[2]) );

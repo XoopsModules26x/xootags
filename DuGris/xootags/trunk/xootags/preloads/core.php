@@ -20,25 +20,12 @@
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
 
 class XooTagsCorePreload extends XoopsPreloadItem
-{    static public function eventCoreHeaderStart($args)
-    {        $xoops = xoops::getinstance();
-        $xoops->registry()->set('XOOTAGS', false);
-        if (XooTagsCorePreload::isActive()) {            $xoops->registry()->set('XOOTAGS', true);
-        }
-    }
-
-    static public function eventAdminHeaderStart($args)
+{    static public function eventCoreIncludeCommonStart($args)
     {
         $xoops = xoops::getinstance();
         $xoops->registry()->set('XOOTAGS', false);
         if (XooTagsCorePreload::isActive()) {
             $xoops->registry()->set('XOOTAGS', true);
-        }
-    }
-
-    static function eventCoreHeaderEnd($args)
-    {
-        if (XooTagsCorePreload::isActive()) {
             XoopsLoad::addMap(array('xoopsformtags' => dirname(dirname(__FILE__)) . '/class/xoopsformtags.php'));
         }
     }

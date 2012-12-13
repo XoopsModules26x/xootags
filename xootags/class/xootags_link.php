@@ -126,7 +126,7 @@ class xootagsxootags_linkHandler extends XoopsPersistableObjectHandler
         $itemid = intval($itemid);
 
         $xoops = xoops::getinstance();
-        if ( is_null($modid) && $xoops->module->dirname() != 'xootags' ) {            $modid = $xoops->module->getVar('mid');        }
+        if ( is_null($modid) && ( is_object($xoops->module) && $xoops->module->dirname() != 'xootags' ) ) {            $modid = $xoops->module->getVar('mid');        }
 
         if ( !is_null($modid) ) {            $criteria = new CriteriaCompo();
             $criteria->add( new Criteria('o.tag_itemid', $itemid) ) ;

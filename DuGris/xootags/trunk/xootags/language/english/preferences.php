@@ -22,9 +22,9 @@ if (!defined("_XOO_CONFIG_SAVED")) {
 }
 
 define("_XOO_CONFIG_MAINPAGE",             "Main page");
-define("_XOO_CONFIG_MAINMENU",             "Main menu");
+define("_XOO_CONFIG_TAGS",                 "Tags");
+
 define("_XOO_CONFIG_COLORS",               "Tags Colors");
-define("_XOO_CONFIG_DELIMITERS",           "Delimiters for forms");
 
 define("_XOO_CONFIG_WELCOME",              "Text to display in index page");
 DEFINE("_XOO_CONFIG_COUNT",                "Display counter Tags");
@@ -35,9 +35,6 @@ define("_XOO_CONFIG_MODE_JQUERY",          "Cloud (jquery)");
 define("_XOO_CONFIG_LIMIT_MAIN",           "Number tags on page (0 = no limit)");
 define("_XOO_CONFIG_FONT_MAX",             "Maximum font-size(%) for display");
 define("_XOO_CONFIG_FONT_MIN",             "Minimum font-size(%) for display");
-
-define("_XOO_CONFIG_MAIN_MENU",            "Display tags in main menu");
-define("_XOO_CONFIG_ITEM_PERMENU",         "Items in main menu");
 
 // QRCode
 define("_XOO_CONFIG_QRCODE",              "QR Code");

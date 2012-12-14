@@ -32,6 +32,7 @@ switch ($op) {    case 'save':
     $xoops->redirect('preferences.php', 3, _XOO_CONFIG_SAVED);
     break;
     default:
+    $xoops->theme()->addStylesheet('modules/xootags/css/preferences.css');
     $form = $xoops->getModuleForm(null, 'preferences', 'xootags');
     $form->PreferencesForm();
     $form->display();

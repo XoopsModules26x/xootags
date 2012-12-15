@@ -19,7 +19,7 @@
  */
 
 define("_MI_XOO_TAGS_NAME",     "XooFoo - Tags");
-define("_MI_XOO_TAGS_DESC",     "XooFoo - Tags module for xoops 2.6.0");
+define("_MI_XOO_TAGS_DESC",     "XooFoo - Tags<br />odule for xoops 2.6.0");
 
 // admin menu
 define("_MI_XOO_TAGS_INDEX",               "Admin Homepage");

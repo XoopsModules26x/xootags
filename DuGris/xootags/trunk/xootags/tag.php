@@ -60,7 +60,7 @@ foreach ($items as $mid => $module) {    $moduleObj = $module_Handler->get( $mi
             }        }
     }
 }
-ksort($tags);
+krsort($tags);
 $xoops->tpl()->assign('tags', $tags );
 
 $subtitle = array();

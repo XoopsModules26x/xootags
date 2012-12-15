@@ -9,7 +9,8 @@ var word_list = [
         {text: "<{$tag.tag_term}><{if $xootags_count}> (<{$tag.tag_count}>)<{/if}>", class: "tag<{$tag.tag_id}> <{cycle values="$xootags_colors"}>", weight: <{$tag.size}>, link: "<{xoAppUrl /modules/xootags/}>tag.php?tag_id=<{$tag.tag_id}>"},
     <{/foreach}>
 ];
-$(function() {    $("#xootagsCloud").jQCloud(word_list);
+$(function() {
+    $("#xootagsCloud").jQCloud(word_list);
 });
 </script>
 

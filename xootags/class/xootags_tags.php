@@ -44,7 +44,7 @@ class Xootags_tags extends XoopsObject
 class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
 {
 
-    public function __construct(&$db)
+    public function __construct($db)
     {
         parent::__construct($db, 'xootags_tags', 'Xootags_tags', 'tag_id', 'tag_term');
     }

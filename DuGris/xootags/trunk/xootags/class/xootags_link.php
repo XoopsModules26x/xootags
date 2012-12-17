@@ -79,7 +79,7 @@ class xootagsxootags_linkHandler extends XoopsPersistableObjectHandler
 {
     var $table_link, $field_link;
 
-    public function __construct(&$db)
+    public function __construct($db)
     {
         parent::__construct($db, 'xootags_link', 'Xootags_link', 'tl_id', 'tag_itemid');
         $this->className = 'Xootags_link';

@@ -43,7 +43,7 @@ $modversion['min_db']              = array('mysql'=>'5.0.7', 'mysqli'=>'5.0.7');
 // paypal
 $modversion['paypal']                  = array();
 $modversion['paypal']['business']      = 'dugris93@gmail.com';
-$modversion['paypal']['item_name']     = _MI_XOO_CONTACT_DESC;
+$modversion['paypal']['item_name']     = _MI_XOO_TAGS_DESC;
 $modversion['paypal']['amount']        = 0;
 $modversion['paypal']['currency_code'] = 'EUR';
 
@@ -96,11 +96,6 @@ $modversion['blocks'][$i]['show_func']      = 'xootags_show';
 $modversion['blocks'][$i]['edit_func']      = 'xootags_top_edit';
 $modversion['blocks'][$i]['options']        = '50|100|200|time|asc';
 $modversion['blocks'][$i]['template']       = 'xootags_block_top.html';
-
-// Search
-$modversion['hasSearch'] = 1;
-$modversion['search']['file'] = 'include/search.php';
-$modversion['search']['func'] = 'xootags_search';
 
 // Menu
 $modversion['hasMain'] = 1;

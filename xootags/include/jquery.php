@@ -34,7 +34,9 @@ if ( $tag_term != '') {    $criteria->add( new Criteria('tag_term', '%' . $tag_
 $criteria->setSort('tag_count');
 $criteria->setOrder('DESC');
 
-$xootags_tags_handler = $xoops->getModuleHandler('xootags_tags', 'xootags');
+$tags_module = Xootags::getInstance();
+$xootags_tags_handler = $tags_module->getHandler('xootags_tags');
+
 $tags = $xootags_tags_handler->getObjects($criteria, false, false);
 
 $ret = array();

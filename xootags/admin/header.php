@@ -47,7 +47,6 @@ if ($script_name != 'about') {
     $xoops->header();
 }
 $xoops->theme()->addStylesheet('modules/xootags/css/moduladmin.css');
-$xoops->loadLanguage('main', 'xootags');
 
 $admin_page = new XoopsModuleAdmin();
 if ($script_name != 'about' && $script_name != 'index') {
@@ -56,9 +55,13 @@ if ($script_name != 'about' && $script_name != 'index') {
     $admin_page->displayNavigation( basename($_SERVER['SCRIPT_NAME']) );
 }
 
+$tags_module = Xootags::getInstance();
+$tags_module->loadLanguage('main');
+$Xootags_config = $tags_module->LoadConfig();
+$xootags_link_handler = $tags_module->getHandler('xootags_link');
+$xootags_tags_handler = $tags_module->getHandler('xootags_tags');
+
 $module_Handler = $xoops->getHandlerModule();
-$xootags_tags_handler = $xoops->getModuleHandler('xootags_tags', 'xootags');
-$xootags_link_handler = $xoops->getModuleHandler('xootags_link', 'xootags');
 
 // Count by module
 $criteria = new CriteriaCompo();

@@ -30,6 +30,14 @@ class XooTagsCorePreload extends XoopsPreloadItem
         }
     }
 
+    static function eventCoreIncludeCommonEnd($args)
+    {
+        $path = dirname(dirname(__FILE__));
+        XoopsLoad::addMap(array(
+            'xootags' => $path . '/class/xootags.php',
+        ));
+    }
+
     static private function isActive()
     {        $xoops = Xoops::getInstance();
         $module_handler = $xoops->getHandlerModule();

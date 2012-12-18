@@ -23,13 +23,13 @@ defined('XOOPS_ROOT_PATH') or die('Restricted access');
 function xootags_show($options)
 {    $xoops = Xoops::getInstance();
     $xoops->theme()->addStylesheet('modules/xootags/css/blocks.css');
-    $xoops->loadLanguage('main', 'xootags');
 
-    XoopsLoad::load('xoopreferences', 'xootags');
-    $Xootags_config = XooTagsPreferences::getInstance()->getConfig();
+    $tags_module = Xootags::getInstance();
+    $Xootags_config = $tags_module->LoadConfig();
+    $xootags_link_handler = $tags_module->getHandler('xootags_link');
+    $xootags_tags_handler = $tags_module->getHandler('xootags_tags');
+    $tags_module->loadLanguage('main', 'xootags');
 
-    $xootags_link_handler = $xoops->getModuleHandler('xootags_link', 'xootags');
-    $xootags_tags_handler = $xoops->getModuleHandler('xootags_tags', 'xootags');
     $module_Handler = $xoops->getHandlerModule();
 
     $criteria = new CriteriaCompo();
@@ -71,8 +71,8 @@ function xootags_show($options)
 
 function xootags_cloud_edit($options)
 {
-    $xoops = Xoops::getInstance();
-    $xoops->loadLanguage('preferences', 'xootags');
+    $tags_module = Xootags::getInstance();
+    $tags_module->loadLanguage('preferences', 'xootags');
 
     $block_form = new XoopsFormElementTray('&nbsp;', '<br />');
     // limit per page
@@ -86,12 +86,12 @@ function xootags_cloud_edit($options)
 
 function xootags_top_edit($options)
 {
-    $xoops = Xoops::getInstance();
-    $xoops->loadLanguage('preferences', 'xootags');
+    $tags_module = Xootags::getInstance();
+    $tags_module->loadLanguage('preferences', 'xootags');
 
     $block_form = new XoopsFormElementTray('&nbsp;', '<br />');
     // limit per page
-    $block_form->addElement( new XoopsFormText(_XOO_CONFIG_LIMIT_TAG_MAIN, 'options[0]', 1, 10, $options[0] ) );
+    $block_form->addElement( new XoopsFormText(_XOO_CONFIG_LIMIT_MAIN, 'options[0]', 1, 10, $options[0] ) );
     // font size
     $block_form->addElement( new XoopsFormText(_XOO_CONFIG_FONT_MIN, 'options[1]', 1, 10, $options[1]) );
     $block_form->addElement( new XoopsFormText(_XOO_CONFIG_FONT_MAX, 'options[2]', 1, 10, $options[2]) );

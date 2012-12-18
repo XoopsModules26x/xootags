@@ -47,14 +47,8 @@ class XooTagsPreferencesForm extends XoopsThemeForm
      */
     public function __construct()
     {        $this->_config = XooTagsPreferences::getInstance()->loadConfig();
-    }
 
-    /**
-     * Maintenance Form
-     * @return void
-     */
-    public function PreferencesForm()
-    {        $xoops = Xoops::getinstance();        extract( $this->_config );
+        $xoops = Xoops::getinstance();        extract( $this->_config );
         parent::__construct('', 'form_preferences', 'preferences.php', 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
@@ -79,6 +73,8 @@ class XooTagsPreferencesForm extends XoopsThemeForm
         // limit per page
         $tab1->addElement( new XoopsFormText(_XOO_CONFIG_LIMIT_MAIN, 'xootags_limit_tag_main', 1, 10, $xootags_limit_tag_main) );
 
+        $tabtray->addElement($tab1);
+
         /**
          * Tags
          */
@@ -98,12 +94,67 @@ class XooTagsPreferencesForm extends XoopsThemeForm
         $colors_tray->addElement( new XoopsFormLabel( '', '<div class="colors">' . $extra . '</div>' ) );
         $tab2->addElement( $colors_tray );
 
-        $tabtray->addElement($tab1);
         $tabtray->addElement($tab2);
+
+        /**
+         * Qrcode
+         */
         if ( $xoops->isActiveModule('qrcode') ) {
-            $tabtray->addElement( $this->QRcodeForm() );
+            $qrcode = new XoopsFormTab(_XOO_CONFIG_QRCODE, 'tabid-qrcode');
+            $xoops->theme()->addScript('modules/xootags/include/qrcode.js');
+
+            // use QR code
+            $qrcode->addElement( new XoopsFormRadioYN(_XOO_CONFIG_QRCODE_USE, 'xootags_qrcode[use_qrcode]', $xootags_qrcode['use_qrcode']) );
+
+            // Error Correction Level
+            $ecl_mode = new XoopsFormSelect(_XOO_CONFIG_QRCODE_ECL, 'xootags_qrcode[CorrectionLevel]', $xootags_qrcode['CorrectionLevel']);
+            $ecl_mode->setExtra( "onchange='showImgQRcode(\"image_qrcode\", \"" . 'xootags' . "\", \"url=http://dugris.xoofoo.org\", \"" . $xoops->url('modules') . "\")'" );
+            $ecl_mode->addOption(0,   _XOO_CONFIG_QRCODE_ECL_L);
+            $ecl_mode->addOption(1,   _XOO_CONFIG_QRCODE_ECL_M);
+            $ecl_mode->addOption(2,   _XOO_CONFIG_QRCODE_ECL_Q);
+            $ecl_mode->addOption(3,   _XOO_CONFIG_QRCODE_ECL_H);
+            $qrcode->addElement( $ecl_mode );
+
+            // Matrix Point Size
+            $matrix_mode = new XoopsFormSelect(_XOO_CONFIG_QRCODE_MATRIX, 'xootags_qrcode[matrixPointSize]', $xootags_qrcode['matrixPointSize']);
+            $matrix_mode->setExtra( "onchange='showImgQRcode(\"image_qrcode\", \"" . 'xootags' . "\", \"url=http://dugris.xoofoo.org\", \"" . $xoops->url('modules') . "\")'" );
+            for ($i = 1; $i <= 5; $i++) {
+                $matrix_mode->addOption($i, $i);
+            }
+            $qrcode->addElement( $matrix_mode );
+
+            // Margin
+            $margin_mode = new XoopsFormSelect(_XOO_CONFIG_QRCODE_MARGIN, 'xootags_qrcode[whiteMargin]', $xootags_qrcode['whiteMargin']);
+            $margin_mode->setExtra( "onchange='showImgQRcode(\"image_qrcode\", \"" . 'xootags' . "\", \"url=http://dugris.xoofoo.org\", \"" . $xoops->url('modules') . "\")'" );
+            for ($i = 0; $i <= 20; $i++) {
+                $margin_mode->addOption($i,   $i);
+            }
+            $qrcode->addElement( $margin_mode );
+
+            // Background & Foreground Color
+            $colors_tray = new XoopsFormElementTray(_XOO_CONFIG_QRCODE_COLORS, '' );
+
+            $colors_bg = new XoopsFormSelect(_XOO_CONFIG_QRCODE_COLORS_BG . ': ', 'xootags_qrcode[backgroundColor]', $xootags_qrcode['backgroundColor'], 1);
+            $colors_bg->setExtra( "onchange='showImgQRcode(\"image_qrcode\", \"" . 'xootags' . "\", \"url=http://dugris.xoofoo.org\", \"" . $xoops->url('modules') . "\")'" );
+
+            $colors_fg = new XoopsFormSelect(_XOO_CONFIG_QRCODE_COLORS_FG . ': ', 'xootags_qrcode[foregroundColor]', $xootags_qrcode['foregroundColor'], 1);
+            $colors_fg->setExtra( "onchange='showImgQRcode(\"image_qrcode\", \"" . 'xootags' . "\", \"url=http://dugris.xoofoo.org\", \"" . $xoops->url('modules') . "\")'" );
+
+            foreach ( $this->_colors as $k => $color ) {
+                $colors_bg->addOption( $k );
+                $colors_fg->addOption( $k );
+            }
+            $colors_tray->addElement( new XoopsFormLabel( '', "<div class='floatright'><img src='" . $xoops->url('/modules/xootags/') . "qrcode.php?url=http://dugris.xoofoo.org' name='image_qrcode' id='image_qrcode' alt='" . _XOO_CONFIG_QRCODE . "' /></div>" ) );
+            $colors_tray->addElement( $colors_bg );
+            $colors_tray->addElement( new XoopsFormLabel( '', '<br />') );
+            $colors_tray->addElement( $colors_fg );
+
+            $qrcode->addElement( $colors_tray );
+
+            $tabtray->addElement( $qrcode );
         } else {            $this->addElement( new XoopsFormHidden('xootags_qrcode[use_qrcode]', 0) );
         }
+
         $this->addElement($tabtray);
 
         /**
@@ -126,62 +177,6 @@ class XooTagsPreferencesForm extends XoopsThemeForm
         $button_tray->addElement($button_3);
 
         $this->addElement($button_tray);
-    }
-
-    private function QRcodeForm()
-    {        $xoops = Xoops::getinstance();
-        $tab3 = new XoopsFormTab(_XOO_CONFIG_QRCODE, 'tabid-3');
-        $xoops->theme()->addScript('modules/xootags/include/qrcode.js');
-        extract( $this->_config );
-
-        // use QR code
-        $tab3->addElement( new XoopsFormRadioYN(_XOO_CONFIG_QRCODE_USE, 'xootags_qrcode[use_qrcode]', $xootags_qrcode['use_qrcode']) );
-
-        // Error Correction Level
-        $ecl_mode = new XoopsFormSelect(_XOO_CONFIG_QRCODE_ECL, 'xootags_qrcode[CorrectionLevel]', $xootags_qrcode['CorrectionLevel']);
-        $ecl_mode->setExtra( "onchange='showImgQRcode(\"image_qrcode\", \"" . 'xootags' . "\", \"url=http://dugris.xoofoo.org\", \"" . $xoops->url('modules') . "\")'" );
-        $ecl_mode->addOption(0,   _XOO_CONFIG_QRCODE_ECL_L);
-        $ecl_mode->addOption(1,   _XOO_CONFIG_QRCODE_ECL_M);
-        $ecl_mode->addOption(2,   _XOO_CONFIG_QRCODE_ECL_Q);
-        $ecl_mode->addOption(3,   _XOO_CONFIG_QRCODE_ECL_H);
-        $tab3->addElement( $ecl_mode );
-
-        // Matrix Point Size
-        $matrix_mode = new XoopsFormSelect(_XOO_CONFIG_QRCODE_MATRIX, 'xootags_qrcode[matrixPointSize]', $xootags_qrcode['matrixPointSize']);
-        $matrix_mode->setExtra( "onchange='showImgQRcode(\"image_qrcode\", \"" . 'xootags' . "\", \"url=http://dugris.xoofoo.org\", \"" . $xoops->url('modules') . "\")'" );
-        for ($i = 1; $i <= 5; $i++) {
-            $matrix_mode->addOption($i, $i);
-        }
-        $tab3->addElement( $matrix_mode );
-
-        // Margin
-        $margin_mode = new XoopsFormSelect(_XOO_CONFIG_QRCODE_MARGIN, 'xootags_qrcode[whiteMargin]', $xootags_qrcode['whiteMargin']);
-        $margin_mode->setExtra( "onchange='showImgQRcode(\"image_qrcode\", \"" . 'xootags' . "\", \"url=http://dugris.xoofoo.org\", \"" . $xoops->url('modules') . "\")'" );
-        for ($i = 0; $i <= 20; $i++) {
-            $margin_mode->addOption($i,   $i);
-        }
-        $tab3->addElement( $margin_mode );
-
-        // Background & Foreground Color
-        $colors_tray = new XoopsFormElementTray(_XOO_CONFIG_QRCODE_COLORS, '' );
-
-        $colors_bg = new XoopsFormSelect(_XOO_CONFIG_QRCODE_COLORS_BG . ': ', 'xootags_qrcode[backgroundColor]', $xootags_qrcode['backgroundColor'], 1);
-        $colors_bg->setExtra( "onchange='showImgQRcode(\"image_qrcode\", \"" . 'xootags' . "\", \"url=http://dugris.xoofoo.org\", \"" . $xoops->url('modules') . "\")'" );
-
-        $colors_fg = new XoopsFormSelect(_XOO_CONFIG_QRCODE_COLORS_FG . ': ', 'xootags_qrcode[foregroundColor]', $xootags_qrcode['foregroundColor'], 1);
-        $colors_fg->setExtra( "onchange='showImgQRcode(\"image_qrcode\", \"" . 'xootags' . "\", \"url=http://dugris.xoofoo.org\", \"" . $xoops->url('modules') . "\")'" );
-
-        foreach ( $this->_colors as $k => $color ) {
-            $colors_bg->addOption( $k );
-            $colors_fg->addOption( $k );
-        }
-        $colors_tray->addElement( new XoopsFormLabel( '', "<div class='floatright'><img src='" . $xoops->url('/modules/xootags/') . "qrcode.php?url=http://dugris.xoofoo.org' name='image_qrcode' id='image_qrcode' alt='" . _XOO_CONFIG_QRCODE . "' /></div>" ) );
-        $colors_tray->addElement( $colors_bg );
-        $colors_tray->addElement( new XoopsFormLabel( '', '<br />') );
-        $colors_tray->addElement( $colors_fg );
-
-        $tab3->addElement( $colors_tray );
-        return $tab3;
     }
 }
 ?>

@@ -15,7 +15,7 @@
  * @since           2.6.0
  * @author          Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id: xootags_link.php 1298 2012-12-13 11:55:06Z DuGris $
+ * @version         $Id$
  */
 
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
@@ -24,7 +24,6 @@ class XootagsSearchPlugin extends Xoops_Plugin_Abstract implements SearchPluginI
 {
     public function search($queries, $andor, $limit, $start, $uid)
     {
-    $xoops = Xoops::getInstance();
     $searchstring = '';
     $ret = array();
 
@@ -45,8 +44,10 @@ class XootagsSearchPlugin extends Xoops_Plugin_Abstract implements SearchPluginI
         }
     }
 
-    $xootags_handler = $xoops->getModuleHandler('xootags_tags', 'xootags');
-    $tags = $xootags_handler->getObjects($criteria, false, false);
+    $tags_module = Xootags::getInstance();
+    $xootags_tags_handler = $tags_module->getHandler('xootags_tags');
+
+    $tags = $xootags_tags_handler->getObjects($criteria, false, false);
 
     foreach ( $tags as $k => $tag ) {
         $ret[$k]['image']    = 'icons/logo_small.png';

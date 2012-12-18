@@ -35,15 +35,11 @@ foreach ($modules as $k => $module) {
 $tags = array();
 foreach ($items as $mid => $module) {    $moduleObj = $module_Handler->get( $mid ) ;
 
-    if ( file_exists(XOOPS_ROOT_PATH . '/modules/' . $moduleObj->getVar('dirname') . '/include/plugin.xootags.php') ) {
-        include XOOPS_ROOT_PATH . '/modules/' . $moduleObj->getVar('dirname') . '/include/plugin.xootags.php';
-    } elseif (file_exists(XOOPS_ROOT_PATH . '/modules/xootags/plugins/' . $moduleObj->getVar('dirname') . '.php') ) {
-        include XOOPS_ROOT_PATH . '/modules/xootags/plugins/' . $moduleObj->getVar('dirname') . '.php';
-    }
+    $plugin = Xoops_Plugin::getPlugin($moduleObj->getVar('dirname'), 'xootags');
+    if (is_object($plugin)) {
+        $results = $plugin->Xootags($module['item_id']);
 
-    if (  function_exists( $func = 'Xootags_' . ucfirst($moduleObj->getVar('dirname')) ) ) {
-        $datas = call_user_func($func, $module['item_id']);
-        if ( count($datas) > 0 ) {            foreach ($datas as $k => $data) {                $k = $k + '-' + $mid;
+        if ( count($results) > 0 ) {            foreach ($results as $k => $data) {                $k = $k + '-' + $mid;
                 $tags[$k]['modules'][$mid]['mid'] = $mid;
                 $tags[$k]['modules'][$mid]['name'] = $moduleObj->getVar('name');
                 $tags[$k]['modules'][$mid]['dirname'] = $moduleObj->getVar('dirname');
@@ -57,8 +53,8 @@ foreach ($items as $mid => $module) {    $moduleObj = $module_Handler->get( $mi
                 $tags[$k]['uid_name'] = XoopsUser::getUnameFromId($data['uid'], true);
                 $tags[$k]['tags']     = $xootags_tags_handler->getbyItem($data['itemid'], $mid);
                 $tags[$k]['content']  = $data['content'];
-            }        }
-    }
+            }
+        }    }
 }
 krsort($tags);
 $xoops->tpl()->assign('tags', $tags );

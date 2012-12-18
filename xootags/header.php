@@ -31,11 +31,6 @@ if ( isset( $_GET ) ){
     }
 }
 
-XoopsLoad::load('xoopreferences', 'xootags');
-$Xootags_config = XooTagsPreferences::getInstance()->getConfig();
-
-XoopsLoad::load('xoopaginate', 'xootags');
-
 XoopsLoad::load('system', 'system');
 $system = System::getInstance();
 
@@ -46,8 +41,10 @@ $xoops->header('xootags_' . $script_name . '.html');
 
 $xoops->theme()->addStylesheet('modules/xootags/css/module.css');
 
-$xootags_link_handler = $xoops->getModuleHandler('xootags_link', 'xootags');
-$xootags_tags_handler = $xoops->getModuleHandler('xootags_tags', 'xootags');
+$tags_module = Xootags::getInstance();
+$Xootags_config = $tags_module->LoadConfig();
+$xootags_link_handler = $tags_module->getHandler('xootags_link');
+$xootags_tags_handler = $tags_module->getHandler('xootags_tags');
 $module_Handler = $xoops->getHandlerModule();
 
 $xoops->tpl()->assign('moduletitle', $xoops->module->name() );

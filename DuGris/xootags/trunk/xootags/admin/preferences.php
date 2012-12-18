@@ -19,7 +19,7 @@
 
 include dirname(__FILE__) . '/header.php';
 
-$xoops->loadLanguage('preferences', 'xootags');
+$tags_module->loadLanguage('preferences');
 
 switch ($op) {    case 'save':
     if (!$xoops->security()->check()) {
@@ -32,8 +32,7 @@ switch ($op) {    case 'save':
     $xoops->redirect('preferences.php', 3, _XOO_CONFIG_SAVED);
     break;
     default:
-    $form = $xoops->getModuleForm(null, 'preferences', 'xootags');
-    $form->PreferencesForm();
+    $form = $tags_module->getForm(null, 'preferences');
     $form->display();
 }
 include dirname(__FILE__) . '/footer.php';

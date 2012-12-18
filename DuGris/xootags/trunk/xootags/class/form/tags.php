@@ -37,15 +37,16 @@ class XootagsTagsForm extends XoopsThemeForm
 
     public function TagsForm( $name, $value = null, $size=5, $maxlength=10 )
     {        $xoops = xoops::getinstance();
-        $xoops->loadLanguage('main', 'xootags');
-        if ( $this->isActive() ) {            XoopsLoad::load('xoopreferences', 'xootags');
-            $Tags_config = XooTagsPreferences::getInstance()->getConfig();
 
-            $value = empty($value) ? '' : $value;
+        $tags_module = Xootags::getInstance();
+        $tags_module->loadLanguage('main');
+
+        if ( $this->isActive() ) {            $value = empty($value) ? '' : $value;
 
             if ( !empty($value) && is_numeric($value) ) {
                 $modid = $xoops->module->getVar('mid');
-                $xootags_link_handler = $xoops->getModuleHandler('xootags_link', 'xootags');
+
+                $xootags_link_handler = $tags_module->getHandler('xootags_link');
                 if ( $tags = $xootags_link_handler->getByItem($value, $modid, true) ) {                    $value = htmlspecialchars(implode(',', $tags));
                 } else {
                     $value = '';

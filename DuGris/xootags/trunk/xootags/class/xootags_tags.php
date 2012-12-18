@@ -75,11 +75,13 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
     public function getbyItem( $itemid, $modid = null, $onlytags=false)
     {
         $xoops = xoops::getinstance();
-        $xoops->loadLanguage('main', 'xootags');
+        $tags_module = Xootags::getInstance();
+        $tags_module->loadLanguage('main');
         if ( $this->isActive() ) {
             $xoops->theme()->addStylesheet('modules/xootags/css/module.css');
 
-            $xootags_link_handler = $xoops->getModuleHandler('xootags_link', 'xootags');
+            $xootags_link_handler = $tags_module->getHandler('xootags_link');
+
             return $xootags_link_handler->getbyItem( $itemid, $modid, $onlytags);
         } else {
             $xoops->logger->handleError( 2 , '<strong><span class="red">' . _XOO_TAGS_TAGS_ERROR . '</span></strong>', $xoops->getenv('PHP_SELF'), 'TagsForm(...)' );
@@ -89,7 +91,8 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
 
     public function updateByItem( $name='tags', $itemid=0 )
     {        $xoops = xoops::getinstance();
-        $xoops->loadLanguage('main', 'xootags');
+        $tags_module = Xootags::getInstance();
+        $tags_module->loadLanguage('main');
 
         $itemid = intval($itemid);
         $mid = $xoops->module->getVar('mid');
@@ -110,7 +113,10 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
 
         if (!empty($tags_delete)) {            $tags_delete = array_map(array($this->db, 'quoteString'), $tags_delete);
             $tag_ids = $this->getIds(new Criteria('tag_term', '(' . implode(', ', $tags_delete) . ')', 'IN'));
-            $xootags_link_handler = $xoops->getModuleHandler('xootags_link', 'xootags');
+
+            $tags_module = Xootags::getInstance();
+            $xootags_link_handler = $tags_module->getHandler('xootags_link');
+
             if ( !$xootags_link_handler->DeleteByIds( $tag_ids, $itemid ) ) {            }
             unset($xootags_link_handler);
 
@@ -142,7 +148,9 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
                     $tag_id = $this->insert($tagObj);
                 }
 
-                $xootags_link_handler = $xoops->getModuleHandler('xootags_link', 'xootags');
+                $tags_module = Xootags::getInstance();
+                $xootags_link_handler = $tags_module->getHandler('xootags_link');
+
                 $xootags_link_handler->className = 'Xootags_link';
                 $criteria = new CriteriaCompo();
                 $criteria->add( new Criteria('tag_id', $tag_id) ) ;

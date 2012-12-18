@@ -51,7 +51,7 @@ switch ($op) {    case 'del':
     default:
     $module_id = $system->CleanVars($_REQUEST, 'module_id', 0, 'int');
 
-    $form = $xoops->getModuleForm(0, 'tags', 'xootags');
+    $form = $tags_module->getForm(null, 'tags');
     $form->TagsFormModules( $module_id, $modules );
 
     if ($module_id == 0 ) {        $criteria = new CriteriaCompo();

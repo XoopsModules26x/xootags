@@ -32,7 +32,7 @@ switch ($op) {    case 'save':
     $xoops->redirect('preferences.php', 3, _XOO_CONFIG_SAVED);
     break;
     default:
-    $form = $tags_module->getForm(null, 'preferences');
+    $form = $tags_module->getForm($Xootags_config, 'preferences');
     $form->display();
 }
 include dirname(__FILE__) . '/footer.php';

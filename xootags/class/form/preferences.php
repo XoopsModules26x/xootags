@@ -45,10 +45,8 @@ class XooTagsPreferencesForm extends XoopsThemeForm
     /**
      * @param null $obj
      */
-    public function __construct()
-    {        $this->_config = XooTagsPreferences::getInstance()->loadConfig();
-
-        $xoops = Xoops::getinstance();        extract( $this->_config );
+    public function __construct($config)
+    {        extract( $config );
         parent::__construct('', 'form_preferences', 'preferences.php', 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
@@ -99,6 +97,7 @@ class XooTagsPreferencesForm extends XoopsThemeForm
         /**
          * Qrcode
          */
+        $xoops = Xoops::getinstance();
         if ( $xoops->isActiveModule('qrcode') ) {
             $qrcode = new XoopsFormTab(_XOO_CONFIG_QRCODE, 'tabid-qrcode');
             $xoops->theme()->addScript('modules/xootags/include/qrcode.js');

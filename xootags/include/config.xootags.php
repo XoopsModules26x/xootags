@@ -7,6 +7,7 @@ return $config = array (
 
     'xootags_count'              => true,
     'xootags_limit_tag_main'     => 100,
+    'xootags_limit_tag_tag'      => 10,
     'xootags_font_min'           => 100,
     'xootags_font_max'           => 200,
 

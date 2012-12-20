@@ -68,8 +68,11 @@ class XooTagsPreferencesForm extends XoopsThemeForm
         // Display count
         $tab1->addElement( new XoopsFormRadioYN(_XOO_CONFIG_COUNT, 'xootags_count', $xootags_count) );
 
-        // limit per page
+        // limit per page : main page
         $tab1->addElement( new XoopsFormText(_XOO_CONFIG_LIMIT_MAIN, 'xootags_limit_tag_main', 1, 10, $xootags_limit_tag_main) );
+
+        // limit per page : main page
+        $tab1->addElement( new XoopsFormText(_XOO_CONFIG_LIMIT_TAGS, 'xootags_limit_tag_tag', 1, 10, $xootags_limit_tag_tag) );
 
         $tabtray->addElement($tab1);
 

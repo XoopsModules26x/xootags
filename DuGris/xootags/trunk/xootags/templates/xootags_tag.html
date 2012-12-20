@@ -16,6 +16,7 @@
     </div>
 <{/if}>
 
+<{$xoopaginate->display()}>
 <{foreachq from=$tags item=item}>
     <div class="item">
         <div class="itemHead">
@@ -56,3 +57,4 @@
         </div>
     </div>
 <{/foreach}>
+<{$xoopaginate->display()}>

@@ -22,14 +22,14 @@ include dirname(__FILE__) . '/header.php';
 switch ($op) {    case 'del':
     $tag_id = $system->CleanVars($_REQUEST, 'tag_id', 0, 'int');
     if( isset($tag_id) && $tag_id > 0 ){
-        if ($tag = $xootags_tags_handler->get($tag_id) ) {
+        if ($tag = $tags_tags_handler->get($tag_id) ) {
             $delete = $system->CleanVars( $_POST, 'ok', 0, 'int' );
             if ($delete == 1) {
                 if ( !$xoops->security()->check() ) {
                     $xoops->redirect('tags.php', 5, implode(',', $xoops->security()->getErrors()));
                 }
-                $xootags_link_handler->DeleteByItem( $tag_id );
-                $xootags_tags_handler->delete($tag);
+                $tags_link_handler->DeleteByItem( $tag_id );
+                $tags_tags_handler->delete($tag);
                 $xoops->redirect('tags.php', 5, _AM_XOO_TAGS_DELETED);
             } else {
                 $xoops->confirm(array('ok' => 1, 'tag_id' => $tag_id, 'op' => 'del'), $_SERVER['REQUEST_URI'], sprintf(_AM_XOO_TAGS_DELETE_CFM . "<br /><b><span style='color : Red'> %s </span></b><br /><br />", $tag->getVar('tag_term')));
@@ -44,7 +44,7 @@ switch ($op) {    case 'del':
     case 'show':
     case 'hide':
     $tag_id = $system->CleanVars($_REQUEST, 'tag_id', 0, 'int');
-    $xootags_tags_handler->SetOnline($tag_id);
+    $tags_tags_handler->SetOnline($tag_id);
     $xoops->redirect('tags.php', 5, _AM_XOO_TAGS_SAVED);
     break;
 
@@ -57,8 +57,8 @@ switch ($op) {    case 'del':
     if ($module_id == 0 ) {        $criteria = new CriteriaCompo();
         $criteria->setSort('tag_count');
         $criteria->setOrder('DESC');
-        $tags = $xootags_tags_handler->getObjects($criteria, false, false);
-    } else {        $tags = $xootags_link_handler->getbyModule( $module_id );
+        $tags = $tags_tags_handler->getObjects($criteria, false, false);
+    } else {        $tags = $tags_link_handler->getbyModule( $module_id );
     }
     $xoops->tpl()->assign('form', $form->render() );
     $xoops->tpl()->assign('tags', $tags);

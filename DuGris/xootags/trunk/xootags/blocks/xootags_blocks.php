@@ -25,9 +25,9 @@ function xootags_show($options)
     $xoops->theme()->addStylesheet('modules/xootags/css/blocks.css');
 
     $tags_module = Xootags::getInstance();
-    $Xootags_config = $tags_module->LoadConfig();
-    $xootags_link_handler = $tags_module->getHandler('xootags_link');
-    $xootags_tags_handler = $tags_module->getHandler('xootags_tags');
+    $tags_config = $tags_module->LoadConfig();
+    $tags_link_handler = $tags_module->getHandler('xootags_link');
+    $tags_tags_handler = $tags_module->getHandler('xootags_tags');
     $tags_module->loadLanguage('main', 'xootags');
 
     $module_Handler = $xoops->getHandlerModule();
@@ -44,7 +44,7 @@ function xootags_show($options)
         $criteria->setOrder( 'desc' );
     }
 
-    $tags = $xootags_link_handler->getTags($criteria);
+    $tags = $tags_link_handler->getTags($criteria);
 
     $tags_max = 1;
     $tags_min = 1;
@@ -64,7 +64,7 @@ function xootags_show($options)
     }
 
     $block['lineheight'] = $options[2];
-    $block['colors'] = implode(',', $Xootags_config['xootags_colors']);
+    $block['colors'] = implode(',', $tags_config['xootags_colors']);
     $block['tags'] = $tags;
 	return $block;
 }

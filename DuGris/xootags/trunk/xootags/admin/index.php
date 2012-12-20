@@ -21,7 +21,7 @@ include dirname(__FILE__) . '/header.php';
 
 $xoops->tpl()->assign('count_module', $count_module );
 $xoops->tpl()->assign('count_item', $count_items );
-$xoops->tpl()->assign('count_tag', $xootags_tags_handler->getCount() );
+$xoops->tpl()->assign('count_tag', $tags_tags_handler->getCount() );
 $admin_page->addInfoBox(_AM_XOO_TAGS_STATS);
 $admin_page->addInfoBoxLine( $xoops->tpl()->fetch('admin:xootags|xootags_tags_stats.html') );
 

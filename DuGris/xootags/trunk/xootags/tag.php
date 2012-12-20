@@ -23,8 +23,8 @@ $tag_id = $system->CleanVars($_REQUEST, 'tag_id', 0, 'int');
 $module_id = $system->CleanVars($_REQUEST, 'module_id', 0, 'int');
 
 if ($tag_id == 0) {    $xoops->redirect('index.php', 5);}
-if ( $module_id != 0 ) {    $modules = $xootags_link_handler->getByModule( $module_id, $tag_id);
-} else {    $modules = $xootags_link_handler->getByModule( 0, $tag_id);
+if ( $module_id != 0 ) {    $modules = $tags_link_handler->getByModule( $module_id, $tag_id);
+} else {    $modules = $tags_link_handler->getByModule( 0, $tag_id);
 }
 
 foreach ($modules as $k => $module) {
@@ -51,7 +51,7 @@ foreach ($items as $mid => $module) {    $moduleObj = $module_Handler->get( $mi
                 $tags[$k]['time']     = $data['time'];
                 $tags[$k]['uid']      = $data['uid'];
                 $tags[$k]['uid_name'] = XoopsUser::getUnameFromId($data['uid'], true);
-                $tags[$k]['tags']     = $xootags_tags_handler->getbyItem($data['itemid'], $mid);
+                $tags[$k]['tags']     = $tags_tags_handler->getbyItem($data['itemid'], $mid);
                 $tags[$k]['content']  = $data['content'];
             }
         }    }
@@ -60,7 +60,7 @@ krsort($tags);
 $xoops->tpl()->assign('tags', $tags );
 
 $subtitle = array();
-if ($tag_id != 0) {    $subtitle[] = sprintf(_XOO_TAGS_TERM, $xootags_tags_handler->get($tag_id)->getVar('tag_term') );}
+if ($tag_id != 0) {    $subtitle[] = sprintf(_XOO_TAGS_TERM, $tags_tags_handler->get($tag_id)->getVar('tag_term') );}
 if ($module_id != 0) {
     $subtitle[] = sprintf(_XOO_TAGS_MODULE, $module_Handler->get($module_id)->getVar('name') );
 }

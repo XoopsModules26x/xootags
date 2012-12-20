@@ -19,7 +19,7 @@
 
 include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'header.php';
 $url = $system->CleanVars($_REQUEST, 'url', '', 'string');
-extract($Xootags_config['xootags_qrcode']);
+extract($tags_config['xootags_qrcode']);
 
 if ( count($_GET) > 1 ) {
     if ( isset($_GET['bgcolor']) ) {

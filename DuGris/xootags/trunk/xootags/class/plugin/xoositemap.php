@@ -24,14 +24,14 @@ class XootagsXoositemapPlugin extends Xoops_Plugin_Abstract implements Xoositema
     public function Xoositemap($subcategories)
     {
         $tags_module = Xootags::getInstance();
-        $Xootags_config = $tags_module->LoadConfig();
-        $xootags_tags_handler = $tags_module->getHandler('xootags_tags');
+        $tags_config = $tags_module->LoadConfig();
+        $tags_tags_handler = $tags_module->getHandler('xootags_tags');
 
         $criteria = new CriteriaCompo();
         $criteria->setSort('tag_count');
         $criteria->setOrder('DESC');
-        $criteria->setLimit($Xootags_config['xootags_limit_tag_main']);
-        $tags = $xootags_tags_handler->getObjects($criteria, false, false);
+        $criteria->setLimit($tags_config['xootags_limit_tag_main']);
+        $tags = $tags_tags_handler->getObjects($criteria, false, false);
 
         $sitemap = array();
         foreach ($tags as $k => $tag) {

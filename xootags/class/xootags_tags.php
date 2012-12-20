@@ -80,9 +80,9 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
         if ( $this->isActive() ) {
             $xoops->theme()->addStylesheet('modules/xootags/css/module.css');
 
-            $xootags_link_handler = $tags_module->getHandler('xootags_link');
+            $tags_link_handler = $tags_module->getHandler('xootags_link');
 
-            return $xootags_link_handler->getbyItem( $itemid, $modid, $onlytags);
+            return $tags_link_handler->getbyItem( $itemid, $modid, $onlytags);
         } else {
             $xoops->logger->handleError( 2 , '<strong><span class="red">' . _XOO_TAGS_TAGS_ERROR . '</span></strong>', $xoops->getenv('PHP_SELF'), 'TagsForm(...)' );
             return false;
@@ -115,10 +115,10 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
             $tag_ids = $this->getIds(new Criteria('tag_term', '(' . implode(', ', $tags_delete) . ')', 'IN'));
 
             $tags_module = Xootags::getInstance();
-            $xootags_link_handler = $tags_module->getHandler('xootags_link');
+            $tags_link_handler = $tags_module->getHandler('xootags_link');
 
-            if ( !$xootags_link_handler->DeleteByIds( $tag_ids, $itemid ) ) {            }
-            unset($xootags_link_handler);
+            if ( !$tags_link_handler->DeleteByIds( $tag_ids, $itemid ) ) {            }
+            unset($tags_link_handler);
 
             $criteria = new CriteriaCompo();
             $criteria->add( new Criteria('tag_id', '(' . implode(', ', $tag_ids) . ')', 'IN') ) ;
@@ -149,19 +149,19 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
                 }
 
                 $tags_module = Xootags::getInstance();
-                $xootags_link_handler = $tags_module->getHandler('xootags_link');
+                $tags_link_handler = $tags_module->getHandler('xootags_link');
 
-                $xootags_link_handler->className = 'Xootags_link';
+                $tags_link_handler->className = 'Xootags_link';
                 $criteria = new CriteriaCompo();
                 $criteria->add( new Criteria('tag_id', $tag_id) ) ;
                 $criteria->add( new Criteria('tag_modid', $mid) ) ;
                 $criteria->add( new Criteria('tag_itemid', $itemid) ) ;
-                if ( !$tagLink = $xootags_link_handler->getObjects( $criteria ) ) {                    $tagLink = $xootags_link_handler->create();
+                if ( !$tagLink = $tags_link_handler->getObjects( $criteria ) ) {                    $tagLink = $tags_link_handler->create();
                     $tagLink->setVar('tag_id', $tag_id);
                     $tagLink->setVar('tag_modid', $mid);
                     $tagLink->setVar('tag_itemid', $itemid);
                     $tagLink->setVar('tag_time', time());
-                    if ( !$xootags_link_handler->insert($tagLink) ) {                    }
+                    if ( !$tags_link_handler->insert($tagLink) ) {                    }
                 }
 
                 if ($tag_update) {                    $tagObj->setVar('tag_count', $tagObj->getVar('tag_count') + 1);

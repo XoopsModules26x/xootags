@@ -46,8 +46,8 @@ class XootagsTagsForm extends XoopsThemeForm
             if ( !empty($value) && is_numeric($value) ) {
                 $modid = $xoops->module->getVar('mid');
 
-                $xootags_link_handler = $tags_module->getHandler('xootags_link');
-                if ( $tags = $xootags_link_handler->getByItem($value, $modid, true) ) {                    $value = htmlspecialchars(implode(',', $tags));
+                $tags_link_handler = $tags_module->getHandler('xootags_link');
+                if ( $tags = $tags_link_handler->getByItem($value, $modid, true) ) {                    $value = htmlspecialchars(implode(',', $tags));
                 } else {
                     $value = '';
                 }

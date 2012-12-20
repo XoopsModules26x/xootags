@@ -57,9 +57,9 @@ if ($script_name != 'about' && $script_name != 'index') {
 
 $tags_module = Xootags::getInstance();
 $tags_module->loadLanguage('main');
-$Xootags_config = $tags_module->LoadConfig();
-$xootags_link_handler = $tags_module->getHandler('xootags_link');
-$xootags_tags_handler = $tags_module->getHandler('xootags_tags');
+$tags_config = $tags_module->LoadConfig();
+$tags_link_handler = $tags_module->getHandler('xootags_link');
+$tags_tags_handler = $tags_module->getHandler('xootags_tags');
 
 $module_Handler = $xoops->getHandlerModule();
 
@@ -69,7 +69,7 @@ $criteria->setGroupby( 'tag_modid' );
 
 $modules = array();
 $count_items = 0;
-$count_bymodule = $xootags_link_handler->getCounts( $criteria );
+$count_bymodule = $tags_link_handler->getCounts( $criteria );
 foreach ( $count_bymodule as $mid => $count_item ) {
     $count_items += $count_item;
     $module = $module_Handler->get( $mid ) ;

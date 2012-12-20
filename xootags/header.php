@@ -42,15 +42,15 @@ $xoops->header('xootags_' . $script_name . '.html');
 $xoops->theme()->addStylesheet('modules/xootags/css/module.css');
 
 $tags_module = Xootags::getInstance();
-$Xootags_config = $tags_module->LoadConfig();
-$xootags_link_handler = $tags_module->getHandler('xootags_link');
-$xootags_tags_handler = $tags_module->getHandler('xootags_tags');
+$tags_config = $tags_module->LoadConfig();
+$tags_link_handler = $tags_module->getHandler('xootags_link');
+$tags_tags_handler = $tags_module->getHandler('xootags_tags');
 $module_Handler = $xoops->getHandlerModule();
 
 $xoops->tpl()->assign('moduletitle', $xoops->module->name() );
-$xoops->tpl()->assign('welcome', $Xootags_config['xootags_welcome'] );
-$xoops->tpl()->assign('xootags_colors', implode(',', $Xootags_config['xootags_colors']) );
-$xoops->tpl()->assign('xootags_count', $Xootags_config['xootags_count'] );
-$xoops->tpl()->assign('xootags_main_mode', $Xootags_config['xootags_main_mode'] );
-$xoops->tpl()->assign('xootags_qrcode', $Xootags_config['xootags_qrcode'] );
+$xoops->tpl()->assign('welcome', $tags_config['xootags_welcome'] );
+$xoops->tpl()->assign('xootags_colors', implode(',', $tags_config['xootags_colors']) );
+$xoops->tpl()->assign('xootags_count', $tags_config['xootags_count'] );
+$xoops->tpl()->assign('xootags_main_mode', $tags_config['xootags_main_mode'] );
+$xoops->tpl()->assign('xootags_qrcode', $tags_config['xootags_qrcode'] );
 ?>

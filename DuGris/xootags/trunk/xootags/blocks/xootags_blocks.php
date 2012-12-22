@@ -28,7 +28,6 @@ function xootags_show($options)
     $tags_config = $tags_module->LoadConfig();
     $tags_link_handler = $tags_module->getHandler('xootags_link');
     $tags_tags_handler = $tags_module->getHandler('xootags_tags');
-    $tags_module->loadLanguage('main', 'xootags');
 
     $module_Handler = $xoops->getHandlerModule();
 

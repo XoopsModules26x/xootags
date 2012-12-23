@@ -19,8 +19,6 @@
 
 include dirname(__FILE__) . '/header.php';
 
-$tags_module->loadLanguage('preferences');
-
 switch ($op) {    case 'save':
     if (!$xoops->security()->check()) {
         $xoops->redirect('preferences.php', 3, implode('<br />', $xoops->security()->getErrors()));

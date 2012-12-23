@@ -26,8 +26,8 @@ function xootags_show($options)
 
     $tags_module = Xootags::getInstance();
     $tags_config = $tags_module->LoadConfig();
-    $tags_link_handler = $tags_module->getHandler('xootags_link');
-    $tags_tags_handler = $tags_module->getHandler('xootags_tags');
+    $tags_link_handler = $tags_module->LinkHandler();
+    $tags_tags_handler = $tags_module->TagsHandler();
 
     $module_Handler = $xoops->getHandlerModule();
 
@@ -71,7 +71,6 @@ function xootags_show($options)
 function xootags_cloud_edit($options)
 {
     $tags_module = Xootags::getInstance();
-    $tags_module->loadLanguage('preferences', 'xootags');
 
     $block_form = new XoopsFormElementTray('&nbsp;', '<br />');
     // limit per page
@@ -86,7 +85,6 @@ function xootags_cloud_edit($options)
 function xootags_top_edit($options)
 {
     $tags_module = Xootags::getInstance();
-    $tags_module->loadLanguage('preferences', 'xootags');
 
     $block_form = new XoopsFormElementTray('&nbsp;', '<br />');
     // limit per page

@@ -45,7 +45,7 @@ class XootagsSearchPlugin extends Xoops_Plugin_Abstract implements SearchPluginI
     }
 
     $tags_module = Xootags::getInstance();
-    $tags_tags_handler = $tags_module->getHandler('xootags_tags');
+    $tags_tags_handler = $tags_module->TagsHandler();
 
     $tags = $tags_tags_handler->getObjects($criteria, false, false);
 

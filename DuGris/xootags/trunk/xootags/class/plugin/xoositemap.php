@@ -25,7 +25,7 @@ class XootagsXoositemapPlugin extends Xoops_Plugin_Abstract implements Xoositema
     {
         $tags_module = Xootags::getInstance();
         $tags_config = $tags_module->LoadConfig();
-        $tags_tags_handler = $tags_module->getHandler('xootags_tags');
+        $tags_tags_handler = $tags_module->TagsHandler();
 
         $criteria = new CriteriaCompo();
         $criteria->setSort('tag_count');

@@ -29,6 +29,9 @@ class Xootags extends Xoops_Module_Abstract
     public function init()
     {
         $this->setDirname('xootags');
+        @$this->loadLanguage('main');
+        @$this->loadLanguage('preferences');
+
         XoopsLoad::load('xoopaginate', $this->_dirname);
     }
 
@@ -36,6 +39,16 @@ class Xootags extends Xoops_Module_Abstract
     {
         XoopsLoad::load('xoopreferences', $this->_dirname);
         return XooTagsPreferences::getInstance()->getConfig();
+    }
+
+    public function TagsHandler()
+    {
+        return $this->getHandler('xootags_tags');
+    }
+
+    public function LinkHandler()
+    {
+        return $this->getHandler('xootags_link');
     }
 }
 ?>

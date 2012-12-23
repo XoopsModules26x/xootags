@@ -56,10 +56,9 @@ if ($script_name != 'about' && $script_name != 'index') {
 }
 
 $tags_module = Xootags::getInstance();
-$tags_module->loadLanguage('main');
 $tags_config = $tags_module->LoadConfig();
-$tags_link_handler = $tags_module->getHandler('xootags_link');
-$tags_tags_handler = $tags_module->getHandler('xootags_tags');
+$tags_link_handler = $tags_module->LinkHandler();
+$tags_tags_handler = $tags_module->TagsHandler();
 
 $module_Handler = $xoops->getHandlerModule();
 

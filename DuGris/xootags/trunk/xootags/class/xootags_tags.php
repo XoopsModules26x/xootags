@@ -76,11 +76,10 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
     {
         $xoops = xoops::getinstance();
         $tags_module = Xootags::getInstance();
-        $tags_module->loadLanguage('main');
         if ( $this->isActive() ) {
             $xoops->theme()->addStylesheet('modules/xootags/css/module.css');
 
-            $tags_link_handler = $tags_module->getHandler('xootags_link');
+            $tags_link_handler = $tags_module->LinkHandler();
 
             return $tags_link_handler->getbyItem( $itemid, $modid, $onlytags);
         } else {
@@ -92,7 +91,6 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
     public function updateByItem( $name='tags', $itemid=0 )
     {        $xoops = xoops::getinstance();
         $tags_module = Xootags::getInstance();
-        $tags_module->loadLanguage('main');
 
         $itemid = intval($itemid);
         $mid = $xoops->module->getVar('mid');
@@ -115,7 +113,7 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
             $tag_ids = $this->getIds(new Criteria('tag_term', '(' . implode(', ', $tags_delete) . ')', 'IN'));
 
             $tags_module = Xootags::getInstance();
-            $tags_link_handler = $tags_module->getHandler('xootags_link');
+            $tags_link_handler = $tags_module->LinkHandler();
 
             if ( !$tags_link_handler->DeleteByIds( $tag_ids, $itemid ) ) {            }
             unset($tags_link_handler);
@@ -149,7 +147,7 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
                 }
 
                 $tags_module = Xootags::getInstance();
-                $tags_link_handler = $tags_module->getHandler('xootags_link');
+                $tags_link_handler = $tags_module->LinkHandler();
 
                 $tags_link_handler->className = 'Xootags_link';
                 $criteria = new CriteriaCompo();

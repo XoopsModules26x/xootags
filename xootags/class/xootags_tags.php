@@ -97,10 +97,10 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
 
         if ( empty($itemid) || empty($mid) || is_null($name) ) {            return _XOO_TAGS_ADD_TAGS_ERROR;        }
 
-        XoopsLoad::load('xoopreferences', 'xootags');
-        $Tags_config = XooTagsPreferences::getInstance()->getConfig();
+        $tags_module = Xootags::getInstance();
+        $tags_config = $tags_module->LoadConfig();
 
-        if ( array_key_exists($name, $_POST) === false ) {            $tags = array();        } else {//            $tags = explode('|', str_replace($Tags_config['xootags_delimiters'],'|', $tags) );
+        if ( array_key_exists($name, $_POST) === false ) {            $tags = array();        } else {//            $tags = explode('|', str_replace($tags_config['xootags_delimiters'],'|', $tags) );
             $tags = explode(',', $_POST[$name]);
             $tags = array_filter(array_map('trim', $tags));
         }

@@ -20,8 +20,8 @@
 
 require_once dirname(dirname(dirname(dirname(__FILE__)))) . '/include/cp_header.php';
 
-XoopsLoad::load('xoopreferences', 'xootags');
-$Tags_config = XooTagsPreferences::getInstance()->getConfig();
+$tags_module = Xootags::getInstance();
+$tags_config = $tags_module->LoadConfig();
 
 $op = '';
 if ( isset( $_POST ) ){

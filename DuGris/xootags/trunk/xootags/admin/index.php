@@ -25,5 +25,9 @@ $xoops->tpl()->assign('count_tag', $tags_tags_handler->getCount() );
 $admin_page->addInfoBox(_AM_XOO_TAGS_STATS);
 $admin_page->addInfoBoxLine( $xoops->tpl()->fetch('admin:xootags|xootags_tags_stats.html') );
 
+// extension
+$admin_page->addConfigBoxLine(array('qrcode', 'warning'), 'extension');
+$admin_page->addConfigBoxLine(array('notifications', 'warning'), 'module');
+
 include dirname(__FILE__) . '/footer.php';
 ?>

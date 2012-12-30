@@ -19,7 +19,7 @@
 
 defined('XOOPS_ROOT_PATH') or die('Restricted access');
 
-class Xootags extends Xoops_Module_Abstract
+class Xootags extends Xoops_Module_Helper_Abstract
 {
     /**
      * Init the module

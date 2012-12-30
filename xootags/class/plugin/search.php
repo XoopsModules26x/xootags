@@ -20,7 +20,7 @@
 
 defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
 
-class XootagsSearchPlugin extends Xoops_Plugin_Abstract implements SearchPluginInterface
+class XootagsSearchPlugin extends Xoops_Module_Plugin_Abstract implements SearchPluginInterface
 {
     public function search($queries, $andor, $limit, $start, $uid)
     {

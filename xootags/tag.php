@@ -36,7 +36,7 @@ foreach ($modules as $k => $module) {
 $tags = array();
 foreach ($items as $mid => $module) {    $moduleObj = $module_Handler->get( $mid ) ;
 
-    $plugin = Xoops_Plugin::getPlugin($moduleObj->getVar('dirname'), 'xootags');
+    $plugin = Xoops_Module_Plugin::getPlugin($moduleObj->getVar('dirname'), 'xootags');
     if (is_object($plugin)) {
         $results = $plugin->Xootags($module['item_id'], $start, $limit=0);
 

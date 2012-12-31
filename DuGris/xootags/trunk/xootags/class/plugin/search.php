@@ -47,7 +47,7 @@ class XootagsSearchPlugin extends Xoops_Module_Plugin_Abstract implements Search
     $tags_module = Xootags::getInstance();
     $tags_tags_handler = $tags_module->TagsHandler();
 
-    $tags = $tags_tags_handler->getObjects($criteria, false, false);
+    $tags = $tags_tags_handler->getObjects($criteria, true, false);
 
     foreach ( $tags as $k => $tag ) {
         $ret[$k]['image']    = 'icons/logo_small.png';

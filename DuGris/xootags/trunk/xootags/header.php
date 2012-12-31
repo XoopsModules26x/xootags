@@ -52,5 +52,4 @@ $xoops->tpl()->assign('welcome', $tags_config['xootags_welcome'] );
 $xoops->tpl()->assign('xootags_colors', implode(',', $tags_config['xootags_colors']) );
 $xoops->tpl()->assign('xootags_count', $tags_config['xootags_count'] );
 $xoops->tpl()->assign('xootags_main_mode', $tags_config['xootags_main_mode'] );
-$xoops->tpl()->assign('xootags_qrcode', $tags_config['xootags_qrcode'] );
 ?>

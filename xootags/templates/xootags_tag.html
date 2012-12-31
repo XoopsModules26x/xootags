@@ -33,6 +33,9 @@
                     <{$item.uid_name}>
                     </a>
                 </div>
+                <div class="itemDate">
+                    <{$smarty.const._XOO_TAGS_PUBLISHED}>: <span><{$item.date}></span>
+                </div>
 
                 <{if $item.tags}>
                     <{includeq file="module:xootags|xootags_bar.html" tags=$item.tags}>

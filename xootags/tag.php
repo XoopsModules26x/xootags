@@ -34,31 +34,31 @@ foreach ($modules as $k => $module) {
 }
 
 $tags = array();
+$i=0;
 foreach ($items as $mid => $module) {    $moduleObj = $module_Handler->get( $mid ) ;
 
     $plugin = Xoops_Module_Plugin::getPlugin($moduleObj->getVar('dirname'), 'xootags');
-    if (is_object($plugin)) {
-        $results = $plugin->Xootags($module['item_id'], $start, $limit=0);
+    $results = $plugin->Xootags($module['item_id'], $start, $limit=0);
 
-        if ( count($results) > 0 ) {            foreach ($results as $k => $data) {                $k = $k . '-' . $mid;
-                $tags[$k]['modules'][$mid]['mid'] = $mid;
-                $tags[$k]['modules'][$mid]['name'] = $moduleObj->getVar('name');
-                $tags[$k]['modules'][$mid]['dirname'] = $moduleObj->getVar('dirname');
-                $tags[$k]['modules'][$mid]['image'] = $xoops->url('/modules/' . $moduleObj->getVar('dirname') . '/icons/logo_small.png');
+    if ( is_array($results) && count($results) > 0 ) {        foreach ($results as $data) {            $tags[$i]['modules'][$mid]['mid'] = $mid;
+            $tags[$i]['modules'][$mid]['name'] = $moduleObj->getVar('name');
+            $tags[$i]['modules'][$mid]['dirname'] = $moduleObj->getVar('dirname');
+            $tags[$i]['modules'][$mid]['image'] = $xoops->url('/modules/' . $moduleObj->getVar('dirname') . '/icons/logo_small.png');
 
-                $tags[$k]['tag_id']   = $tag_id;
-                $tags[$k]['link']     = $xoops->url('/modules/' . $moduleObj->getVar('dirname') . '/' . $data['link']);
-                $tags[$k]['title']    = $data['title'];
-                $tags[$k]['time']     = $data['time'];
-                $tags[$k]['uid']      = $data['uid'];
-                $tags[$k]['uid_name'] = XoopsUser::getUnameFromId($data['uid'], true);
-                $tags[$k]['tags']     = $tags_tags_handler->getbyItem($data['itemid'], $mid);
-                $tags[$k]['content']  = $data['content'];
-            }
-        }    }
-}
+            $tags[$i]['tag_id']   = $tag_id;
+            $tags[$i]['link']     = $xoops->url('/modules/' . $moduleObj->getVar('dirname') . '/' . $data['link']);
+            $tags[$i]['title']    = $data['title'];
+            $tags[$i]['date']     = XoopsLocal::formatTimestamp($data['time'], 's');
+            $tags[$i]['uid']      = $data['uid'];
+            $tags[$i]['uid_name'] = XoopsUser::getUnameFromId($data['uid'], true);
+            $tags[$i]['tags']     = $tags_tags_handler->getbyItem($data['itemid'], $mid);
+            $tags[$i]['content']  = $data['content'];
+            $dates[$i] = array('time' => $data['time']);
+            $i++;
+        }
+    }}
 
-krsort($tags);
+array_multisort($dates, SORT_DESC, $tags);
 
 $subtitle = array();
 if ($tag_id != 0) {    $subtitle[] = sprintf(_XOO_TAGS_TERM, $tags_tags_handler->get($tag_id)->getVar('tag_term') );}

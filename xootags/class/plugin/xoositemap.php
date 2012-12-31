@@ -31,7 +31,7 @@ class XootagsXoositemapPlugin extends Xoops_Module_Plugin_Abstract implements Xo
         $criteria->setSort('tag_count');
         $criteria->setOrder('DESC');
         $criteria->setLimit($tags_config['xootags_limit_tag_main']);
-        $tags = $tags_tags_handler->getObjects($criteria, false, false);
+        $tags = $tags_tags_handler->getObjects($criteria, true, false);
 
         $sitemap = array();
         foreach ($tags as $k => $tag) {

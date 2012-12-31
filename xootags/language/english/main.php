@@ -26,4 +26,6 @@ define("_XOO_TAGS_TOPICS",           "Topics");
 define("_XOO_TAGS_AUTHOR",           "Author");
 define("_XOO_TAGS_TERM",             "Term: <span class='bold'>%s</span>");
 define("_XOO_TAGS_MODULE",           "Module: <span class='bold'>%s</span>");
+define("_XOO_TAGS_PUBLISHED",        "Publication date");
+
 ?>

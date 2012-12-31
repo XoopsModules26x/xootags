@@ -37,7 +37,7 @@ $criteria->setOrder('DESC');
 $tags_module = Xootags::getInstance();
 $tags_tags_handler = $tags_module->TagsHandler();
 
-$tags = $tags_tags_handler->getObjects($criteria, false, false);
+$tags = $tags_tags_handler->getObjects($criteria, true, false);
 
 $ret = array();
 if (count($tags) >= 0) {    foreach ($tags as $k => $tag) {        $ret[$k]['id']    = $tag['tag_term'];        $ret[$k]['label'] = $tag['tag_term'];

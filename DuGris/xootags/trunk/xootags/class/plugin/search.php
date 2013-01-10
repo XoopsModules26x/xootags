@@ -49,10 +49,12 @@ class XootagsSearchPlugin extends Xoops_Module_Plugin_Abstract implements Search
 
     $tags = $tags_tags_handler->getObjects($criteria, true, false);
 
-    foreach ( $tags as $k => $tag ) {
+    $k=0;
+    foreach ( $tags as $tag ) {
         $ret[$k]['image']    = 'icons/logo_small.png';
         $ret[$k]['link']     = 'tag.php?tag_id=' . $tag['tag_id'];
         $ret[$k]['title']    = $tag['tag_term'];
+        $k++;
     }
     return $ret;
     }

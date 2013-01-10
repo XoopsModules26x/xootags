@@ -21,9 +21,9 @@
 $modversion['name']           = _MI_XOO_TAGS_NAME;
 $modversion['description']    = _MI_XOO_TAGS_DESC;
 $modversion['version']        = 3;
-$modversion['author']         = 'Taiwen Jiang <phppp@users.sourceforge.net>, JEN Laurent';
-$modversion['nickname']       = 'DJ, Dugris';
-$modversion['credits']        = 'The XOOPS Project';
+$modversion['author']         = 'XooFoo - Laurent JEN';
+$modversion['nickname']       = 'aka DuGris';
+$modversion['credits']        = 'DuGris.XooFoo Project';
 $modversion['license']        = 'GNU GPL 2.0';
 $modversion['license_url']    = 'www.gnu.org/licenses/gpl-2.0.html/';
 $modversion['official']       = 1;

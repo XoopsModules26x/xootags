@@ -36,6 +36,20 @@ class Xootags_link extends XoopsObject
     {
         $this->__construct();
     }
+
+    public function getValues($keys = null, $format = null, $maxDepth = null)
+    {
+        $ret = parent::getValues();
+        $ret['tag_term_js'] = $this->js_escape($this->getVar('tag_term'));
+        return $ret;
+    }
+
+    public function js_escape($str)
+    {
+        $search = array("&#039;", "&amp;", "&#176;", "&#128;");
+        $replace = array("\u0027", "\u0026", "\u00b0", "\u20AC");
+        return str_replace($search, $replace, $str);
+    }
 }
 
 class Xootags_getByModule extends XoopsObject
@@ -47,15 +61,28 @@ class Xootags_getByModule extends XoopsObject
         $this->initVar('tag_modid',     XOBJ_DTYPE_INT,     0);
         $this->initVar('tag_itemid',    XOBJ_DTYPE_INT,     0);
 
-        $this->initVar('tag_id',            XOBJ_DTYPE_INT,     null, false);
-        $this->initVar('tag_term',          XOBJ_DTYPE_TXTBOX,     '', true);
-        $this->initVar('tag_status',        XOBJ_DTYPE_INT,     0);
-        $this->initVar('tag_count',         XOBJ_DTYPE_INT,     0);
+        $this->initVar('tag_id',        XOBJ_DTYPE_INT,     null, false);
+        $this->initVar('tag_term',      XOBJ_DTYPE_TXTBOX,     '', true);
+        $this->initVar('tag_status',    XOBJ_DTYPE_INT,     0);
+        $this->initVar('tag_count',     XOBJ_DTYPE_INT,     0);
+        $this->initVar('tag_time',      XOBJ_DTYPE_INT,     0);
     }
 
     private function Xootags_getByModule()
     {
         $this->__construct();
+    }
+
+    public function getValues($keys = null, $format = null, $maxDepth = null)
+    {        $ret = parent::getValues();
+        $ret['tag_term_js'] = $this->js_escape($this->getVar('tag_term'));
+        return $ret;
+    }
+
+    public function js_escape($str)
+    {        $search = array("&#039;", "&amp;", "&#176;", "&#128;");
+        $replace = array("\u0027", "\u0026", "\u00b0", "\u20AC");
+        return str_replace($search, $replace, $str);
     }
 }
 
@@ -65,13 +92,28 @@ class Xootags_getByItem extends XoopsObject
     // constructor
     public function __construct()
     {
-        $this->initVar('tag_id',            XOBJ_DTYPE_INT,     null, false);
-        $this->initVar('tag_term',          XOBJ_DTYPE_TXTBOX,     '', true);
+        $this->initVar('tag_id',        XOBJ_DTYPE_INT,     null, false);
+        $this->initVar('tag_term',      XOBJ_DTYPE_TXTBOX,     '', true);
+        $this->initVar('tag_time',      XOBJ_DTYPE_INT,     0);
     }
 
     private function Xootags_getByItem()
     {
         $this->__construct();
+    }
+
+    public function getValues($keys = null, $format = null, $maxDepth = null)
+    {
+        $ret = parent::getValues();
+        $ret['tag_term_js'] = $this->js_escape($this->getVar('tag_term'));
+        return $ret;
+    }
+
+    public function js_escape($str)
+    {
+        $search = array("&#039;", "&amp;", "&#176;", "&#128;");
+        $replace = array("\u0027", "\u0026", "\u00b0", "\u20AC");
+        return str_replace($search, $replace, $str);
     }
 }
 
@@ -96,12 +138,14 @@ class xootagsxootags_linkHandler extends XoopsPersistableObjectHandler
     {        $this->className = 'Xootags_getByModule';
         $this->table_link = $this->db->prefix('xootags_tags');
         $this->field_link = 'tag_id';
-        $criteria = new CriteriaCompo();
+        $criteria = new CriteriaCompo();
         if ( $module_id != 0 ) {
             $criteria->add( new Criteria('o.tag_modid', $module_id) ) ;
         }
-        if ( $tag_id != 0 ) {            $criteria->add( new Criteria('o.tag_id', $tag_id) ) ;
-        } else {            $criteria->setGroupby('o.tag_id');
+        if ( $tag_id != 0 ) {
+            $criteria->add( new Criteria('o.tag_id', $tag_id) ) ;
+        } else {
+            $criteria->setGroupby('o.tag_id');
         }
         return parent::getByLink( $criteria, null, false, false );
     }
@@ -126,7 +170,8 @@ class xootagsxootags_linkHandler extends XoopsPersistableObjectHandler
         $itemid = intval($itemid);
 
         $xoops = xoops::getinstance();
-        if ( is_null($modid) && ( is_object($xoops->module) && $xoops->module->dirname() != 'xootags' ) ) {            $modid = $xoops->module->getVar('mid');        }
+        if ( is_null($modid) && ( is_object($xoops->module) && $xoops->module->dirname() != 'xootags' ) ) {            $modid = $xoops->module->getVar('mid');
+        }
 
         if ( !is_null($modid) ) {            $criteria = new CriteriaCompo();
             $criteria->add( new Criteria('o.tag_itemid', $itemid) ) ;
@@ -141,7 +186,9 @@ class xootagsxootags_linkHandler extends XoopsPersistableObjectHandler
             }
 
             $tmp = array();
-            foreach ($tags as $k => $v) {                $tmp[] = $v['tag_term'];            }
+            foreach ($tags as $k => $v) {
+                $tmp[] = $v['tag_term'];
+            }
             return $tmp;
         }
     }

@@ -41,7 +41,7 @@ class XooTagsCorePreload extends XoopsPreloadItem
     static private function isActive()
     {        $xoops = Xoops::getInstance();
         $module_handler = $xoops->getHandlerModule();
-        $module = $module_handler->getByDirname('xooTags');
+        $module = $module_handler->getByDirname('xootags');
         return ($module && $module->getVar('isactive')) ? true : false;
     }
 }

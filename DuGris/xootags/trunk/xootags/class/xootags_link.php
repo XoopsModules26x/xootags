@@ -39,16 +39,7 @@ class Xootags_link extends XoopsObject
 
     public function getValues($keys = null, $format = null, $maxDepth = null)
     {
-        $ret = parent::getValues();
-        $ret['tag_term_js'] = $this->js_escape($this->getVar('tag_term'));
-        return $ret;
-    }
-
-    public function js_escape($str)
-    {
-        $search = array("&#039;", "&amp;", "&#176;", "&#128;");
-        $replace = array("\u0027", "\u0026", "\u00b0", "\u20AC");
-        return str_replace($search, $replace, $str);
+        return parent::getValues();
     }
 }
 

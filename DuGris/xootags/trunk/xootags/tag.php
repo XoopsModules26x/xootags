@@ -44,7 +44,6 @@ foreach ($items as $mid => $module) {    $moduleObj = $module_Handler->get( $mi
             $tags[$i]['modules'][$mid]['name'] = $moduleObj->getVar('name');
             $tags[$i]['modules'][$mid]['dirname'] = $moduleObj->getVar('dirname');
             $tags[$i]['modules'][$mid]['image'] = $xoops->url('/modules/' . $moduleObj->getVar('dirname') . '/icons/logo_small.png');
-
             $tags[$i]['tag_id']   = $tag_id;
             $tags[$i]['link']     = $xoops->url('/modules/' . $moduleObj->getVar('dirname') . '/' . $data['link']);
             $tags[$i]['title']    = $data['title'];
@@ -54,6 +53,10 @@ foreach ($items as $mid => $module) {    $moduleObj = $module_Handler->get( $mi
             $tags[$i]['tags']     = $tags_tags_handler->getbyItem($data['itemid'], $mid);
             $tags[$i]['content']  = $data['content'];
             $dates[$i] = array('time' => $data['time']);
+
+            // metas
+            $keywords[] = $data['title'];
+
             $i++;
         }
     }}
@@ -71,6 +74,11 @@ $xoops->tpl()->assign('subtitle', $subtitle );
 
 // Page navigation
 $paginate = new Xoopaginate(count($tags), $tags_config['xootags_limit_tag_tag'], $start, 'start', 'tag_id=' . $tag_id);
+
+// Metas
+$xoops->theme()->addMeta($type = 'meta', 'description', XooTags_getMetaDescription($keywords));
+$xoops->theme()->addMeta($type = 'meta', 'keywords', XooTags_getMetaKeywords($keywords));
+$xoops->tpl()->assign('xoops_pagetitle' , $tags_tags_handler->get($tag_id)->getVar('tag_term') . ' - ' . $xoops->module->getVar('name') );
 
 include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'footer.php';
 ?>

@@ -31,7 +31,8 @@ $tags = $tags_tags_handler->getObjects($criteria, false, false);
 $tags_count = $tags_tags_handler->getCount($criteria);
 $tags_max = 1;
 $tags_min = 1;
-foreach( $tags as $k => $tag) {    $tags_max = ($tag['tag_count'] > $tags_max) ? $tag['tag_count'] : $tags_max;    $tags_min = ($tag['tag_count'] < $tags_min) ? $tag['tag_count'] : $tags_min;
+foreach( $tags as $k => $tag) {    $keywords[] = $tag['tag_term'];
+    $tags_max = ($tag['tag_count'] > $tags_max) ? $tag['tag_count'] : $tags_max;    $tags_min = ($tag['tag_count'] < $tags_min) ? $tag['tag_count'] : $tags_min;
     $bytags = $tags_link_handler->getByTag( $tag['tag_id'] );
     foreach ($bytags as $j => $mod ) {        $mid = $mod['tag_modid'];        $module = $module_Handler->get( $mid );
         $tags[$k]['modules'][$mid]['mid'] = $mid;
@@ -49,10 +50,14 @@ $font_ratio = ($tags_interval) ? ($font_max - $font_min) / $tags_interval : 1;
 foreach( $tags as $k => $tag) {    $tags[$k]['font'] = empty($tags_interval) ? 100 : floor( ($tag['tag_count'] - $tags_min) * $font_ratio ) + $font_min;
     $tags[$k]['size'] = (floor( ($tag['tag_count'] - $tags_min) * $font_ratio ) + $font_min) / 10;
 }
+$xoops->tpl()->assign('tags', $tags);
 
 // Page navigation
 $paginate = new Xoopaginate($tags_count, $tags_config['xootags_limit_tag_main'], $start, 'start', '');
 
-$xoops->tpl()->assign('tags', $tags);
+// Metas
+$xoops->theme()->addMeta($type = 'meta', 'description', XooTags_getMetaDescription($keywords));
+$xoops->theme()->addMeta($type = 'meta', 'keywords', XooTags_getMetaKeywords($keywords));
+
 include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'footer.php';
 ?>

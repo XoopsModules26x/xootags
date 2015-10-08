@@ -17,16 +17,20 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
-class XoopsFormTags extends XoopsFormElement
-{    /**
+/**
+ * Class XoopsFormTags
+ */
+class XoopsFormTags extends Xoops\Form\Element
+{
+    /**
      * number of columns
      *
      * @var int
      * @access private
      */
-    public $_cols;
+    private $cols;
 
     /**
      * number of rows
@@ -34,34 +38,34 @@ class XoopsFormTags extends XoopsFormElement
      * @var int
      * @access private
      */
-    public $_rows;
+    private $rows;
 
-     /**
+    /**
      * placeholder for this element
      *
      * @var string
      * @access private
      */
-    public $_placeholder;
-
+    private $placeholder;
 
     /**
      * Constructor
      *
-     * @param string $caption caption
-     * @param string $name name
-     * @param string $value initial content
-     * @param int $rows number of rows
-     * @param int $cols number of columns
+     * @param string $caption     caption
+     * @param string $name        name
+     * @param string $value       initial content
+     * @param int    $rows        number of rows
+     * @param int    $cols        number of columns
      * @param string $placeholder placeholder for this element.
      */
     public function __construct($caption, $name, $value = '', $rows = 5, $cols = 5, $placeholder = '')
-    {        $this->setCaption($caption);
+    {
+        $this->setCaption($caption);
         $this->setName($name);
-        $this->_rows = intval($rows);
-        $this->_cols = intval($cols);
+        $this->rows = (int)($rows);
+        $this->cols = (int)($cols);
         $this->setValue($value);
-        $this->_placeholder = $placeholder;
+        $this->placeholder = $placeholder;
         $this->setClass('tags');
     }
 
@@ -72,7 +76,7 @@ class XoopsFormTags extends XoopsFormElement
      */
     public function getRows()
     {
-        return $this->_rows;
+        return $this->rows;
     }
 
     /**
@@ -82,7 +86,7 @@ class XoopsFormTags extends XoopsFormElement
      */
     public function getCols()
     {
-        return $this->_cols;
+        return $this->cols;
     }
 
     /**
@@ -92,10 +96,11 @@ class XoopsFormTags extends XoopsFormElement
      */
     public function getPlaceholder()
     {
-        if (empty($this->_placeholder)) {
+        if (empty($this->placeholder)) {
             return '';
         }
-        return $this->_placeholder;
+
+        return $this->placeholder;
     }
 
     /**
@@ -105,31 +110,34 @@ class XoopsFormTags extends XoopsFormElement
      */
     public function render()
     {
-        $xoops = Xoops::getinstance();
-        $xoops->theme()->addScript('modules/xootags/media/jquery/jquery.tagsinput/jquery.tagsinput.js');
-        $xoops->theme()->addStylesheet('modules/xootags/media/jquery/jquery.tagsinput/jquery.tagsinput.css');
+        $xoops = Xoops::getInstance();
+        $xoops->theme()->addScript('modules/xootags/assets/js/jquery/jquery.tagsinput/jquery.tagsinput.js');
+        $xoops->theme()->addStylesheet('modules/xootags/assets/js/jquery/jquery.tagsinput/jquery.tagsinput.css');
         $xoops->theme()->addStylesheet('media/jquery/ui/base/ui.all.css');
 
-        $name = $this->getName();
+        $name  = $this->getName();
         $class = ($this->getClass() != '' ? " class='" . $this->getClass() . "'" : '');
         if ($this->getCols() > $this->getMaxcols()) {
             $maxcols = 5;
         } else {
             $maxcols = $this->getCols();
         }
-        $class = ($this->getClass() != '' ? " class='span" . $maxcols . " " . $this->getClass() . "'" : " class='span" . $maxcols . "'");
+        $class       = ($this->getClass() != '' ? " class='span" . $maxcols . " " . $this->getClass() . "'" : " class='span" . $maxcols . "'");
         $placeholder = ($this->getPlaceholder() != '' ? " placeholder='" . $this->getPlaceholder() . "'" : '');
-        $extra = ($this->getExtra() != '' ? ' ' . $this->getExtra() : '');
-        $required = ($this->isRequired() ? ' required' : '');
+        $extra       = ($this->getExtra() != '' ? ' ' . $this->getExtra() : '');
+        $required    = ($this->isRequired() ? ' required' : '');
 
-        $script = "<script type=\"text/javascript\">
-        $(function() {            $('#" . $name . "').tagsInput({                width:'auto',
+        $script
+            = "<script type=\"text/javascript\">
+        $(function () {
+            $('#" . $name . "').tagsInput({
+                width:'auto',
                 autocomplete_url:'" . XOOPS_URL . "/modules/xootags/include/jquery.php',
             });
         });
         </script>";
 
-        return $script . "<textarea name='" . $name . "' title='" . $this->getTitle() . "' id='" . $name . "'" . $class ." rows='" . $this->getRows() . "'" . $placeholder . $extra . $required . ">" . $this->getValue() . "</textarea>";
+        return $script . "<textarea name='" . $name . "' title='" . $this->getTitle() . "' id='" . $name . "'" . $class . " rows='" . $this->getRows() . "'" . $placeholder . $extra . $required . ">"
+        . $this->getValue() . "</textarea>";
     }
 }
-?>

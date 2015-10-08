@@ -18,14 +18,11 @@
  * @version         $Id$
  */
 
-
-define("_XOO_TAGS_TAGS",             "Tags");
-define("_XOO_TAGS_TAGS_ERROR",       "Module Xootags was not installed or disabled");
-define("_XOO_TAGS_ADD_TAGS_ERROR",   "Tag(s) has not been added");
-define("_XOO_TAGS_TOPICS",           "Topics");
-define("_XOO_TAGS_AUTHOR",           "Author");
-define("_XOO_TAGS_TERM",             "Term: <span class='bold'>%s</span>");
-define("_XOO_TAGS_MODULE",           "Module: <span class='bold'>%s</span>");
-define("_XOO_TAGS_PUBLISHED",        "Publication date");
-
-?>
+define('_XOO_TAGS_TAGS', 'Tags');
+define('_XOO_TAGS_TAGS_ERROR', 'Module Xootags was not installed or disabled');
+define('_XOO_TAGS_ADD_TAGS_ERROR', 'Tag(s) has not been added');
+define('_XOO_TAGS_TOPICS', 'Topics');
+define('_XOO_TAGS_AUTHOR', 'Author');
+define('_XOO_TAGS_TERM', "Term: <span class='bold'>%s</span>");
+define('_XOO_TAGS_MODULE', "Module: <span class='bold'>%s</span>");
+define('_XOO_TAGS_PUBLISHED', 'Publication date');

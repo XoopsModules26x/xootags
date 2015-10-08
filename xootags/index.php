@@ -17,47 +17,51 @@
  * @version         $Id$
  */
 
-include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'header.php';
+include __DIR__ .  '/header.php';
 
-$start = $system->CleanVars($_REQUEST, 'start', 0, 'int');
+$start = $system->cleanVars($_REQUEST, 'start', 0, 'int');
 
 $criteria = new CriteriaCompo();
 $criteria->setSort('tag_count');
 $criteria->setOrder('DESC');
-$criteria->setStart( $start );
-$criteria->setLimit($tags_config['xootags_limit_tag_main']);
+$criteria->setStart($start);
+$criteria->setLimit($tagsConfig['xootags_limit_tag_main']);
 
-$tags = $tags_tags_handler->getObjects($criteria, false, false);
-$tags_count = $tags_tags_handler->getCount($criteria);
-$tags_max = 1;
-$tags_min = 1;
-foreach( $tags as $k => $tag) {    $keywords[] = $tag['tag_term'];
-    $tags_max = ($tag['tag_count'] > $tags_max) ? $tag['tag_count'] : $tags_max;    $tags_min = ($tag['tag_count'] < $tags_min) ? $tag['tag_count'] : $tags_min;
-    $bytags = $tags_link_handler->getByTag( $tag['tag_id'] );
-    foreach ($bytags as $j => $mod ) {        $mid = $mod['tag_modid'];        $module = $module_Handler->get( $mid );
-        $tags[$k]['modules'][$mid]['mid'] = $mid;
-        $tags[$k]['modules'][$mid]['name'] = $module->getVar('name');
+$tags       = $tagsTagsHandler->getObjects($criteria, false, false);
+$tags_count = $tagsTagsHandler->getCount($criteria);
+$tags_max   = 1;
+$tags_min   = 1;
+foreach ($tags as $k => $tag) {
+    $keywords[] = $tag['tag_term'];
+    $tags_max   = ($tag['tag_count'] > $tags_max) ? $tag['tag_count'] : $tags_max;
+    $tags_min   = ($tag['tag_count'] < $tags_min) ? $tag['tag_count'] : $tags_min;
+    $bytags     = $tagsLinkHandler->getByTag($tag['tag_id']);
+    foreach ($bytags as $j => $mod) {
+        $mid                                  = $mod['tag_modid'];
+        $module                               = $module_Handler->get($mid);
+        $tags[$k]['modules'][$mid]['mid']     = $mid;
+        $tags[$k]['modules'][$mid]['name']    = $module->getVar('name');
         $tags[$k]['modules'][$mid]['dirname'] = $module->getVar('dirname');
-        $tags[$k]['modules'][$mid]['image'] = $xoops->url('/modules/' . $module->getVar('dirname') . '/icons/logo_small.png');
+        $tags[$k]['modules'][$mid]['image']   = $xoops->url('/modules/' . $module->getVar('dirname') . '/assets/icons/logo_small.png');
     }
 }
 
 // font size
-$font_max = $tags_config['xootags_font_max'];
-$font_min = $tags_config['xootags_font_min'];
+$font_max      = $tagsConfig['xootags_font_max'];
+$font_min      = $tagsConfig['xootags_font_min'];
 $tags_interval = $tags_max - $tags_min;
-$font_ratio = ($tags_interval) ? ($font_max - $font_min) / $tags_interval : 1;
-foreach( $tags as $k => $tag) {    $tags[$k]['font'] = empty($tags_interval) ? 100 : floor( ($tag['tag_count'] - $tags_min) * $font_ratio ) + $font_min;
-    $tags[$k]['size'] = (floor( ($tag['tag_count'] - $tags_min) * $font_ratio ) + $font_min) / 10;
+$font_ratio    = ($tags_interval) ? ($font_max - $font_min) / $tags_interval : 1;
+foreach ($tags as $k => $tag) {
+    $tags[$k]['font'] = empty($tags_interval) ? 100 : floor(($tag['tag_count'] - $tags_min) * $font_ratio) + $font_min;
+    $tags[$k]['size'] = (floor(($tag['tag_count'] - $tags_min) * $font_ratio) + $font_min) / 10;
 }
 $xoops->tpl()->assign('tags', $tags);
 
 // Page navigation
-$paginate = new Xoopaginate($tags_count, $tags_config['xootags_limit_tag_main'], $start, 'start', '');
+$paginate = new Xoopaginate($tags_count, $tagsConfig['xootags_limit_tag_main'], $start, 'start', '');
 
 // Metas
 $xoops->theme()->addMeta($type = 'meta', 'description', XooTags_getMetaDescription($keywords));
 $xoops->theme()->addMeta($type = 'meta', 'keywords', XooTags_getMetaKeywords($keywords));
 
-include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'footer.php';
-?>
+include __DIR__ .  '/footer.php';

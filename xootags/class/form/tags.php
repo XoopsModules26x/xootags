@@ -17,56 +17,80 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
-class XootagsTagsForm extends XoopsThemeForm
+/**
+ * Class XootagsTagsForm
+ */
+class XootagsTagsForm extends Xoops\Form\ThemeForm
 {
     /**
-     * @param null $obj
+     * @internal param null $obj
      */
     public function __construct()
-    {    }
+    {
+    }
 
+    /**
+     * @return bool
+     */
     private function isActive()
     {
-        $xoops = Xoops::getInstance();
+        $xoops          = Xoops::getInstance();
         $module_handler = $xoops->getHandlerModule();
-        $module = $module_handler->getByDirname('xooTags');
+        $module         = $module_handler->getByDirname('xooTags');
+
         return ($module && $module->getVar('isactive')) ? true : false;
     }
 
-    public function TagsForm( $name, $value = null, $size=5, $maxlength=10 )
-    {        $xoops = xoops::getinstance();
+    /**
+     * @param      $name
+     * @param null $value
+     * @param int  $size
+     * @param int  $maxlength
+     *
+     * @return \Xoops\Form\Text|XoopsFormTags
+     */
+    public function tagsForm($name, $value = null, $size = 5, $maxlength = 10)
+    {
+        $xoops = Xoops::getInstance();
 
-        $tags_module = Xootags::getInstance();
+        $tagsModule = Xootags::getInstance();
 
-        if ( $this->isActive() ) {            $value = empty($value) ? '' : $value;
+        if ($this->isActive()) {
+            $value = empty($value) ? '' : $value;
 
-            if ( !empty($value) && is_numeric($value) ) {
+            if (!empty($value) && is_numeric($value)) {
                 $modid = $xoops->module->getVar('mid');
-
-                $tags_link_handler = $tags_module->LinkHandler();
-                if ( $tags = $tags_link_handler->getByItem($value, $modid, true) ) {                    $value = htmlspecialchars(implode(',', $tags));
-                } else {
-                    $value = '';
+                $value = '';
+                $tagsLinkHandler = $tagsModule->LinkHandler();
+                if ($tags = $tagsLinkHandler->getByItem($value, $modid, true)) {
+                    $value = htmlspecialchars(implode(',', $tags));
                 }
             }
+
             return new XoopsFormTags(_XOO_TAGS_TAGS, $name, $value, $size, $maxlength);
-        } else {            $xoops->logger->handleError( 2 , '<strong><span class="red">' . _XOO_TAGS_TAGS_ERROR . '</span></strong>', $xoops->getenv('PHP_SELF'), 'TagsForm(...)' );
-            return new XoopsFormText(_XOO_TAGS_TAGS, $name, $size, $maxlength, _XOO_TAGS_TAGS_ERROR) ;
+        } else {
+            $xoops->logger->handleError(2, '<strong><span class="red">' . _XOO_TAGS_TAGS_ERROR . '</span></strong>', $xoops->getEnv('PHP_SELF'), 'TagsForm(...)');
+
+            return new Xoops\Form\Text(_XOO_TAGS_TAGS, $name, $size, $maxlength, _XOO_TAGS_TAGS_ERROR);
         }
     }
 
     /**
      * Maintenance Form
+     *
+     * @param $module_id
+     * @param $modules
+     *
      * @return void
      */
-    public function TagsFormModules( $module_id, $modules )
-    {        $module_select = new XoopsFormSelect(_AM_XOO_TAGS_MODULES, 'module_id',  $module_id);
+    public function TagsFormModules($module_id, $modules)
+    {
+        $module_select = new Xoops\Form\Select(_AM_XOO_TAGS_MODULES, 'module_id', $module_id);
         $module_select->setExtra("onChange='javascript:window.location.href=\"tags.php?module_id=\" + this.value '");
-        $module_select->addOption( 0, _AM_XOO_TAGS_MODULES_ALL );
-        $module_select->addOptionArray( $modules);
+        $module_select->addOption(0, _AM_XOO_TAGS_MODULES_ALL);
+        $module_select->addOptionArray($modules);
         $this->addElement($module_select, true);
     }
 }
-?>

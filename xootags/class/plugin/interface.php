@@ -15,9 +15,12 @@
  * @author          trabis <lusopoemas@gmail.com>
  * @version         $Id$
  */
-
 interface XootagsPluginInterface
 {
-    public function Xootags($items);
+ /**
+  * @param $items
+  *
+  * @return mixed
+     */
+    public function xooTags($items);
 }
-

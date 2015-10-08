@@ -1,0 +1,81 @@
+@import url(item.css);
+@import url(colors.css);
+
+#xootagsCloud {
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 100%;
+    min-height: 400px;
+}
+
+.xootagsMsg {
+    padding: 1em;
+    margin-bottom: 1em;
+    text-align: center;
+    background-color: #f1f1f1;
+    color: #049cd9;
+    border: 2px solid #049cd9;
+}
+
+/*========  Float ======== */
+.floatleft {
+    float: left;
+    margin: 0;
+    padding-left: 0;
+    border: 0;
+}
+
+.floatright {
+    float: right;
+    margin: 0;
+    padding-right: 0;
+    border: 0;
+}
+
+/*========  Icons ======== */
+[class^="xootags-ico-"], [class*=" xoositemap-ico-"] {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: 16px 16px;
+    display: inline-block;
+    margin-right: 0.5em;
+    vertical-align: text-top;
+    line-height: 16px;
+    height: 16px;
+    width: 16px;
+}
+
+/*========  Search ======== */
+.searchModule {
+    border: 1px solid #ccc;
+    padding: 1em;
+    margin: 2em 0;
+}
+
+.searchIcon {
+    width: 25px;
+    margin-right: 5px;
+}
+
+.searchIcon img {
+    width: 20px;
+}
+
+.searchTitle {
+    font-weight: bold;
+}
+
+.searchItem {
+    margin: 10px 0;
+    padding: 5px;
+    border: 1px solid #eee;
+}
+
+.searchHighlight {
+    background-color: #ffed00;
+}
+
+.searchSpace {
+    margin: .5em 2em;
+}

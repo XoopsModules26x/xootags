@@ -17,17 +17,17 @@
  * @version         $Id$
  */
 
-include dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'mainfile.php';
-include dirname(__FILE__) . '/include/functions.php';
+include dirname(dirname(__DIR__)) .  '/mainfile.php';
+include __DIR__ . '/include/functions.php';
 
 $op = '';
-if ( isset( $_POST ) ){
-    foreach ( $_POST as $k => $v )  {
+if (isset($_POST)) {
+    foreach ($_POST as $k => $v) {
         ${$k} = $v;
     }
 }
-if ( isset( $_GET ) ){
-    foreach ( $_GET as $k => $v )  {
+if (isset($_GET)) {
+    foreach ($_GET as $k => $v) {
         ${$k} = $v;
     }
 }
@@ -38,19 +38,18 @@ $system = System::getInstance();
 $xoops = Xoops::getInstance();
 
 $script_name = basename($_SERVER['SCRIPT_NAME'], '.php');
-$xoops->header('xootags_' . $script_name . '.html');
+$xoops->header('xootags_' . $script_name . '.tpl');
 
-$xoops->theme()->addStylesheet('modules/xootags/css/module.css');
+$xoops->theme()->addStylesheet('modules/xootags/assets/css/module.css');
 
-$tags_module = Xootags::getInstance();
-$tags_config = $tags_module->LoadConfig();
-$tags_link_handler = $tags_module->LinkHandler();
-$tags_tags_handler = $tags_module->TagsHandler();
-$module_Handler = $xoops->getHandlerModule();
+$tagsModule       = Xootags::getInstance();
+$tagsConfig       = $tagsModule->LoadConfig();
+$tagsLinkHandler = $tagsModule->LinkHandler();
+$tagsTagsHandler = $tagsModule->TagsHandler();
+$module_Handler    = $xoops->getHandlerModule();
 
-$xoops->tpl()->assign('moduletitle', $xoops->module->name() );
-$xoops->tpl()->assign('welcome', $tags_config['xootags_welcome'] );
-$xoops->tpl()->assign('xootags_colors', implode(',', $tags_config['xootags_colors']) );
-$xoops->tpl()->assign('xootags_count', $tags_config['xootags_count'] );
-$xoops->tpl()->assign('xootags_main_mode', $tags_config['xootags_main_mode'] );
-?>
+$xoops->tpl()->assign('moduletitle', $xoops->module->name());
+$xoops->tpl()->assign('welcome', $tagsConfig['xootags_welcome']);
+$xoops->tpl()->assign('xootags_colors', implode(',', $tagsConfig['xootags_colors']));
+$xoops->tpl()->assign('xootags_count', $tagsConfig['xootags_count']);
+$xoops->tpl()->assign('xootags_main_mode', $tagsConfig['xootags_main_mode']);

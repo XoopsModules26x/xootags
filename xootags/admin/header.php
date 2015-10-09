@@ -41,7 +41,7 @@ XoopsLoad::load('system', 'system');
 $system = System::getInstance();
 
 $xoops = Xoops::getInstance();
-if ($script_name != 'about') {
+if ($script_name !== 'about') {
     $xoops->header('xootags_' . $script_name . '.tpl');
 } else {
     $xoops->header();
@@ -49,9 +49,9 @@ if ($script_name != 'about') {
 $xoops->theme()->addStylesheet('modules/xootags/assets/css/moduladmin.css');
 
 $admin_page = new \Xoops\Module\Admin();
-if ($script_name != 'about' && $script_name != 'index') {
+if ($script_name !== 'about' && $script_name !== 'index') {
     $admin_page->renderNavigation(basename($_SERVER['SCRIPT_NAME']));
-} elseif ($script_name != 'index') {
+} elseif ($script_name !== 'index') {
     $admin_page->displayNavigation(basename($_SERVER['SCRIPT_NAME']));
 }
 

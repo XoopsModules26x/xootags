@@ -34,7 +34,7 @@ class Xootags extends Xoops\Module\Helper\HelperAbstract
         XoopsLoad::load('xoopaginate', $this->_dirname);
     }
 
-    public function LoadConfig()
+    public function loadConfig()
     {
         XoopsLoad::load('xoopreferences', $this->_dirname);
 
@@ -44,7 +44,7 @@ class Xootags extends Xoops\Module\Helper\HelperAbstract
     /**
      * @return \Xoops\Module\Helper\XoopsObjectHandler
      */
-    public function TagsHandler()
+    public function tagsHandler()
     {
         return $this->getHandler('xootags_tags');
     }
@@ -52,7 +52,7 @@ class Xootags extends Xoops\Module\Helper\HelperAbstract
     /**
      * @return \Xoops\Module\Helper\XoopsObjectHandler
      */
-    public function LinkHandler()
+    public function linkHandler()
     {
         return $this->getHandler('xootagslink');
     }

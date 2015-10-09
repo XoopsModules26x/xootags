@@ -60,7 +60,7 @@ class XootagsXoositemapPlugin extends Xoops\Module\Plugin\PluginAbstract impleme
      *
      * @return array
      */
-    public function Xoositemap_xml($subcategories)
+    public function xoositemap_xml($subcategories)
     {
         $tagsModule        = Xootags::getInstance();
         $tagsConfig        = $tagsModule->LoadConfig();

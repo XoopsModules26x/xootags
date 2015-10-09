@@ -30,7 +30,7 @@
 
             <div class="itemInfo">
                 <div class="itemPoster">
-                    <{$smarty.const._XOO_TAGS_AUTHOR}> : <a href="<{xoAppUrl userinfo.php}>?uid=<{$item.uid}>" title="<{$item.uid_name}>">
+                    <{$smarty.const._XOO_TAGS_AUTHOR}> : <a href="<{xoAppUrl 'userinfo.php'}>?uid=<{$item.uid}>" title="<{$item.uid_name}>">
                         <{$item.uid_name}>
                     </a>
                 </div>
@@ -39,13 +39,13 @@
                 </div>
 
                 <{if $item.tags}>
-                    <{include file="module:xootags/xootags_bar.html" tags=$item.tags}>
+                    <{include file='module:xootags/xootags_bar.tpl' tags=$item.tags}>
                 <{/if}>
 
                 <div class="itemModules">
                     <{$smarty.const._XOO_TAGS_TOPICS}>:&nbsp;
                     <{foreach from=$item.modules item=module name=foo}>
-                    <a href="<{xoAppUrl /modules/}><{$module.dirname}>/" title="<{$module.name}>"><i class="xootags-ico-<{$module.dirname}>"></i><{$module.name}>
+                    <a href="<{xoAppUrl '/modules/'}><{$module.dirname}>/" title="<{$module.name}>"><i class="xootags-ico-<{$module.dirname}>"></i><{$module.name}>
                         </a><{if !$smarty.foreach.foo.last}>,&nbsp;<{/if}>
                     <{/foreach}>
                 </div>

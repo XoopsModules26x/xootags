@@ -164,9 +164,9 @@ class Xootags_getByItem extends XoopsObject
  */
 class xootagsXootagsLinkHandler extends XoopsPersistableObjectHandler
 {
-    public $tableLink;
+    public $table_link;
 
-    public $fieldLink;
+    public $field_link;
 
     /**
      * @param Connection $db
@@ -185,9 +185,9 @@ class xootagsXootagsLinkHandler extends XoopsPersistableObjectHandler
     public function getTags($criteria)
     {
         $this->className  = 'Xootags_getByModule';
-        $this->tableLink = $this->db2->prefix('xootags_tags');
-//        $this->tableLink = $xoops->db->prefix('xootags_tags');
-        $this->fieldLink = 'tag_id';
+        $this->table_link = $this->db2->prefix('xootags_tags');
+//        $this->table_link = $xoops->db->prefix('xootags_tags');
+        $this->field_link = 'tag_id';
 
         return parent::getByLink($criteria, null, false, false);
     }
@@ -201,8 +201,8 @@ class xootagsXootagsLinkHandler extends XoopsPersistableObjectHandler
     public function getByModule($module_id, $tag_id = 0)
     {
         $this->className  = 'Xootags_getByModule';
-        $this->tableLink = $this->db2->prefix('xootags_tags');
-        $this->fieldLink = 'tag_id';
+        $this->table_link = $this->db2->prefix('xootags_tags');
+        $this->field_link = 'tag_id';
         $criteria         = new CriteriaCompo();
         if ($module_id != 0) {
             $criteria->add(new Criteria('o.tag_modid', $module_id));
@@ -221,11 +221,11 @@ class xootagsXootagsLinkHandler extends XoopsPersistableObjectHandler
      *
      * @return array
      */
-    public function getBytag($itemid)
+    public function getByTag($itemid)
     {
         $this->className  = 'Xootags_getByModule';
-        $this->tableLink = $this->db2->prefix('xootags_tags');
-        $this->fieldLink = 'tag_id';
+        $this->table_link = $this->db2->prefix('xootags_tags');
+        $this->field_link = 'tag_id';
 
         $criteria = new CriteriaCompo();
         $criteria->add(new Criteria('l.tag_id', $itemid));
@@ -250,7 +250,7 @@ class xootagsXootagsLinkHandler extends XoopsPersistableObjectHandler
         $itemid = (int)($itemid);
 
         $xoops = Xoops::getInstance();
-        if (is_null($modid) && (is_object($xoops->module) && $xoops->module->dirname() != 'xootags')) {
+        if (is_null($modid) && (is_object($xoops->module) && $xoops->module->dirname() !== 'xootags')) {
             $modid = $xoops->module->getVar('mid');
         }
 
@@ -300,7 +300,7 @@ class xootagsXootagsLinkHandler extends XoopsPersistableObjectHandler
     public function deleteByIds($tag_ids, $itemid, $modid = null)
     {
         $xoops = Xoops::getInstance();
-        if (is_null($modid) && $xoops->module->dirname() != 'xootags') {
+        if (is_null($modid) && $xoops->module->dirname() !== 'xootags') {
             $modid = $xoops->module->getVar('mid');
         }
         $criteria = new CriteriaCompo();

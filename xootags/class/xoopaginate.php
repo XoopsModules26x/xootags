@@ -117,6 +117,6 @@ class XooPaginate
             $xoops->tpl()->assign('xoopages', $pages);
         }
 
-        return $xoops->tpl()->fetch('module:xootags|xoo_paginate.tpl');
+        return $xoops->tpl()->fetch('module:xootags/xoo_paginate.tpl');
     }
 }

@@ -1,0 +1,6 @@
+Credits
+===============
+
+Originally developed by several XOOPS Developers (see changelog)
+
+Redesgined for XOOPS 2.6.0 by JEN Laurent aka Dugris

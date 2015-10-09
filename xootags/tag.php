@@ -17,6 +17,8 @@
  * @version         $Id$
  */
 
+use \Xoops\Core\Kernel\Handlers\XoopsUser;
+
 include __DIR__ .  '/header.php';
 
 $tag_id    = $system->cleanVars($_REQUEST, 'tag_id', 0, 'int');
@@ -54,7 +56,7 @@ foreach ($items as $mid => $module) {
             $tags[$i]['tag_id']                   = $tag_id;
             $tags[$i]['link']                     = $xoops->url('/modules/' . $moduleObj->getVar('dirname') . '/' . $data['link']);
             $tags[$i]['title']                    = $data['title'];
-            $tags[$i]['date']                     = XoopsLocal::formatTimestamp($data['time'], 's');
+            $tags[$i]['date']                     = XoopsLocale::formatTimestamp($data['time'], 's');
             $tags[$i]['uid']                      = $data['uid'];
             $tags[$i]['uid_name']                 = XoopsUser::getUnameFromId($data['uid'], true);
             $tags[$i]['tags']                     = $tagsTagsHandler->getbyItem($data['itemid'], $mid);

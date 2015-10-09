@@ -39,11 +39,6 @@ class XootagsTags extends XoopsObject
         $this->initVar('tag_count', XOBJ_DTYPE_INT, 0);
     }
 
-    private function XootagsTags()
-    {
-        $this->__construct();
-    }
-
     /**
      * @param null $keys
      * @param null $format

@@ -42,7 +42,7 @@ use Xoops\Core\PreloadItem;
         $path = dirname(__DIR__);
         XoopsLoad::addMap(
             array(
-                'xootags' => $path . '/class/helper.php',
+                'xootags' => $path . '/class/helper.php'
             )
         );
     }

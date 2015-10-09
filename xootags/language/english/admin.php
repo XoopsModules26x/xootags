@@ -18,23 +18,22 @@
  * @version         $Id$
  */
 
-define("_AM_XOO_TAGS_STATS",         "Statistic Infomation");
-define("_AM_XOO_TAGS_COUNT_TAGS",    "Tag count");
-define("_AM_XOO_TAGS_COUNT_ITEM",    "Item count");
+define('_AM_XOO_TAGS_STATS', 'Statistic Infomation');
+define('_AM_XOO_TAGS_COUNT_TAGS', 'Tag count');
+define('_AM_XOO_TAGS_COUNT_ITEM', 'Item count');
 
-define("_AM_XOO_TAGS_ACTION",        "Action" );
-define("_AM_XOO_TAGS_SAVED",         "Tag was saved" );
+define('_AM_XOO_TAGS_ACTION', 'Action');
+define('_AM_XOO_TAGS_SAVED', 'Tag was saved');
 
-define("_AM_XOO_TAGS_SHOW",          "Show");
-define("_AM_XOO_TAGS_HIDE",          "Hide");
+define('_AM_XOO_TAGS_SHOW', 'Show');
+define('_AM_XOO_TAGS_HIDE', 'Hide');
 
-define("_AM_XOO_TAGS_DELETED",       "The tag has been deleted");
-define("_AM_XOO_TAGS_DELETE_CFM",    "Are you sure to delete this tag ?");
+define('_AM_XOO_TAGS_DELETED', 'The tag has been deleted');
+define('_AM_XOO_TAGS_DELETE_CFM', 'Are you sure to delete this tag ?');
 
-define("_AM_XOO_TAGS_TERM",          "Term");
-define("_AM_XOO_TAGS_COUNT",         "Count");
-define("_AM_XOO_TAGS_SHOW_HIDE",     "Actif / Inactif");
+define('_AM_XOO_TAGS_TERM', 'Term');
+define('_AM_XOO_TAGS_COUNT', 'Count');
+define('_AM_XOO_TAGS_SHOW_HIDE', 'Actif / Inactif');
 
-define("_AM_XOO_TAGS_MODULES",       "Module(s)" );
-define("_AM_XOO_TAGS_MODULES_ALL",   "All" );
-?>
+define('_AM_XOO_TAGS_MODULES', 'Module(s)');
+define('_AM_XOO_TAGS_MODULES_ALL', 'All');

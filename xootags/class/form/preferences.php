@@ -17,83 +17,91 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') or die('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
-class XooTagsPreferencesForm extends XoopsThemeForm
+/**
+ * Class XooTagsPreferencesForm
+ */
+class XooTagsPreferencesForm extends Xoops\Form\ThemeForm
 {
-    private $_config = array();
+    private $config = array();
 
-    private $_colors = array(
-        'Aqua'    => '#00FFFF',
-        'Black'   => '#000000',
-        'Blue'    => '#0000FF',
-        'Fuchsia' => '#FF00FF',
-        'Gray'    => '#808080',
-        'Green'   => '#008000',
-        'Lime'    => '#00FF00',
-        'Maroon'  => '#800000',
-        'Navy'    => '#000080',
-        'Olive'   => '#808000',
-        'Purple'  => '#800080',
-        'Red'     => '#FF0000',
-        'Silver'  => '#C0C0C0',
-        'Teal'    => '#008080',
-        'White'   => '#FFFFFF',
-        'Yellow'  => '#FFFF00',
-    );
+    private $colors
+        = array(
+            'Aqua'    => '#00FFFF',
+            'Black'   => '#000000',
+            'Blue'    => '#0000FF',
+            'Fuchsia' => '#FF00FF',
+            'Gray'    => '#808080',
+            'Green'   => '#008000',
+            'Lime'    => '#00FF00',
+            'Maroon'  => '#800000',
+            'Navy'    => '#000080',
+            'Olive'   => '#808000',
+            'Purple'  => '#800080',
+            'Red'     => '#FF0000',
+            'Silver'  => '#C0C0C0',
+            'Teal'    => '#008080',
+            'White'   => '#FFFFFF',
+            'Yellow'  => '#FFFF00'
+        );
 
     /**
-     * @param null $obj
+     * @param string $config
+     *
+     * @internal param null $obj
      */
     public function __construct($config)
-    {        extract( $config );
+    {
+        extract($config);
         parent::__construct('', 'form_preferences', 'preferences.php', 'post', true);
         $this->setExtra('enctype="multipart/form-data"');
 
-        $tabtray = new XoopsFormTabTray('', 'uniqueid');
+        $tabtray = new Xoops\Form\TabTray('', 'uniqueid');
 
         /**
          * Main page
          */
-        $tab1 = new XoopsFormTab(_XOO_CONFIG_MAINPAGE, 'tabid-1');
+        $tab1 = new Xoops\Form\Tab(_XOO_CONFIG_MAINPAGE, 'tabid-1');
         //welcome
-        $tab1->addElement( new XoopsFormTextArea(_XOO_CONFIG_WELCOME, 'xootags_welcome', $xootags_welcome, 12, 12) );
+        $tab1->addElement(new Xoops\Form\TextArea(_XOO_CONFIG_WELCOME, 'xootags_welcome', $xootags_welcome, 12, 12));
 
         // Display mode
-        $category_mode = new XoopsFormSelect(_XOO_CONFIG_DISPLAY_MODE, 'xootags_main_mode', $xootags_main_mode);
-        $category_mode->addOption('blog',   _XOO_CONFIG_MODE_BLOG);
-        $category_mode->addOption('cloud',  _XOO_CONFIG_MODE_CLOUD);
-        $tab1->addElement( $category_mode );
+        $category_mode = new Xoops\Form\Select(_XOO_CONFIG_DISPLAY_MODE, 'xootags_main_mode', $xootags_main_mode);
+        $category_mode->addOption('blog', _XOO_CONFIG_MODE_BLOG);
+        $category_mode->addOption('cloud', _XOO_CONFIG_MODE_CLOUD);
+        $tab1->addElement($category_mode);
 
         // Display count
-        $tab1->addElement( new XoopsFormRadioYN(_XOO_CONFIG_COUNT, 'xootags_count', $xootags_count) );
+        $tab1->addElement(new Xoops\Form\RadioYesNo(_XOO_CONFIG_COUNT, 'xootags_count', $xootags_count));
 
         // limit per page : main page
-        $tab1->addElement( new XoopsFormText(_XOO_CONFIG_LIMIT_MAIN, 'xootags_limit_tag_main', 1, 10, $xootags_limit_tag_main) );
+        $tab1->addElement(new Xoops\Form\Text(_XOO_CONFIG_LIMIT_MAIN, 'xootags_limit_tag_main', 1, 10, $xootags_limit_tag_main));
 
         // limit per page : main page
-        $tab1->addElement( new XoopsFormText(_XOO_CONFIG_LIMIT_TAGS, 'xootags_limit_tag_tag', 1, 10, $xootags_limit_tag_tag) );
+        $tab1->addElement(new Xoops\Form\Text(_XOO_CONFIG_LIMIT_TAGS, 'xootags_limit_tag_tag', 1, 10, $xootags_limit_tag_tag));
 
         $tabtray->addElement($tab1);
 
         /**
          * Tags
          */
-        $tab2 = new XoopsFormTab(_XOO_CONFIG_TAGS, 'tabid-2');
+        $tab2 = new Xoops\Form\Tab(_XOO_CONFIG_TAGS, 'tabid-2');
         // font size
-        $tab2->addElement( new XoopsFormText(_XOO_CONFIG_FONT_MAX, 'xootags_font_max', 1, 10, $xootags_font_max) );
-        $tab2->addElement( new XoopsFormText(_XOO_CONFIG_FONT_MIN, 'xootags_font_min', 1, 10, $xootags_font_min) );
+        $tab2->addElement(new Xoops\Form\Text(_XOO_CONFIG_FONT_MAX, 'xootags_font_max', 1, 10, $xootags_font_max));
+        $tab2->addElement(new Xoops\Form\Text(_XOO_CONFIG_FONT_MIN, 'xootags_font_min', 1, 10, $xootags_font_min));
 
-        $colors_tray = new XoopsFormElementTray(_XOO_CONFIG_COLORS, '' );
-        $colors_select = new XoopsFormSelect('', 'xootags_colors', $xootags_colors, 5, true);
-        $extra = '';
-        foreach ( $this->_colors as $k => $color ) {            $colors_select->addOption( $k );
+        $colors_tray   = new Xoops\Form\ElementTray(_XOO_CONFIG_COLORS, '');
+        $colors_select = new Xoops\Form\Select('', 'xootags_colors', $xootags_colors, 5, true);
+        $extra         = '';
+        foreach ($this->colors as $k => $color) {
+            $colors_select->addOption($k);
             $extra .= '<div class="color-div"><div class="color-box" style="background-color:' . $color . ';"></div>' . $k . '</div>';
         }
 
-        $colors_tray->addElement( $colors_select );
-        $colors_tray->addElement( new XoopsFormLabel( '', '<div class="colors">' . $extra . '</div>' ) );
-        $tab2->addElement( $colors_tray );
+        $colors_tray->addElement($colors_select);
+        $colors_tray->addElement(new Xoops\Form\Label('', '<div class="colors">' . $extra . '</div>'));
+        $tab2->addElement($colors_tray);
 
         $tabtray->addElement($tab2);
 
@@ -102,18 +110,18 @@ class XooTagsPreferencesForm extends XoopsThemeForm
         /**
          * Buttons
          */
-        $button_tray = new XoopsFormElementTray('', '');
-        $button_tray->addElement(new XoopsFormHidden('op', 'save'));
+        $button_tray = new Xoops\Form\ElementTray('', '');
+        $button_tray->addElement(new Xoops\Form\Hidden('op', 'save'));
 
-        $button = new XoopsFormButton('', 'submit', _SUBMIT, 'submit');
+        $button = new Xoops\Form\Button('', 'submit',XoopsLocale::A_SUBMIT, 'submit');
         $button->setClass('btn btn-success');
         $button_tray->addElement($button);
 
-        $button_2 = new XoopsFormButton('', 'reset', _RESET, 'reset');
+        $button_2 = new Xoops\Form\Button('', 'reset', XoopsLocale::A_RESET, 'reset');
         $button_2->setClass('btn btn-warning');
         $button_tray->addElement($button_2);
 
-        $button_3 = new XoopsFormButton('', 'cancel', _CANCEL, 'button');
+        $button_3 = new Xoops\Form\Button('', 'cancel', XoopsLocale::A_CANCEL, 'button');
         $button_3->setExtra("onclick='javascript:history.go(-1);'");
         $button_3->setClass('btn btn-danger');
         $button_tray->addElement($button_3);
@@ -121,4 +129,3 @@ class XooTagsPreferencesForm extends XoopsThemeForm
         $this->addElement($button_tray);
     }
 }
-?>

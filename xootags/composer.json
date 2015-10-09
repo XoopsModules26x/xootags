@@ -1,0 +1,9 @@
+{
+    "name"       : "xoops/xootags",
+    "license"    : "GPL-2.0+",
+    "type"       : "xoops-module",
+    "description": "XOOPS Tags module",
+    "require"    : {
+        "xoops/module-installer-plugin": "~1.0"
+    }
+}

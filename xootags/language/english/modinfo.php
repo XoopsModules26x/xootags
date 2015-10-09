@@ -18,17 +18,16 @@
  * @version         $Id$
  */
 
-define("_MI_XOO_TAGS_NAME",     "XooFoo - Tags");
-define("_MI_XOO_TAGS_DESC",     "XooFoo - Tags<br />odule for xoops 2.6.0");
+define('_MI_XOO_TAGS_NAME', 'XooFoo - Tags');
+define('_MI_XOO_TAGS_DESC', 'XooFoo - Tags<br />Module for xoops 2.6.0');
 
 // admin menu
-define("_MI_XOO_TAGS_INDEX",               "Admin Homepage");
-define("_MI_XOO_TAGS_EDIT",                "Tags");
-define("_MI_XOO_TAGS_SYNCHRONIZATION",     "Sync.");
-define("_MI_XOO_TAGS_ABOUT",               "About");
-define("_MI_XOO_TAGS_PREFERENCES",         "Preferences");
+define('_MI_XOO_TAGS_INDEX', 'Admin Homepage');
+define('_MI_XOO_TAGS_EDIT', 'Tags');
+define('_MI_XOO_TAGS_SYNCHRONIZATION', 'Sync.');
+define('_MI_XOO_TAGS_ABOUT', 'About');
+define('_MI_XOO_TAGS_PREFERENCES', 'Preferences');
 
 // block
-define("_MI_XOO_TAGS_BLOCK_CLOUD",         "Cloud tags");
-define("_MI_XOO_TAGS_BLOCK_TOP",           "Top tags");
-?>
+define('_MI_XOO_TAGS_BLOCK_CLOUD', 'Cloud tags');
+define('_MI_XOO_TAGS_BLOCK_TOP', 'Top tags');

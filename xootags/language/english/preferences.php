@@ -17,37 +17,36 @@
  * @version         $Id$
  */
 
-if (!defined("_XOO_CONFIG_SAVED")) {
-    define("_XOO_CONFIG_SAVED",                "Configuration was saved");
+if (!defined('_XOO_CONFIG_SAVED')) {
+    define('_XOO_CONFIG_SAVED', 'Configuration was saved');
 }
 
-define("_XOO_CONFIG_MAINPAGE",             "Main page");
-define("_XOO_CONFIG_TAGS",                 "Tags");
+define('_XOO_CONFIG_MAINPAGE', 'Main page');
+define('_XOO_CONFIG_TAGS', 'Tags');
 
-define("_XOO_CONFIG_COLORS",               "Tags Colors");
+define('_XOO_CONFIG_COLORS', 'Tags Colors');
 
-define("_XOO_CONFIG_WELCOME",              "Text to display in index page");
-DEFINE("_XOO_CONFIG_COUNT",                "Display counter Tags");
-define("_XOO_CONFIG_DISPLAY_MODE",         "Display mode of the main page");
-define("_XOO_CONFIG_MODE_BLOG",            "Blog");
-define("_XOO_CONFIG_MODE_CLOUD",           "Cloud");
-define("_XOO_CONFIG_MODE_JQUERY",          "Cloud (jquery)");
-define("_XOO_CONFIG_LIMIT_MAIN",           "Number tags on main page (0 = no limit)");
-define("_XOO_CONFIG_LIMIT_TAGS",           "Number tags on tag page (0 = no limit)");
-define("_XOO_CONFIG_FONT_MAX",             "Maximum font-size(%) for display");
-define("_XOO_CONFIG_FONT_MIN",             "Minimum font-size(%) for display");
+define('_XOO_CONFIG_WELCOME', 'Text to display in index page');
+define('_XOO_CONFIG_COUNT', 'Display counter Tags');
+define('_XOO_CONFIG_DISPLAY_MODE', 'Display mode of the main page');
+define('_XOO_CONFIG_MODE_BLOG', 'Blog');
+define('_XOO_CONFIG_MODE_CLOUD', 'Cloud');
+define('_XOO_CONFIG_MODE_JQUERY', 'Cloud (jquery)');
+define('_XOO_CONFIG_LIMIT_MAIN', 'Number tags on main page (0 = no limit)');
+define('_XOO_CONFIG_LIMIT_TAGS', 'Number tags on tag page (0 = no limit)');
+define('_XOO_CONFIG_FONT_MAX', 'Maximum font-size(%) for display');
+define('_XOO_CONFIG_FONT_MIN', 'Minimum font-size(%) for display');
 
 // QRCode
-define("_XOO_CONFIG_QRCODE",              "QR Code");
-define("_XOO_CONFIG_QRCODE_USE",          "Use QR Code");
-define("_XOO_CONFIG_QRCODE_ECL",          "Error Correction Level");
-define("_XOO_CONFIG_QRCODE_ECL_L",        "Smallest");
-define("_XOO_CONFIG_QRCODE_ECL_M",        "Medium");
-define("_XOO_CONFIG_QRCODE_ECL_Q",        "Hight");
-define("_XOO_CONFIG_QRCODE_ECL_H",        "Best");
-define("_XOO_CONFIG_QRCODE_MATRIX",       "Image width");
-define("_XOO_CONFIG_QRCODE_MARGIN",       "Image margin (px)");
-define("_XOO_CONFIG_QRCODE_COLORS",       "QR Code Colors");
-define("_XOO_CONFIG_QRCODE_COLORS_BG",    "Background");
-define("_XOO_CONFIG_QRCODE_COLORS_FG",    "Foreground");
-?>
+define('_XOO_CONFIG_QRCODE', 'QR Code');
+define('_XOO_CONFIG_QRCODE_USE', 'Use QR Code');
+define('_XOO_CONFIG_QRCODE_ECL', 'Error Correction Level');
+define('_XOO_CONFIG_QRCODE_ECL_L', 'Smallest');
+define('_XOO_CONFIG_QRCODE_ECL_M', 'Medium');
+define('_XOO_CONFIG_QRCODE_ECL_Q', 'Hight');
+define('_XOO_CONFIG_QRCODE_ECL_H', 'Best');
+define('_XOO_CONFIG_QRCODE_MATRIX', 'Image width');
+define('_XOO_CONFIG_QRCODE_MARGIN', 'Image margin (px)');
+define('_XOO_CONFIG_QRCODE_COLORS', 'QR Code Colors');
+define('_XOO_CONFIG_QRCODE_COLORS_BG', 'Background');
+define('_XOO_CONFIG_QRCODE_COLORS_FG', 'Foreground');

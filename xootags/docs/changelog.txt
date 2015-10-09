@@ -1,19 +1,23 @@
-<span class="red bold">3.00 ALPHA</span> -> JEN Laurent (Aka Dugris)
-December 1st, 2012 
-<span class="red bold">For XOOPS 2.6+</span>
+<hr><strong>3.01 Alpha 1         (NOT RELEASED)</strong>
+- updates for consistency with latest XOOPS 2.6.0 (mamba)
+- PSR-2 changes (mamba)
+- moved all images, CSS, and JS files to /assets (mamba)
+- renamed .html Smarty templates to .tpl (mamba)
+- added PhpDoc comments (mamba)
+- added namespaces (mamba)
+- added docs files (mamba)
 
-2.30 RC -> Taiwen Jiang (DJ
-October 12th, 2008
-For XOOPS 2.3+
+<hr><strong>3.0 Alpha 1         (2012-12-01)</strong>
+- For XOOPS 2.6+ (JEN Laurent aka Dugris)
 
-2.0 -> Taiwen Jiang (DJ
-May 4th, 2008
-For XOOPS 2.3.0
+<hr><strong>2.30 RC         (2008-10-12)</strong>
+- For XOOPS 2.3+ (Taiwen Jiang aka DJ)
 
+<hr><strong>2.0          (2008-05-04)</strong>
+- For XOOPS 2.3.0 (Taiwen Jiang aka DJ)
 
-1.60
-Jan 3rd, 2007
-Added global search
+<hr><strong>1.60 Alpha 1         (2007-01-03)</strong>
+- Added global search
 
-Oct 29th, 2006
-Minor bugfix by Gizmhail
+<hr><strong>1.?          (2006-10-29)</strong>
+- Minor bugfix by Gizmhail

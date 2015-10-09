@@ -17,7 +17,7 @@
  * @version         $Id$
  */
 
-include dirname(dirname(dirname(dirname(__FILE__)))) . DIRECTORY_SEPARATOR . 'mainfile.php';
+include dirname(dirname(dirname(__DIR__))) .  '/mainfile.php';
 
 XoopsLoad::load('system', 'system');
 $system = System::getInstance();
@@ -25,23 +25,27 @@ $system = System::getInstance();
 $xoops = Xoops::getInstance();
 $xoops->disableErrorReporting();
 
-$tag_term = $system->CleanVars($_REQUEST, 'term', '', 'string');
+$tag_term = $system->cleanVars($_REQUEST, 'term', '', 'string');
 
 $criteria = new CriteriaCompo();
-$criteria->add( new Criteria('tag_status', 1) ) ;
-if ( $tag_term != '') {    $criteria->add( new Criteria('tag_term', '%' . $tag_term . '%', 'LIKE')) ;
+$criteria->add(new Criteria('tag_status', 1));
+if ($tag_term != '') {
+    $criteria->add(new Criteria('tag_term', '%' . $tag_term . '%', 'LIKE'));
 }
 $criteria->setSort('tag_count');
 $criteria->setOrder('DESC');
 
-$tags_module = Xootags::getInstance();
-$tags_tags_handler = $tags_module->TagsHandler();
+$tagsModule       = Xootags::getInstance();
+$tagsTagsHandler = $tagsModule->TagsHandler();
 
-$tags = $tags_tags_handler->getObjects($criteria, true, false);
+$tags = $tagsTagsHandler->getObjects($criteria, true, false);
 
 $ret = array();
-if (count($tags) >= 0) {    foreach ($tags as $k => $tag) {        $ret[$k]['id']    = $tag['tag_term'];        $ret[$k]['label'] = $tag['tag_term'];
+if (count($tags) >= 0) {
+    foreach ($tags as $k => $tag) {
+        $ret[$k]['id']    = $tag['tag_term'];
+        $ret[$k]['label'] = $tag['tag_term'];
         $ret[$k]['value'] = $tag['tag_term'];
-    }}
+    }
+}
 echo json_encode($ret);
-?>

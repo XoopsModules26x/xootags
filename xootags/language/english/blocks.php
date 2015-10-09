@@ -18,13 +18,12 @@
  * @version         $Id$
  */
 
-define("_MB_XOO_TAGS_SORT",                       "Sort by: ");
-define("_MB_XOO_TAGS_SORT_ALPHABETIC",            "Alphabetic");
-define("_MB_XOO_TAGS_SORT_RECENTS",               "Recents");
-define("_MB_XOO_TAGS_SORT_HITS",                  "Hits");
-define("_MB_XOO_TAGS_SORT_RANDOM",                "Random");
+define('_MB_XOO_TAGS_SORT', 'Sort by: ');
+define('_MB_XOO_TAGS_SORT_ALPHABETIC', 'Alphabetic');
+define('_MB_XOO_TAGS_SORT_RECENTS', 'Recents');
+define('_MB_XOO_TAGS_SORT_HITS', 'Hits');
+define('_MB_XOO_TAGS_SORT_RANDOM', 'Random');
 
-define("_MB_XOO_TAGS_ORDER",                      "Order: ");
-define("_MB_XOO_TAGS_ORDER_ASC",                  "Ascending");
-define("_MB_XOO_TAGS_ORDER_DESC",                 "Descending");
-?>
+define('_MB_XOO_TAGS_ORDER', 'Order: ');
+define('_MB_XOO_TAGS_ORDER_ASC', 'Ascending');
+define('_MB_XOO_TAGS_ORDER_DESC', 'Descending');

@@ -17,24 +17,32 @@
  * @version         $Id$
  */
 
-defined("XOOPS_ROOT_PATH") or die("XOOPS root path not defined");
+defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-class XootagsXoositemapPlugin extends Xoops_Module_Plugin_Abstract implements XoositemapPluginInterface
+/**
+ * Class XootagsXoositemapPlugin
+ */
+class XootagsXoositemapPlugin extends Xoops\Module\Plugin\PluginAbstract implements XoositemapPluginInterface
 {
-    public function Xoositemap($subcategories)
+    /**
+     * @param $subcategories
+     *
+     * @return array
+     */
+    public function xooSitemap($subcategories)
     {
-        $tags_module = Xootags::getInstance();
-        $tags_config = $tags_module->LoadConfig();
-        $tags_tags_handler = $tags_module->TagsHandler();
-        $tags_links_handler = $tags_module->LinkHandler();
+        $tagsModule        = Xootags::getInstance();
+        $tagsConfig        = $tagsModule->LoadConfig();
+        $tagsTagsHandler  = $tagsModule->TagsHandler();
+        $tagsLinksHandler = $tagsModule->LinkHandler();
 
         $criteria = new CriteriaCompo();
 
         $criteria->setSort('tag_time');
         $criteria->setOrder('DESC');
         $criteria->setGroupby('l.tag_id');
-        $criteria->setLimit($tags_config['xootags_limit_tag_main']);
-        $tags = $tags_links_handler->getTags($criteria);
+        $criteria->setLimit($tagsConfig['xootags_limit_tag_main']);
+        $tags = $tagsLinksHandler->getTags($criteria);
 
         $sitemap = array();
         foreach ($tags as $k => $tag) {
@@ -43,29 +51,35 @@ class XootagsXoositemapPlugin extends Xoops_Module_Plugin_Abstract implements Xo
             $sitemap[$k]['url']   = XOOPS_URL . '/modules/xootags/tag.php?tag_id=' . $tag['tag_id'];
             $sitemap[$k]['time']  = $tag['tag_time'];
         }
+
         return $sitemap;
     }
 
-    public function Xoositemap_xml($subcategories)
+    /**
+     * @param $subcategories
+     *
+     * @return array
+     */
+    public function xoositemap_xml($subcategories)
     {
-        $tags_module = Xootags::getInstance();
-        $tags_config = $tags_module->LoadConfig();
-        $tags_tags_handler = $tags_module->TagsHandler();
-        $tags_links_handler = $tags_module->LinkHandler();
+        $tagsModule        = Xootags::getInstance();
+        $tagsConfig        = $tagsModule->LoadConfig();
+        $tagsTagsHandler  = $tagsModule->TagsHandler();
+        $tagsLinksHandler = $tagsModule->LinkHandler();
 
         $sitemap = array();
-        $time = 0;
+        $time    = 0;
 
         $criteria = new CriteriaCompo();
         $criteria->setSort('tag_time');
         $criteria->setOrder('DESC');
         $criteria->setGroupby('l.tag_id');
-        $criteria->setLimit($tags_config['xootags_limit_tag_main']);
+        $criteria->setLimit($tagsConfig['xootags_limit_tag_main']);
 
-        $tags = $tags_links_handler->getTags($criteria);
+        $tags = $tagsLinksHandler->getTags($criteria);
         foreach ($tags as $k => $tag) {
-            $sitemap[$k]['url']   = XOOPS_URL . '/modules/xootags/tag.php?tag_id=' . $tag['tag_id'];
-            $sitemap[$k]['time']  = $tag['tag_time'];
+            $sitemap[$k]['url']  = XOOPS_URL . '/modules/xootags/tag.php?tag_id=' . $tag['tag_id'];
+            $sitemap[$k]['time'] = $tag['tag_time'];
             if ($time < $tag['tag_time']) {
                 $time = $tag['tag_time'];
             }

@@ -17,52 +17,59 @@
  * @version         $Id$
  */
 
-include dirname(__FILE__) . '/header.php';
+include __DIR__ . '/header.php';
 
-switch ($op) {    case 'del':
-    $tag_id = $system->CleanVars($_REQUEST, 'tag_id', 0, 'int');
-    if( isset($tag_id) && $tag_id > 0 ){
-        if ($tag = $tags_tags_handler->get($tag_id) ) {
-            $delete = $system->CleanVars( $_POST, 'ok', 0, 'int' );
-            if ($delete == 1) {
-                if ( !$xoops->security()->check() ) {
-                    $xoops->redirect('tags.php', 5, implode(',', $xoops->security()->getErrors()));
+switch ($op) {
+    case 'del':
+        $tag_id = $system->cleanVars($_REQUEST, 'tag_id', 0, 'int');
+        if (isset($tag_id) && $tag_id > 0) {
+            if ($tag = $tagsTagsHandler->get($tag_id)) {
+                $delete = $system->cleanVars($_POST, 'ok', 0, 'int');
+                if ($delete == 1) {
+                    if (!$xoops->security()->check()) {
+                        $xoops->redirect('tags.php', 5, implode(',', $xoops->security()->getErrors()));
+                    }
+                    $tagsLinkHandler->deleteByItem($tag_id);
+                    $tagsTagsHandler->delete($tag);
+                    $xoops->redirect('tags.php', 5, _AM_XOO_TAGS_DELETED);
+                } else {
+                    $xoops->confirm(
+                        array('ok' => 1, 'tag_id' => $tag_id, 'op' => 'del'),
+                        $_SERVER['REQUEST_URI'],
+                        sprintf(_AM_XOO_TAGS_DELETE_CFM . "<br /><b><span style='color : Red'> %s </span></b><br /><br />", $tag->getVar('tag_term'))
+                    );
                 }
-                $tags_link_handler->DeleteByItem( $tag_id );
-                $tags_tags_handler->delete($tag);
-                $xoops->redirect('tags.php', 5, _AM_XOO_TAGS_DELETED);
             } else {
-                $xoops->confirm(array('ok' => 1, 'tag_id' => $tag_id, 'op' => 'del'), $_SERVER['REQUEST_URI'], sprintf(_AM_XOO_TAGS_DELETE_CFM . "<br /><b><span style='color : Red'> %s </span></b><br /><br />", $tag->getVar('tag_term')));
+                $xoops->redirect('tags.php', 5);
             }
         } else {
             $xoops->redirect('tags.php', 5);
         }
-    } else {
-        $xoops->redirect('tags.php', 5);
-    }
-    break;
-    case 'show':
+        break;
+
+    case 'show':
     case 'hide':
-    $tag_id = $system->CleanVars($_REQUEST, 'tag_id', 0, 'int');
-    $tags_tags_handler->SetOnline($tag_id);
-    $xoops->redirect('tags.php', 5, _AM_XOO_TAGS_SAVED);
-    break;
+        $tag_id = $system->cleanVars($_REQUEST, 'tag_id', 0, 'int');
+        $tagsTagsHandler->SetOnline($tag_id);
+        $xoops->redirect('tags.php', 5, _AM_XOO_TAGS_SAVED);
+        break;
 
     default:
-    $module_id = $system->CleanVars($_REQUEST, 'module_id', 0, 'int');
+        $module_id = $system->cleanVars($_REQUEST, 'module_id', 0, 'int');
 
-    $form = $tags_module->getForm(null, 'tags');
-    $form->TagsFormModules( $module_id, $modules );
+        $form = $tagsModule->getForm(null, 'tags');
+        $form->TagsFormModules($module_id, $modules);
 
-    if ($module_id == 0 ) {        $criteria = new CriteriaCompo();
-        $criteria->setSort('tag_count');
-        $criteria->setOrder('DESC');
-        $tags = $tags_tags_handler->getObjects($criteria, false, false);
-    } else {        $tags = $tags_link_handler->getbyModule( $module_id );
-    }
-    $xoops->tpl()->assign('form', $form->render() );
-    $xoops->tpl()->assign('tags', $tags);
+        if ($module_id == 0) {
+            $criteria = new CriteriaCompo();
+            $criteria->setSort('tag_count');
+            $criteria->setOrder('DESC');
+            $tags = $tagsTagsHandler->getObjects($criteria, false, false);
+        } else {
+            $tags = $tagsLinkHandler->getbyModule($module_id);
+        }
+        $xoops->tpl()->assign('form', $form->render());
+        $xoops->tpl()->assign('tags', $tags);
 }
 
-include dirname(__FILE__) . '/footer.php';
-?>
+include __DIR__ . '/footer.php';

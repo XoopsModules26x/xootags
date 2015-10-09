@@ -1,0 +1,162 @@
+tables:
+    xootags_link:
+        options: {  }
+        columns:
+            tl_id:
+                name: tl_id
+                type: integer
+                default: null
+                notnull: true
+                length: null
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: true
+                columnDefinition: null
+                comment: null
+            tag_id:
+                name: tag_id
+                type: integer
+                default: '0'
+                notnull: true
+                length: null
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+            tag_modid:
+                name: tag_modid
+                type: smallint
+                default: '0'
+                notnull: true
+                length: null
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+            tag_itemid:
+                name: tag_itemid
+                type: integer
+                default: '0'
+                notnull: true
+                length: null
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+            tag_time:
+                name: tag_time
+                type: integer
+                default: '0'
+                notnull: true
+                length: null
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+        indexes:
+            PRIMARY:
+                name: PRIMARY
+                columns: [tl_id]
+                unique: true
+                primary: true
+            tag_id:
+                name: tag_id
+                columns: [tag_id]
+                unique: false
+                primary: false
+            tag_time:
+                name: tag_time
+                columns: [tag_time]
+                unique: false
+                primary: false
+            tag_item:
+                name: tag_item
+                columns: [tag_modid, tag_itemid]
+                unique: false
+                primary: false
+    xootags_tags:
+        options: {  }
+        columns:
+            tag_id:
+                name: tag_id
+                type: integer
+                default: null
+                notnull: true
+                length: null
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: true
+                columnDefinition: null
+                comment: null
+            tag_term:
+                name: tag_term
+                type: string
+                default: ''
+                notnull: true
+                length: 64
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+                collation: utf8_general_ci
+            tag_status:
+                name: tag_status
+                type: boolean
+                default: '0'
+                notnull: true
+                length: null
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+            tag_count:
+                name: tag_count
+                type: integer
+                default: '0'
+                notnull: true
+                length: null
+                precision: 10
+                scale: 0
+                fixed: false
+                unsigned: false
+                autoincrement: false
+                columnDefinition: null
+                comment: null
+        indexes:
+            PRIMARY:
+                name: PRIMARY
+                columns: [tag_id]
+                unique: true
+                primary: true
+            tag_term:
+                name: tag_term
+                columns: [tag_term]
+                unique: false
+                primary: false
+            tag_status:
+                name: tag_status
+                columns: [tag_status]
+                unique: false
+                primary: false

@@ -18,8 +18,6 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
-
 /**
  * @param $options
  *
@@ -31,11 +29,11 @@ function xootags_show($options)
     $xoops->theme()->addStylesheet('modules/xootags/assets/css/blocks.css');
 
     $tagsModule       = Xootags::getInstance();
-    $tagsConfig       = $tagsModule->LoadConfig();
-    $tagsLinkHandler = $tagsModule->LinkHandler();
-    $tagsTagsHandler = $tagsModule->TagsHandler();
+    $tagsConfig       = $tagsModule->loadConfig();
+    $tagsLinkHandler = $tagsModule->linkHandler();
+    $tagsTagsHandler = $tagsModule->tagsHandler();
 
-    $module_Handler = $xoops->getHandlerModule();
+    $moduleHandler = $xoops->getHandlerModule();
 
     $criteria = new CriteriaCompo();
     $criteria->setLimit($options[0]);

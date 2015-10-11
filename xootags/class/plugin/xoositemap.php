@@ -17,8 +17,6 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
-
 /**
  * Class XootagsXoositemapPlugin
  */
@@ -32,9 +30,9 @@ class XootagsXoositemapPlugin extends Xoops\Module\Plugin\PluginAbstract impleme
     public function xooSitemap($subcategories)
     {
         $tagsModule        = Xootags::getInstance();
-        $tagsConfig        = $tagsModule->LoadConfig();
-        $tagsTagsHandler  = $tagsModule->TagsHandler();
-        $tagsLinksHandler = $tagsModule->LinkHandler();
+        $tagsConfig        = $tagsModule->loadConfig();
+        $tagsTagsHandler  = $tagsModule->tagsHandler();
+        $tagsLinksHandler = $tagsModule->linkHandler();
 
         $criteria = new CriteriaCompo();
 
@@ -48,7 +46,7 @@ class XootagsXoositemapPlugin extends Xoops\Module\Plugin\PluginAbstract impleme
         foreach ($tags as $k => $tag) {
             $sitemap[$k]['id']    = $k;
             $sitemap[$k]['title'] = $tag['tag_term'];
-            $sitemap[$k]['url']   = XOOPS_URL . '/modules/xootags/tag.php?tag_id=' . $tag['tag_id'];
+            $sitemap[$k]['url']   = \XoopsBaseConfig::get('url')  . '/modules/xootags/tag.php?tag_id=' . $tag['tag_id'];
             $sitemap[$k]['time']  = $tag['tag_time'];
         }
 
@@ -63,9 +61,9 @@ class XootagsXoositemapPlugin extends Xoops\Module\Plugin\PluginAbstract impleme
     public function xoositemap_xml($subcategories)
     {
         $tagsModule        = Xootags::getInstance();
-        $tagsConfig        = $tagsModule->LoadConfig();
-        $tagsTagsHandler  = $tagsModule->TagsHandler();
-        $tagsLinksHandler = $tagsModule->LinkHandler();
+        $tagsConfig        = $tagsModule->loadConfig();
+        $tagsTagsHandler  = $tagsModule->tagsHandler();
+        $tagsLinksHandler = $tagsModule->linkHandler();
 
         $sitemap = array();
         $time    = 0;
@@ -78,7 +76,7 @@ class XootagsXoositemapPlugin extends Xoops\Module\Plugin\PluginAbstract impleme
 
         $tags = $tagsLinksHandler->getTags($criteria);
         foreach ($tags as $k => $tag) {
-            $sitemap[$k]['url']  = XOOPS_URL . '/modules/xootags/tag.php?tag_id=' . $tag['tag_id'];
+            $sitemap[$k]['url']  = \XoopsBaseConfig::get('url')  . '/modules/xootags/tag.php?tag_id=' . $tag['tag_id'];
             $sitemap[$k]['time'] = $tag['tag_time'];
             if ($time < $tag['tag_time']) {
                 $time = $tag['tag_time'];

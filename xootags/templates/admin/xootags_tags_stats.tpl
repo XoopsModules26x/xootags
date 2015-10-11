@@ -6,7 +6,7 @@
 </div>
 
 <hr>
-<{foreach from=$count_module item=module}>
+<{foreach from=$countModule item=module}>
     <div class="bold">
         <a href="tags.php?module_id=<{$module.mid}>"><{$module.name}></a>: <span class="red"><{$module.count}></span>
     </div>

@@ -21,7 +21,7 @@
 require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
 $tagsModule = Xootags::getInstance();
-$tagsConfig = $tagsModule->LoadConfig();
+$tagsConfig = $tagsModule->loadConfig();
 
 $op = '';
 if (isset($_POST)) {
@@ -56,25 +56,25 @@ if ($script_name !== 'about' && $script_name !== 'index') {
 }
 
 $tagsModule       = Xootags::getInstance();
-$tagsConfig       = $tagsModule->LoadConfig();
-$tagsLinkHandler = $tagsModule->LinkHandler();
-$tagsTagsHandler = $tagsModule->TagsHandler();
+$tagsConfig       = $tagsModule->loadConfig();
+$tagsLinkHandler = $tagsModule->linkHandler();
+$tagsTagsHandler = $tagsModule->tagsHandler();
 
-$module_Handler = $xoops->getHandlerModule();
+$moduleHandler = $xoops->getHandlerModule();
 
 // Count by module
 $criteria = new CriteriaCompo();
 $criteria->setGroupby('tag_modid');
 
 $modules        = array();
-$count_items    = 0;
+$countItems    = 0;
 $count_bymodule = $tagsLinkHandler->getCounts($criteria);
 foreach ($count_bymodule as $mid => $count_item) {
-    $count_items += $count_item;
-    $module                      = $module_Handler->get($mid);
-    $count_module[$mid]['mid']   = $mid;
-    $count_module[$mid]['name']  = $module->getVar('name');
-    $count_module[$mid]['count'] = $count_item;
+    $countItems += $count_item;
+    $module                      = $moduleHandler->get($mid);
+    $countModule[$mid]['mid']   = $mid;
+    $countModule[$mid]['name']  = $module->getVar('name');
+    $countModule[$mid]['count'] = $count_item;
 
     $modules[$mid] = $module->getVar('name');
 }

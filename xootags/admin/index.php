@@ -19,8 +19,8 @@
 
 include __DIR__ . '/header.php';
 
-$xoops->tpl()->assign('count_module', $count_module);
-$xoops->tpl()->assign('count_item', $count_items);
+$xoops->tpl()->assign('countModule', $countModule);
+$xoops->tpl()->assign('count_item', $countItems);
 $xoops->tpl()->assign('count_tag', $tagsTagsHandler->getCount());
 $admin_page->addInfoBox(_AM_XOO_TAGS_STATS);
 $admin_page->addInfoBoxLine($xoops->tpl()->fetch('admin:xootags/xootags_tags_stats.tpl'));

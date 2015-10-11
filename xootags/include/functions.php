@@ -17,13 +17,12 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
-
 /**
  * @param $string
  *
  * @return mixed|string
  */
+/*
 function XooTags_getMetaDescription($string)
 {
     $xoops = Xoops::getInstance();
@@ -42,6 +41,7 @@ function XooTags_getMetaDescription($string)
 
     return $string;
 }
+*/
 
 /**
  * @param     $string
@@ -49,6 +49,8 @@ function XooTags_getMetaDescription($string)
  *
  * @return string
  */
+
+/*
 function XooTags_getMetaKeywords($string, $limit = 5)
 {
 $xoops = Xoops::getInstance();
@@ -78,3 +80,4 @@ $xoops = Xoops::getInstance();
 
     return implode(', ', $keywords);
 }
+*/

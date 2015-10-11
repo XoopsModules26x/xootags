@@ -18,7 +18,7 @@
  */
 
 include dirname(dirname(__DIR__)) .  '/mainfile.php';
-include __DIR__ . '/include/functions.php';
+include __DIR__ . '/class/utilities.php';
 
 $op = '';
 if (isset($_POST)) {
@@ -43,10 +43,10 @@ $xoops->header('xootags_' . $script_name . '.tpl');
 $xoops->theme()->addStylesheet('modules/xootags/assets/css/module.css');
 
 $tagsModule       = Xootags::getInstance();
-$tagsConfig       = $tagsModule->LoadConfig();
-$tagsLinkHandler = $tagsModule->LinkHandler();
-$tagsTagsHandler = $tagsModule->TagsHandler();
-$module_Handler    = $xoops->getHandlerModule();
+$tagsConfig       = $tagsModule->loadConfig();
+$tagsLinkHandler = $tagsModule->linkHandler();
+$tagsTagsHandler = $tagsModule->tagsHandler();
+$moduleHandler    = $xoops->getHandlerModule();
 
 $xoops->tpl()->assign('moduletitle', $xoops->module->name());
 $xoops->tpl()->assign('welcome', $tagsConfig['xootags_welcome']);

@@ -17,8 +17,6 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
-
 /**
  * Class XoopsFormTags
  */
@@ -132,7 +130,7 @@ class XoopsFormTags extends Xoops\Form\Element
         $(function () {
             $('#" . $name . "').tagsInput({
                 width:'auto',
-                autocomplete_url:'" . XOOPS_URL . "/modules/xootags/include/jquery.php',
+                autocomplete_url:'" . \XoopsBaseConfig::get('url')  . "/modules/xootags/include/jquery.php',
             });
         });
         </script>";

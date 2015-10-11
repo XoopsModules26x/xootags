@@ -42,7 +42,7 @@ foreach ($modules as $k => $module) {
 $tags = array();
 $i    = 0;
 foreach ($items as $mid => $module) {
-    $moduleObj = $module_Handler->get($mid);
+    $moduleObj = $moduleHandler->get($mid);
 
     $plugin  = \Xoops\Module\Plugin::getPlugin($moduleObj->getVar('dirname'), 'xootags');
     $results = $plugin->Xootags($module['item_id'], $start, $limit = 0);
@@ -78,7 +78,7 @@ if ($tag_id != 0) {
     $subtitle[] = sprintf(_XOO_TAGS_TERM, $tagsTagsHandler->get($tag_id)->getVar('tag_term'));
 }
 if ($module_id != 0) {
-    $subtitle[] = sprintf(_XOO_TAGS_MODULE, $module_Handler->get($module_id)->getVar('name'));
+    $subtitle[] = sprintf(_XOO_TAGS_MODULE, $moduleHandler->get($module_id)->getVar('name'));
 }
 
 $xoops->tpl()->assign('tags', array_slice($tags, $start, $tagsConfig['xootags_limit_tag_tag']));
@@ -88,8 +88,9 @@ $xoops->tpl()->assign('subtitle', $subtitle);
 $paginate = new Xoopaginate(count($tags), $tagsConfig['xootags_limit_tag_tag'], $start, 'start', 'tag_id=' . $tag_id);
 
 // Metas
-$xoops->theme()->addMeta($type = 'meta', 'description', XooTags_getMetaDescription($keywords));
-$xoops->theme()->addMeta($type = 'meta', 'keywords', XooTags_getMetaKeywords($keywords));
+$utilities = new XooTagsUtilities();
+$xoops->theme()->addMeta($type = 'meta', 'description', $utilities->getMetaDescription($keywords));
+$xoops->theme()->addMeta($type = 'meta', 'keywords', $utilities->getMetaKeywords($keywords));
 $xoops->tpl()->assign('xoops_pagetitle', $tagsTagsHandler->get($tag_id)->getVar('tag_term') . ' - ' . $xoops->module->getVar('name'));
 
 include __DIR__ .  '/footer.php';

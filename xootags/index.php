@@ -17,9 +17,11 @@
  * @version         $Id$
  */
 
-include __DIR__ .  '/header.php';
+use Xoops\Core\Request;
 
-$start = $system->cleanVars($_REQUEST, 'start', 0, 'int');
+include __DIR__ . '/header.php';
+
+$start = Request::getInt('start', 0); //$system->cleanVars($_REQUEST, 'start', 0, 'int');
 
 $criteria = new CriteriaCompo();
 $criteria->setSort('tag_count');
@@ -65,4 +67,4 @@ $utilities = new XooTagsUtilities();
 $xoops->theme()->addMeta($type = 'meta', 'description', $utilities->getMetaDescription($keywords));
 $xoops->theme()->addMeta($type = 'meta', 'keywords', $utilities->getMetaKeywords($keywords));
 
-include __DIR__ .  '/footer.php';
+include __DIR__ . '/footer.php';

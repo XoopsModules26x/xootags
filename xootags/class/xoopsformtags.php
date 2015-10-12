@@ -120,7 +120,7 @@ class XoopsFormTags extends Xoops\Form\Element
         } else {
             $maxcols = $this->getCols();
         }
-        $class       = ($this->getClass() != '' ? " class='span" . $maxcols . " " . $this->getClass() . "'" : " class='span" . $maxcols . "'");
+        $class       = ($this->getClass() != '' ? " class='span" . $maxcols . ' ' . $this->getClass() . "'" : " class='span" . $maxcols . "'");
         $placeholder = ($this->getPlaceholder() != '' ? " placeholder='" . $this->getPlaceholder() . "'" : '');
         $extra       = ($this->getExtra() != '' ? ' ' . $this->getExtra() : '');
         $required    = ($this->isRequired() ? ' required' : '');
@@ -130,12 +130,12 @@ class XoopsFormTags extends Xoops\Form\Element
         $(function () {
             $('#" . $name . "').tagsInput({
                 width:'auto',
-                autocomplete_url:'" . \XoopsBaseConfig::get('url')  . "/modules/xootags/include/jquery.php',
+                autocomplete_url:'" . \XoopsBaseConfig::get('url')  . "/modules/xootags/include/jquery.php'
             });
         });
         </script>";
 
-        return $script . "<textarea name='" . $name . "' title='" . $this->getTitle() . "' id='" . $name . "'" . $class . " rows='" . $this->getRows() . "'" . $placeholder . $extra . $required . ">"
-        . $this->getValue() . "</textarea>";
+        return $script . "<textarea name='" . $name . "' title='" . $this->getTitle() . "' id='" . $name . "'" . $class . " rows='" . $this->getRows() . "'" . $placeholder . $extra . $required . '>'
+        . $this->getValue() . '</textarea>';
     }
 }

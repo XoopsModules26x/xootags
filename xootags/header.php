@@ -17,7 +17,9 @@
  * @version         $Id$
  */
 
-include dirname(dirname(__DIR__)) .  '/mainfile.php';
+use Xoops\Core\Request;
+
+include dirname(dirname(__DIR__)) . '/mainfile.php';
 include __DIR__ . '/class/utilities.php';
 
 $op = '';
@@ -37,16 +39,16 @@ $system = System::getInstance();
 
 $xoops = Xoops::getInstance();
 
-$script_name = basename($_SERVER['SCRIPT_NAME'], '.php');
-$xoops->header('xootags_' . $script_name . '.tpl');
+$scriptName = basename(Request::getString('SCRIPT_NAME', '', 'SERVER'), '.php'); //$_SERVER['SCRIPT_NAME'], '.php');
+$xoops->header('xootags_' . $scriptName . '.tpl');
 
 $xoops->theme()->addStylesheet('modules/xootags/assets/css/module.css');
 
-$tagsModule       = Xootags::getInstance();
-$tagsConfig       = $tagsModule->loadConfig();
+$tagsModule      = Xootags::getInstance();
+$tagsConfig      = $tagsModule->loadConfig();
 $tagsLinkHandler = $tagsModule->linkHandler();
 $tagsTagsHandler = $tagsModule->tagsHandler();
-$moduleHandler    = $xoops->getHandlerModule();
+$moduleHandler   = $xoops->getHandlerModule();
 
 $xoops->tpl()->assign('moduletitle', $xoops->module->name());
 $xoops->tpl()->assign('welcome', $tagsConfig['xootags_welcome']);

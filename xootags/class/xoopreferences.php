@@ -156,7 +156,7 @@ class XooTagsPreferences
                     if (!mkdir($dest, 0755)) {
                         return false;
                     } else {
-                        $this->writeIndex($xoops->path('uploads'), 'index.html', $dest);
+                        $this->writeIndex(\XoopsBaseConfig::get('uploads-path'), 'index.html', $dest);
                     }
                 }
             }
@@ -204,7 +204,7 @@ class XooTagsPreferences
             if (is_array($data[$k])) {
                 $config[$k] = $this->prepare2Save($data[$k], false);
             } else {
-                if (strstr($k, $this->module_dirname . '_') || !$module) {
+                if (false != strpos($k, $this->module_dirname . '_') || !$module) {
                     $config[$k] = $data[$k];
                 }
             }

@@ -17,13 +17,14 @@
  * @version         $Id$
  */
 
-use \Xoops\Core\Kernel\Handlers\XoopsUser;
+use Xoops\Core\Kernel\Handlers\XoopsUser;
+use Xoops\Core\Request;
 
-include __DIR__ .  '/header.php';
+include __DIR__ . '/header.php';
 
-$tag_id    = $system->cleanVars($_REQUEST, 'tag_id', 0, 'int');
-$module_id = $system->cleanVars($_REQUEST, 'module_id', 0, 'int');
-$start     = $system->cleanVars($_REQUEST, 'start', 0, 'int');
+$tag_id    = Request::getInt('tag_id', 0); //$system->cleanVars($_REQUEST, 'tag_id', 0, 'int');
+$module_id = Request::getInt('module_id', 0); //$system->cleanVars($_REQUEST, 'module_id', 0, 'int');
+$start     = Request::getInt('start', 0); //$system->cleanVars($_REQUEST, 'start', 0, 'int');
 
 if ($tag_id == 0) {
     $xoops->redirect('index.php', 5);
@@ -93,4 +94,4 @@ $xoops->theme()->addMeta($type = 'meta', 'description', $utilities->getMetaDescr
 $xoops->theme()->addMeta($type = 'meta', 'keywords', $utilities->getMetaKeywords($keywords));
 $xoops->tpl()->assign('xoops_pagetitle', $tagsTagsHandler->get($tag_id)->getVar('tag_term') . ' - ' . $xoops->module->getVar('name'));
 
-include __DIR__ .  '/footer.php';
+include __DIR__ . '/footer.php';

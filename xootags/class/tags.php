@@ -165,7 +165,7 @@ class XootagsTagsHandler extends XoopsPersistableObjectHandler
             $tags = array();
         } else {
 //            $tags = explode('|', str_replace($tagsConfig['xootags_delimiters'],'|', $tags) );
-            $tags = explode(',', $_POST[$name]);
+            $tags = explode(',', Request::getString($name, '', 'POST')); //$_POST[$name]);
             $tags = array_filter(array_map('trim', $tags));
         }
 

@@ -32,7 +32,6 @@ div.tagsinput span.tag a {
 
 div.tagsinput input {
     width: 80px;
-    margin: 0;
     font-family: helvetica, sans-serif;
     font-size: 13px;
     border: 1px solid transparent;
@@ -40,8 +39,7 @@ div.tagsinput input {
     background: transparent;
     color: #000;
     outline: 0;
-    margin-right: 5px;
-    margin-bottom: 5px;
+    margin: 0 5px 5px 0;
 }
 
 div.tagsinput div {

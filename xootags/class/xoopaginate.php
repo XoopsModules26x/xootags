@@ -1,5 +1,7 @@
 <?php
 
+use Xoops\Core\Request;
+
 /**
  * Xoopaginate : Page navigation manager
  *
@@ -41,7 +43,7 @@ class XooPaginate
         if ($extraArg !== '' && (substr($extraArg, -5) !== '&amp;' || substr($extraArg, -1) !== '&')) {
             $this->extra = '&amp;' . $extraArg;
         }
-        $this->url    = $_SERVER['PHP_SELF'] . '?' . trim($startName) . '=';
+        $this->url    = Request::getString('PHP_SELF', '', 'SERVER') . '?' . trim($startName) . '=';
         $this->offset = (int)($offset);
 
         $this->render();

@@ -32,7 +32,6 @@ $modversion['official']    = 1;
 $modversion['help']        = 'page=help';
 $modversion['image']       = 'assets/images/logo.png';
 
-
 // about
 $modversion['release_date']        = '2015/10/01';
 $modversion['module_website_url']  = 'xoops.org';
@@ -58,7 +57,7 @@ $modversion['adminindex'] = 'admin/index.php';
 $modversion['adminmenu']  = 'admin/menu.php';
 
 // Manage extension
-$modversion['extension']          = 0;
+$modversion['extension']         = 0;
 $modversion['extensionModule'][] = '';
 
 // Scripts to run upon installation or update
@@ -77,7 +76,6 @@ $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';
 //$modversion['tables'][1] = 'xootags_tags';
 //$modversion['tables'][2] = 'tag_stats';
 $modversion['schema'] = 'sql/schema.yml';
-
 
 // Use smarty
 $modversion['use_smarty'] = 1;

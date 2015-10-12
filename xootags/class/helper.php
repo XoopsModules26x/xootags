@@ -16,7 +16,6 @@
  * @author          Laurent JEN (Aka DuGris)
  * @version         $Id: xootags.php 1398 2012-12-30 07:37:19Z DuGris $
  */
-//defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 class Xootags extends Xoops\Module\Helper\HelperAbstract
 {

@@ -35,8 +35,7 @@
 
 /*========  Icons ======== */
 [class^="xootags-ico-"], [class*=" xoositemap-ico-"] {
-    background-position: 0 0;
-    background-repeat: no-repeat;
+    background: no-repeat 0 0;
     background-size: 16px 16px;
     display: inline-block;
     margin-right: 0.5em;

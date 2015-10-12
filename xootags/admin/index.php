@@ -22,11 +22,11 @@ include __DIR__ . '/header.php';
 $xoops->tpl()->assign('countModule', $countModule);
 $xoops->tpl()->assign('count_item', $countItems);
 $xoops->tpl()->assign('count_tag', $tagsTagsHandler->getCount());
-$admin_page->addInfoBox(_AM_XOO_TAGS_STATS);
-$admin_page->addInfoBoxLine($xoops->tpl()->fetch('admin:xootags/xootags_tags_stats.tpl'));
+$adminPage->addInfoBox(_AM_XOO_TAGS_STATS);
+$adminPage->addInfoBoxLine($xoops->tpl()->fetch('admin:xootags/xootags_tags_stats.tpl'));
 
 // extension
-$admin_page->addConfigBoxLine(array('qrcode', 'warning'), 'extension');
-$admin_page->addConfigBoxLine(array('notifications', 'warning'), 'module');
+$adminPage->addConfigBoxLine(array('qrcode', 'warning'), 'extension');
+$adminPage->addConfigBoxLine(array('notifications', 'warning'), 'module');
 
 include __DIR__ . '/footer.php';

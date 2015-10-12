@@ -17,13 +17,14 @@
  * @version         $Id$
  */
 
-use \Xoops\Core\Kernel\Handlers\XoopsUser;
+use Xoops\Core\Kernel\Handlers\XoopsUser;
+use Xoops\Core\Request;
 
-include __DIR__ .  '/header.php';
+include __DIR__ . '/header.php';
 
-$tag_id    = $system->cleanVars($_REQUEST, 'tag_id', 0, 'int');
-$module_id = $system->cleanVars($_REQUEST, 'module_id', 0, 'int');
-$start     = $system->cleanVars($_REQUEST, 'start', 0, 'int');
+$tag_id    = Request::getInt('tag_id', 0); //$system->cleanVars($_REQUEST, 'tag_id', 0, 'int');
+$module_id = Request::getInt('module_id', 0); //$system->cleanVars($_REQUEST, 'module_id', 0, 'int');
+$start     = Request::getInt('start', 0); //$system->cleanVars($_REQUEST, 'start', 0, 'int');
 
 if ($tag_id == 0) {
     $xoops->redirect('index.php', 5);
@@ -42,7 +43,7 @@ foreach ($modules as $k => $module) {
 $tags = array();
 $i    = 0;
 foreach ($items as $mid => $module) {
-    $moduleObj = $module_Handler->get($mid);
+    $moduleObj = $moduleHandler->get($mid);
 
     $plugin  = \Xoops\Module\Plugin::getPlugin($moduleObj->getVar('dirname'), 'xootags');
     $results = $plugin->Xootags($module['item_id'], $start, $limit = 0);
@@ -78,7 +79,7 @@ if ($tag_id != 0) {
     $subtitle[] = sprintf(_XOO_TAGS_TERM, $tagsTagsHandler->get($tag_id)->getVar('tag_term'));
 }
 if ($module_id != 0) {
-    $subtitle[] = sprintf(_XOO_TAGS_MODULE, $module_Handler->get($module_id)->getVar('name'));
+    $subtitle[] = sprintf(_XOO_TAGS_MODULE, $moduleHandler->get($module_id)->getVar('name'));
 }
 
 $xoops->tpl()->assign('tags', array_slice($tags, $start, $tagsConfig['xootags_limit_tag_tag']));
@@ -88,8 +89,9 @@ $xoops->tpl()->assign('subtitle', $subtitle);
 $paginate = new Xoopaginate(count($tags), $tagsConfig['xootags_limit_tag_tag'], $start, 'start', 'tag_id=' . $tag_id);
 
 // Metas
-$xoops->theme()->addMeta($type = 'meta', 'description', XooTags_getMetaDescription($keywords));
-$xoops->theme()->addMeta($type = 'meta', 'keywords', XooTags_getMetaKeywords($keywords));
+$utilities = new XooTagsUtilities();
+$xoops->theme()->addMeta($type = 'meta', 'description', $utilities->getMetaDescription($keywords));
+$xoops->theme()->addMeta($type = 'meta', 'keywords', $utilities->getMetaKeywords($keywords));
 $xoops->tpl()->assign('xoops_pagetitle', $tagsTagsHandler->get($tag_id)->getVar('tag_term') . ' - ' . $xoops->module->getVar('name'));
 
-include __DIR__ .  '/footer.php';
+include __DIR__ . '/footer.php';

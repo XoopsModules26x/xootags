@@ -17,6 +17,8 @@
  * @version         $Id$
  */
 
+use Xoops\Core\Request;
+
 include dirname(dirname(dirname(__DIR__))) .  '/mainfile.php';
 
 XoopsLoad::load('system', 'system');
@@ -25,7 +27,7 @@ $system = System::getInstance();
 $xoops = Xoops::getInstance();
 $xoops->disableErrorReporting();
 
-$tag_term = $system->cleanVars($_REQUEST, 'term', '', 'string');
+$tag_term = Request::getString('term', ''); //$system->cleanVars($_REQUEST, 'term', '', 'string');
 
 $criteria = new CriteriaCompo();
 $criteria->add(new Criteria('tag_status', 1));
@@ -36,7 +38,7 @@ $criteria->setSort('tag_count');
 $criteria->setOrder('DESC');
 
 $tagsModule       = Xootags::getInstance();
-$tagsTagsHandler = $tagsModule->TagsHandler();
+$tagsTagsHandler = $tagsModule->tagsHandler();
 
 $tags = $tagsTagsHandler->getObjects($criteria, true, false);
 

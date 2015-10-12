@@ -69,9 +69,9 @@ class XootagsTags extends XoopsObject
 }
 
 /**
- * Class xootagsxootags_tagsHandler
+ * Class XootagsTagsHandler
  */
-class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
+class XootagsTagsHandler extends XoopsPersistableObjectHandler
 {
 
     /**
@@ -88,8 +88,8 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
     private function isActive()
     {
         $xoops          = Xoops::getInstance();
-        $module_handler = $xoops->getHandlerModule();
-        $module         = $module_handler->getByDirname('xooTags');
+        $moduleHandler = $xoops->getHandlerModule();
+        $module         = $moduleHandler->getByDirname('xooTags');
 
         return ($module && $module->getVar('isactive')) ? true : false;
     }
@@ -159,13 +159,13 @@ class xootagsxootags_tagsHandler extends XoopsPersistableObjectHandler
         }
 
         $tagsModule = Xootags::getInstance();
-        $tagsConfig = $tagsModule->LoadConfig();
+        $tagsConfig = $tagsModule->loadConfig();
 
         if (array_key_exists($name, $_POST) === false) {
             $tags = array();
         } else {
 //            $tags = explode('|', str_replace($tagsConfig['xootags_delimiters'],'|', $tags) );
-            $tags = explode(',', $_POST[$name]);
+            $tags = explode(',', Request::getString($name, '', 'POST')); //$_POST[$name]);
             $tags = array_filter(array_map('trim', $tags));
         }
 

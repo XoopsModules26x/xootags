@@ -19,6 +19,6 @@
 
 include __DIR__ . '/header.php';
 
-$admin_page->displayAbout();
+$adminPage->displayAbout();
 
 include __DIR__ . '/footer.php';

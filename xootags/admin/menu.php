@@ -18,8 +18,6 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
-
 $i                      = 1;
 $adminmenu[$i]['title'] = _MI_XOO_TAGS_INDEX;
 $adminmenu[$i]['link']  = 'admin/index.php';

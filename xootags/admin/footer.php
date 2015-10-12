@@ -18,9 +18,7 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
-
-if (basename($_SERVER['SCRIPT_NAME']) === 'index.php') {
-    $admin_page->displayIndex();
+if (basename(Request::getString('SCRIPT_NAME', '', 'SERVER')) === 'index.php') {
+    $adminPage->displayIndex();
 }
 $xoops->footer();

@@ -17,14 +17,16 @@
  * @version         $Id$
  */
 
+use Xoops\Core\Request;
+
 include __DIR__ . '/header.php';
 
 switch ($op) {
     case 'del':
-        $tag_id = $system->cleanVars($_REQUEST, 'tag_id', 0, 'int');
+        $tag_id = Request::getInt('tag_id', 0); //$system->cleanVars($_REQUEST, 'tag_id', 0, 'int');
         if (isset($tag_id) && $tag_id > 0) {
             if ($tag = $tagsTagsHandler->get($tag_id)) {
-                $delete = $system->cleanVars($_POST, 'ok', 0, 'int');
+                $delete = Request::getInt('ok', 0, 'POST'); //$system->cleanVars($_POST, 'ok', 0, 'int');
                 if ($delete == 1) {
                     if (!$xoops->security()->check()) {
                         $xoops->redirect('tags.php', 5, implode(',', $xoops->security()->getErrors()));
@@ -33,11 +35,8 @@ switch ($op) {
                     $tagsTagsHandler->delete($tag);
                     $xoops->redirect('tags.php', 5, _AM_XOO_TAGS_DELETED);
                 } else {
-                    $xoops->confirm(
-                        array('ok' => 1, 'tag_id' => $tag_id, 'op' => 'del'),
-                        $_SERVER['REQUEST_URI'],
-                        sprintf(_AM_XOO_TAGS_DELETE_CFM . "<br /><b><span style='color : Red'> %s </span></b><br /><br />", $tag->getVar('tag_term'))
-                    );
+                    $xoops->confirm(array('ok' => 1, 'tag_id' => $tag_id, 'op' => 'del'), Request::getString('REQUEST_URI', '', 'SERVER'), //$_SERVER['REQUEST_URI'],
+                                    sprintf(_AM_XOO_TAGS_DELETE_CFM . "<br /><b><span style='color : Red'> %s </span></b><br /><br />", $tag->getVar('tag_term')));
                 }
             } else {
                 $xoops->redirect('tags.php', 5);
@@ -49,13 +48,13 @@ switch ($op) {
 
     case 'show':
     case 'hide':
-        $tag_id = $system->cleanVars($_REQUEST, 'tag_id', 0, 'int');
+        $tag_id = Request::getInt('tag_id', 0); //$system->cleanVars($_REQUEST, 'tag_id', 0, 'int');
         $tagsTagsHandler->SetOnline($tag_id);
         $xoops->redirect('tags.php', 5, _AM_XOO_TAGS_SAVED);
         break;
 
     default:
-        $module_id = $system->cleanVars($_REQUEST, 'module_id', 0, 'int');
+        $module_id = Request::getInt('module_id', 0); //$system->cleanVars($_REQUEST, 'module_id', 0, 'int');
 
         $form = $tagsModule->getForm(null, 'tags');
         $form->TagsFormModules($module_id, $modules);

@@ -17,9 +17,11 @@
  * @version         $Id$
  */
 
-include __DIR__ .  '/header.php';
+use Xoops\Core\Request;
 
-$start = $system->cleanVars($_REQUEST, 'start', 0, 'int');
+include __DIR__ . '/header.php';
+
+$start = Request::getInt('start', 0); //$system->cleanVars($_REQUEST, 'start', 0, 'int');
 
 $criteria = new CriteriaCompo();
 $criteria->setSort('tag_count');
@@ -38,7 +40,7 @@ foreach ($tags as $k => $tag) {
     $bytags     = $tagsLinkHandler->getByTag($tag['tag_id']);
     foreach ($bytags as $j => $mod) {
         $mid                                  = $mod['tag_modid'];
-        $module                               = $module_Handler->get($mid);
+        $module                               = $moduleHandler->get($mid);
         $tags[$k]['modules'][$mid]['mid']     = $mid;
         $tags[$k]['modules'][$mid]['name']    = $module->getVar('name');
         $tags[$k]['modules'][$mid]['dirname'] = $module->getVar('dirname');
@@ -61,7 +63,8 @@ $xoops->tpl()->assign('tags', $tags);
 $paginate = new Xoopaginate($tags_count, $tagsConfig['xootags_limit_tag_main'], $start, 'start', '');
 
 // Metas
-$xoops->theme()->addMeta($type = 'meta', 'description', XooTags_getMetaDescription($keywords));
-$xoops->theme()->addMeta($type = 'meta', 'keywords', XooTags_getMetaKeywords($keywords));
+$utilities = new XooTagsUtilities();
+$xoops->theme()->addMeta($type = 'meta', 'description', $utilities->getMetaDescription($keywords));
+$xoops->theme()->addMeta($type = 'meta', 'keywords', $utilities->getMetaKeywords($keywords));
 
-include __DIR__ .  '/footer.php';
+include __DIR__ . '/footer.php';

@@ -18,10 +18,12 @@
  * @version         $Id$
  */
 
+use Xoops\Core\Request;
+
 require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
 $tagsModule = Xootags::getInstance();
-$tagsConfig = $tagsModule->LoadConfig();
+$tagsConfig = $tagsModule->loadConfig();
 
 $op = '';
 if (isset($_POST)) {
@@ -35,46 +37,46 @@ if (isset($_GET)) {
     }
 }
 
-$script_name = basename($_SERVER['SCRIPT_NAME'], '.php');
+$scriptName = basename(Request::getString('SCRIPT_NAME', '', 'SERVER'), '.php');
 
 XoopsLoad::load('system', 'system');
 $system = System::getInstance();
 
 $xoops = Xoops::getInstance();
-if ($script_name !== 'about') {
-    $xoops->header('xootags_' . $script_name . '.tpl');
+if ($scriptName !== 'about') {
+    $xoops->header('xootags_' . $scriptName . '.tpl');
 } else {
     $xoops->header();
 }
 $xoops->theme()->addStylesheet('modules/xootags/assets/css/moduladmin.css');
 
-$admin_page = new \Xoops\Module\Admin();
-if ($script_name !== 'about' && $script_name !== 'index') {
-    $admin_page->renderNavigation(basename($_SERVER['SCRIPT_NAME']));
-} elseif ($script_name !== 'index') {
-    $admin_page->displayNavigation(basename($_SERVER['SCRIPT_NAME']));
+$adminPage = new \Xoops\Module\Admin();
+if ($scriptName !== 'about' && $scriptName !== 'index') {
+    $adminPage->renderNavigation(basename(Request::getString('SCRIPT_NAME', '', 'SERVER'))); // $_SERVER['SCRIPT_NAME']));
+} elseif ($scriptName !== 'index') {
+    $adminPage->displayNavigation(basename(Request::getString('SCRIPT_NAME', '', 'SERVER'))); //$_SERVER['SCRIPT_NAME']));
 }
 
-$tagsModule       = Xootags::getInstance();
-$tagsConfig       = $tagsModule->LoadConfig();
-$tagsLinkHandler = $tagsModule->LinkHandler();
-$tagsTagsHandler = $tagsModule->TagsHandler();
+$tagsModule      = Xootags::getInstance();
+$tagsConfig      = $tagsModule->loadConfig();
+$tagsLinkHandler = $tagsModule->linkHandler();
+$tagsTagsHandler = $tagsModule->tagsHandler();
 
-$module_Handler = $xoops->getHandlerModule();
+$moduleHandler = $xoops->getHandlerModule();
 
 // Count by module
 $criteria = new CriteriaCompo();
 $criteria->setGroupby('tag_modid');
 
-$modules        = array();
-$count_items    = 0;
-$count_bymodule = $tagsLinkHandler->getCounts($criteria);
-foreach ($count_bymodule as $mid => $count_item) {
-    $count_items += $count_item;
-    $module                      = $module_Handler->get($mid);
-    $count_module[$mid]['mid']   = $mid;
-    $count_module[$mid]['name']  = $module->getVar('name');
-    $count_module[$mid]['count'] = $count_item;
+$modules       = array();
+$countItems    = 0;
+$countByModule = $tagsLinkHandler->getCounts($criteria);
+foreach ($countByModule as $mid => $count_item) {
+    $countItems += $count_item;
+    $module                     = $moduleHandler->get($mid);
+    $countModule[$mid]['mid']   = $mid;
+    $countModule[$mid]['name']  = $module->getVar('name');
+    $countModule[$mid]['count'] = $count_item;
 
     $modules[$mid] = $module->getVar('name');
 }

@@ -54,9 +54,9 @@ class XootagsLink extends XoopsObject
 }
 
 /**
- * Class Xootags_getByModule
+ * Class XootagsGetByModule
  */
-class Xootags_getByModule extends XoopsObject
+class XootagsGetByModule extends XoopsObject
 {
     // constructor
     /**
@@ -75,10 +75,6 @@ class Xootags_getByModule extends XoopsObject
         $this->initVar('tag_time', XOBJ_DTYPE_INT, 0);
     }
 
-//    private function Xootags_getByModule()
-//    {
-//        $this->__construct();
-//    }
 
     /**
      * @param null $keys
@@ -110,9 +106,9 @@ class Xootags_getByModule extends XoopsObject
 }
 
 /**
- * Class Xootags_getByItem
+ * Class XootagsGetByItem
  */
-class Xootags_getByItem extends XoopsObject
+class XootagsGetByItem extends XoopsObject
 {
     // constructor
     /**
@@ -125,11 +121,6 @@ class Xootags_getByItem extends XoopsObject
         $this->initVar('tag_time', XOBJ_DTYPE_INT, 0);
     }
 
-//    private function Xootags_getByItem()
-//    {
-//        $this->__construct();
-//    }
-
     /**
      * @param null $keys
      * @param null $format
@@ -160,9 +151,9 @@ class Xootags_getByItem extends XoopsObject
 }
 
 /**
- * Class xootagsXootagsLinkHandler
+ * Class XootagsLinkHandler
  */
-class xootagsXootagsLinkHandler extends XoopsPersistableObjectHandler
+class XootagsLinkHandler extends XoopsPersistableObjectHandler
 {
     public $table_link;
 
@@ -184,7 +175,7 @@ class xootagsXootagsLinkHandler extends XoopsPersistableObjectHandler
      */
     public function getTags($criteria)
     {
-        $this->className  = 'Xootags_getByModule';
+        $this->className  = 'XootagsGetByModule';
         $this->table_link = $this->db2->prefix('xootags_tags');
 //        $this->table_link = $xoops->db->prefix('xootags_tags');
         $this->field_link = 'tag_id';
@@ -200,7 +191,7 @@ class xootagsXootagsLinkHandler extends XoopsPersistableObjectHandler
      */
     public function getByModule($module_id, $tag_id = 0)
     {
-        $this->className  = 'Xootags_getByModule';
+        $this->className  = 'XootagsGetByModule';
         $this->table_link = $this->db2->prefix('xootags_tags');
         $this->field_link = 'tag_id';
         $criteria         = new CriteriaCompo();
@@ -223,7 +214,7 @@ class xootagsXootagsLinkHandler extends XoopsPersistableObjectHandler
      */
     public function getByTag($itemid)
     {
-        $this->className  = 'Xootags_getByModule';
+        $this->className  = 'XootagsGetByModule';
         $this->table_link = $this->db2->prefix('xootags_tags');
         $this->field_link = 'tag_id';
 
@@ -243,7 +234,7 @@ class xootagsXootagsLinkHandler extends XoopsPersistableObjectHandler
      */
     public function getByItem($itemid, $modid = null, $onlyTags = false)
     {
-        $this->className  = 'Xootags_getByItem';
+        $this->className  = 'XootagsGetByItem';
         $this->tableLink = $this->db2->prefix('xootags_tags');
         $this->fieldLink = 'tag_id';
 

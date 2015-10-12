@@ -18,8 +18,6 @@
  * @version         $Id$
  */
 
-defined('XOOPS_ROOT_PATH') or die('XOOPS root path not defined');
-
 /**
  * Class XootagsSearchPlugin
  */
@@ -57,7 +55,7 @@ class XootagsSearchPlugin extends Xoops\Module\Plugin\PluginAbstract implements 
         }
 
         $tagsModule       = Xootags::getInstance();
-        $tagsTagsHandler = $tagsModule->TagsHandler();
+        $tagsTagsHandler = $tagsModule->tagsHandler();
 
         $tags = $tagsTagsHandler->getObjects($criteria, true, false);
 

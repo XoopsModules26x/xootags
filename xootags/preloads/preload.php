@@ -21,11 +21,13 @@ use Xoops\Core\PreloadItem;
 
 /**
  * Class XooTagsPreload
- */class XooTagsPreload extends PreloadItem
+ */
+class XooTagsPreload extends PreloadItem
 {
     /**
-* @param $args
-*/public static function eventCoreIncludeCommonStart($args)
+     * @param $args
+     */
+    public static function eventCoreIncludeCommonStart($args)
     {
         $xoops = Xoops::getInstance();
         $xoops->registry()->set('XOOTAGS', false);
@@ -36,15 +38,13 @@ use Xoops\Core\PreloadItem;
     }
 
     /**
-* @param $args
-*/public static function eventCoreIncludeCommonEnd($args)
+     * @param $args
+     */
+    public static function eventCoreIncludeCommonEnd($args)
     {
         $path = dirname(__DIR__);
-        XoopsLoad::addMap(
-            array(
-                'xootags' => $path . '/class/helper.php'
-            )
-        );
+        XoopsLoad::addMap(array(
+                              'xootags' => $path . '/class/helper.php'));
     }
 
     /**
@@ -52,9 +52,9 @@ use Xoops\Core\PreloadItem;
      */
     private static function isActive()
     {
-        $xoops          = Xoops::getInstance();
-        $module_handler = $xoops->getHandlerModule();
-        $module         = $module_handler->getByDirname('xootags');
+        $xoops         = Xoops::getInstance();
+        $moduleHandler = $xoops->getHandlerModule();
+        $module        = $moduleHandler->getByDirname('xootags');
 
         return ($module && $module->getVar('isactive')) ? true : false;
     }

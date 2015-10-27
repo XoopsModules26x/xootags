@@ -17,6 +17,7 @@
  * @author          Laurent JEN (Aka DuGris)
  * @version         $Id$
  */
+use Xoops\Core\Request;
 
 if (basename(Request::getString('SCRIPT_NAME', '', 'SERVER')) === 'index.php') {
     $adminPage->displayIndex();

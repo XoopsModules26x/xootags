@@ -14,7 +14,6 @@
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id: xootags.php 1398 2012-12-30 07:37:19Z DuGris $
  */
 
 class Xootags extends Xoops\Module\Helper\HelperAbstract

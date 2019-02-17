@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="<{xoImgUrl 'modules/xootags/assets/js/jquery/jquery.cloud/jqcloud.css'}>" type="text/css" media="screen"/>
+<link rel="stylesheet" href="<{xoImgUrl 'modules/xootags/assets/js/jquery/jquery.cloud/jqcloud.css'}>" type="text/css" media="screen">
 <{assign var=tags value=$block.tags}>
 <{assign var=xootags_colors value=$block.colors}>
 

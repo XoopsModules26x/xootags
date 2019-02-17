@@ -15,8 +15,8 @@
  * @since           2.6.0
  * @author          Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
  * @author          Laurent JEN (Aka DuGris)
+ * @version         $Id$
  */
-
 define('_AM_XOO_TAGS_STATS', 'Statistic Infomation');
 define('_AM_XOO_TAGS_COUNT_TAGS', 'Tag count');
 define('_AM_XOO_TAGS_COUNT_ITEM', 'Item count');

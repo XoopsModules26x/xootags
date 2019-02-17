@@ -15,8 +15,8 @@
  * @since           2.6.0
  * @author          Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
  * @author          Laurent JEN (Aka DuGris)
+ * @version         $Id$
  */
-
 define('_XOO_TAGS_TAGS', 'Tags');
 define('_XOO_TAGS_TAGS_ERROR', 'Module Xootags was not installed or disabled');
 define('_XOO_TAGS_ADD_TAGS_ERROR', 'Tag(s) has not been added');

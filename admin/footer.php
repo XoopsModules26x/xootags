@@ -15,10 +15,11 @@
  * @since           2.6.0
  * @author          Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
  * @author          Laurent JEN (Aka DuGris)
+ * @version         $Id$
  */
 use Xoops\Core\Request;
 
-if (basename(Request::getString('SCRIPT_NAME', '', 'SERVER')) === 'index.php') {
+if ('index.php' === basename(Request::getString('SCRIPT_NAME', '', 'SERVER'))) {
     $adminPage->displayIndex();
 }
 $xoops->footer();

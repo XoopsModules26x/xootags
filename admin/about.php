@@ -15,7 +15,6 @@
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
  */
-
 include __DIR__ . '/header.php';
 
 $adminPage->displayAbout();

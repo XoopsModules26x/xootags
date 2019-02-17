@@ -14,6 +14,7 @@
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
+ * @version         $Id$
  */
 
 /**
@@ -24,8 +25,8 @@
 /*
 function XooTags_getMetaDescription($string)
 {
-    $xoops = Xoops::getInstance();
-    $myts  = MyTextSanitizer::getInstance();
+    $xoops = \Xoops::getInstance();
+    $myts  = \MyTextSanitizer::getInstance();
 
     if (is_array($string)) {
         $string = implode(', ', $string);
@@ -52,8 +53,8 @@ function XooTags_getMetaDescription($string)
 /*
 function XooTags_getMetaKeywords($string, $limit = 5)
 {
-$xoops = Xoops::getInstance();
-    $myts  = MyTextSanitizer::getInstance();
+$xoops = \Xoops::getInstance();
+    $myts  = \MyTextSanitizer::getInstance();
 
     if (is_array($string)) {
         $string = implode(', ', $string);

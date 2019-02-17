@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xootags;
+
 /**
  * Xoopreferences : Preferences Manager
  *
@@ -14,31 +17,29 @@
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
+ * @version         $Id$
  */
 
 /**
- * Class XooTagsPreferences
+ * Class Preferences
  */
-class XooTagsPreferences
+class Preferences
 {
-    public $config = array();
-    public $basicConfig = array();
+    public $config = [];
+    public $basicConfig = [];
     public $configPath;
     public $configFile;
-    private $module_dirname = 'xootags';
+    private $moduleDirName = 'xootags';
 
-    /**
-     *
-     */
     public function __construct()
     {
-        $xoops            = Xoops::getInstance();
-        $this->configFile = 'config.' . $this->module_dirname . '.php';
+        $xoops = \Xoops::getInstance();
+        $this->configFile = 'config.' . $this->moduleDirName . '.php';
 
-        $this->configPath = \XoopsBaseConfig::get('var-path') . '/configs/' . $this->module_dirname . '/';
+        $this->configPath = \XoopsBaseConfig::get('var-path') . '/configs/' . $this->moduleDirName . '/';
 
         $this->basicConfig = $this->loadBasicConfig();
-        $this->config      = @$this->loadConfig();
+        $this->config = @$this->loadConfig();
 
         if (count($this->config) != count($this->basicConfig)) {
             $this->config = array_merge($this->basicConfig, $this->config);
@@ -46,16 +47,19 @@ class XooTagsPreferences
         }
     }
 
-//    public function XooTagsPreferences()
+//    public function Preferences()
 //    {
 //        $this->__construct();
 //    }
 
+    /**
+     * @return mixed
+     */
     public static function getInstance()
     {
         static $instance;
         if (!isset($instance)) {
-            $class    = __CLASS__;
+            $class = __CLASS__;
             $instance = new $class();
         }
 
@@ -71,7 +75,7 @@ class XooTagsPreferences
     }
 
     /**
-     * XooTagsPreferences::loadConfig()
+     * Preferences::loadConfig()
      *
      * @return array
      */
@@ -86,7 +90,7 @@ class XooTagsPreferences
     }
 
     /**
-     * XooTagsPreferences::loadBasicConfig()
+     * Preferences::loadBasicConfig()
      *
      * @return array
      */
@@ -100,36 +104,37 @@ class XooTagsPreferences
     }
 
     /**
-     * XooTagsPreferences::readConfig()
+     * Preferences::readConfig()
      *
      * @return array
      */
     public function readConfig()
     {
         $file_path = $this->configPath . $this->configFile;
-        XoopsLoad::load('XoopsFile');
-        $file = XoopsFile::getHandler('file', $file_path);
+        \XoopsLoad::load('XoopsFile');
+        $file = \XoopsFile::getHandler('file', $file_path);
 
         return eval(@$file->read());
     }
 
     /**
-     * XooTagsPreferences::writeConfig()
+     * Preferences::writeConfig()
      *
      * @param  array $config
      *
+     * @return bool|null
      * @internal param string $filename
-     * @return array
      */
     public function writeConfig($config)
     {
         if ($this->createPath($this->configPath)) {
             $file_path = $this->configPath . $this->configFile;
-            XoopsLoad::load('XoopsFile');
-            $file = XoopsFile::getHandler('file', $file_path);
+            \XoopsLoad::load('XoopsFile');
+            $file = \XoopsFile::getHandler('file', $file_path);
 
             return $file->write('return ' . var_export($config, true) . ';');
         }
+
         return null;
     }
 
@@ -141,22 +146,21 @@ class XooTagsPreferences
      */
     private function createPath($pathname, $pathout = XOOPS_ROOT_PATH)
     {
-        $xoops    = Xoops::getInstance();
-        $pathname = substr($pathname, strlen(\XoopsBaseConfig::get('root-path')));
+        $xoops = \Xoops::getInstance();
+        $pathname = mb_substr($pathname, mb_strlen(\XoopsBaseConfig::get('root-path')));
         $pathname = str_replace(DIRECTORY_SEPARATOR, '/', $pathname);
 
-        $dest  = $pathout;
+        $dest = $pathout;
         $paths = explode('/', $pathname);
 
         foreach ($paths as $path) {
             if (!empty($path)) {
                 $dest = $dest . '/' . $path;
                 if (!is_dir($dest)) {
-                    if (!mkdir($dest, 0755)) {
+                    if (!mkdir($dest, 0755) && !is_dir($dest)) {
                         return false;
-                    } else {
-                        $this->writeIndex(\XoopsBaseConfig::get('uploads-path'), 'index.html', $dest);
                     }
+                    $this->writeIndex(\XoopsBaseConfig::get('uploads-path'), 'index.html', $dest);
                 }
             }
         }
@@ -174,7 +178,7 @@ class XooTagsPreferences
     private function writeIndex($folder_in, $source_file, $folder_out)
     {
         if (!is_dir($folder_out) && !$this->createPath($folder_out)) {
-                return false;
+            return false;
         }
 
         // Simple copy for a file
@@ -193,17 +197,17 @@ class XooTagsPreferences
      */
     public function prepare2Save($data = null, $module = true)
     {
-        $xoops = Xoops::getInstance();
+        $xoops = \Xoops::getInstance();
         if (!isset($data)) {
             $data = $_POST;
         }
 
-        $config = array();
+        $config = [];
         foreach (array_keys($data) as $k) {
             if (is_array($data[$k])) {
                 $config[$k] = $this->prepare2Save($data[$k], false);
             } else {
-                if (false != strpos($k, $this->module_dirname . '_') || !$module) {
+                if (false !== mb_strpos($k, $this->moduleDirName . '_') || !$module) {
                     $config[$k] = $data[$k];
                 }
             }

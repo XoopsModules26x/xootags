@@ -15,53 +15,53 @@
  * @since           2.6.0
  * @author          Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
  * @author          Laurent JEN (Aka DuGris)
+ * @version         $Id$
  */
-
-$modversion                = array();
-$modversion['dirname']     = basename(__DIR__);
-$modversion['name']        = _MI_XOO_TAGS_NAME;
+$modversion = [];
+$modversion['version']       = 3.01;
+$modversion['module_status'] = 'Alpha 1';
+$modversion['release_date']  = '2019/02/15';
+$modversion['dirname'] = basename(__DIR__);
+$modversion['name'] = _MI_XOO_TAGS_NAME;
 $modversion['description'] = _MI_XOO_TAGS_DESC;
-$modversion['version']     = 3.01;
-$modversion['author']      = 'XooFoo - Laurent JEN';
-$modversion['nickname']    = 'aka DuGris';
-$modversion['credits']     = 'DuGris.XooFoo Project';
-$modversion['license']     = 'GNU GPL 2.0';
+$modversion['author'] = 'XooFoo - Laurent JEN';
+$modversion['nickname'] = 'aka DuGris';
+$modversion['credits'] = 'DuGris.XooFoo Project';
+$modversion['license'] = 'GNU GPL 2.0';
 $modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html/';
-$modversion['official']    = 1;
-$modversion['help']        = 'page=help';
-$modversion['image']       = 'assets/images/logo.png';
+$modversion['official'] = 1;
+$modversion['help'] = 'page=help';
+$modversion['image'] = 'assets/images/logo.png';
 
 // about
-$modversion['release_date']        = '2015/10/01';
-$modversion['module_website_url']  = 'xoops.org';
+$modversion['module_website_url'] = 'xoops.org';
 $modversion['module_website_name'] = 'XOOPS Project';
-$modversion['module_status']       = 'Alpha 1';
-$modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = '2.6.0';
-$modversion['min_db']              = array('mysql' => '5.0.7', 'mysqli' => '5.0.7');
+$modversion['min_php'] = '7.1.0';
+$modversion['min_xoops'] = '2.6.0';
+$modversion['min_db'] = ['mysql' => '5.5'];
 
 // paypal
-$modversion['paypal']                  = array();
-$modversion['paypal']['business']      = 'dugris93@gmail.com';
-$modversion['paypal']['item_name']     = _MI_XOO_TAGS_DESC;
-$modversion['paypal']['amount']        = 0;
+$modversion['paypal'] = [];
+$modversion['paypal']['business'] = 'dugris93@gmail.com';
+$modversion['paypal']['item_name'] = _MI_XOO_TAGS_DESC;
+$modversion['paypal']['amount'] = 0;
 $modversion['paypal']['currency_code'] = 'EUR';
 
 // Admin menu
 $modversion['system_menu'] = 1;
 
 // Admin things
-$modversion['hasAdmin']   = 1;
+$modversion['hasAdmin'] = 1;
 $modversion['adminindex'] = 'admin/index.php';
-$modversion['adminmenu']  = 'admin/menu.php';
+$modversion['adminmenu'] = 'admin/menu.php';
 
 // Manage extension
-$modversion['extension']         = 0;
+$modversion['extension'] = 0;
 $modversion['extensionModule'][] = '';
 
 // Scripts to run upon installation or update
-$modversion['onInstall']   = '';
-$modversion['onUpdate']    = '';
+$modversion['onInstall'] = '';
+$modversion['onUpdate'] = '';
 $modversion['onUninstall'] = '';
 
 // JQuery
@@ -80,23 +80,23 @@ $modversion['schema'] = 'sql/schema.yml';
 $modversion['use_smarty'] = 1;
 
 // blocks
-$i                                       = 0;
-$modversion['blocks'][$i]['file']        = 'xootags_blocks.php';
-$modversion['blocks'][$i]['name']        = _MI_XOO_TAGS_BLOCK_CLOUD;
+$i = 0;
+$modversion['blocks'][$i]['file'] = 'xootags_blocks.php';
+$modversion['blocks'][$i]['name'] = _MI_XOO_TAGS_BLOCK_CLOUD;
 $modversion['blocks'][$i]['description'] = '';
-$modversion['blocks'][$i]['show_func']   = 'xootags_show';
-$modversion['blocks'][$i]['edit_func']   = 'xootags_cloud_edit';
-$modversion['blocks'][$i]['options']     = '50|100|200';
-$modversion['blocks'][$i]['template']    = 'xootags_block_cloud.tpl';
+$modversion['blocks'][$i]['show_func'] = 'xootags_show';
+$modversion['blocks'][$i]['edit_func'] = 'xootags_cloud_edit';
+$modversion['blocks'][$i]['options'] = '50|100|200';
+$modversion['blocks'][$i]['template'] = 'xootags_block_cloud.tpl';
 
 ++$i;
-$modversion['blocks'][$i]['file']        = 'xootags_blocks.php';
-$modversion['blocks'][$i]['name']        = _MI_XOO_TAGS_BLOCK_TOP;
+$modversion['blocks'][$i]['file'] = 'xootags_blocks.php';
+$modversion['blocks'][$i]['name'] = _MI_XOO_TAGS_BLOCK_TOP;
 $modversion['blocks'][$i]['description'] = '';
-$modversion['blocks'][$i]['show_func']   = 'xootags_show';
-$modversion['blocks'][$i]['edit_func']   = 'xootags_top_edit';
-$modversion['blocks'][$i]['options']     = '50|100|200|time|asc';
-$modversion['blocks'][$i]['template']    = 'xootags_block_top.tpl';
+$modversion['blocks'][$i]['show_func'] = 'xootags_show';
+$modversion['blocks'][$i]['edit_func'] = 'xootags_top_edit';
+$modversion['blocks'][$i]['options'] = '50|100|200|time|asc';
+$modversion['blocks'][$i]['template'] = 'xootags_block_top.tpl';
 
 // Menu
 $modversion['hasMain'] = 1;

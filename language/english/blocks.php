@@ -15,8 +15,8 @@
  * @since           2.6.0
  * @author          Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
  * @author          Laurent JEN (Aka DuGris)
+ * @version         $Id$
  */
-
 define('_MB_XOO_TAGS_SORT', 'Sort by: ');
 define('_MB_XOO_TAGS_SORT_ALPHABETIC', 'Alphabetic');
 define('_MB_XOO_TAGS_SORT_RECENTS', 'Recents');

@@ -14,12 +14,11 @@
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
+ * @version         $Id$
  */
-
 use Xoops\Core\Request;
 
 include dirname(dirname(__DIR__)) . '/mainfile.php';
-include __DIR__ . '/class/utilities.php';
 
 $op = '';
 if (isset($_POST)) {
@@ -33,21 +32,21 @@ if (isset($_GET)) {
     }
 }
 
-XoopsLoad::load('system', 'system');
-$system = System::getInstance();
+\XoopsLoad::load('system', 'system');
+$system = \System::getInstance();
 
-$xoops = Xoops::getInstance();
+$xoops = \Xoops::getInstance();
 
 $scriptName = basename(Request::getString('SCRIPT_NAME', '', 'SERVER'), '.php'); //$_SERVER['SCRIPT_NAME'], '.php');
 $xoops->header('xootags_' . $scriptName . '.tpl');
 
 $xoops->theme()->addStylesheet('modules/xootags/assets/css/module.css');
 
-$tagsModule      = Xootags::getInstance();
-$tagsConfig      = $tagsModule->loadConfig();
-$tagsLinkHandler = $tagsModule->linkHandler();
-$tagsTagsHandler = $tagsModule->tagsHandler();
-$moduleHandler   = $xoops->getHandlerModule();
+$helper = \XoopsModules\Xootags\Helper::getInstance();
+$tagsConfig = $helper->loadConfig();
+$tagsLinkHandler = $helper->linkHandler();
+$tagsTagsHandler = $helper->tagsHandler();
+$moduleHandler = $xoops->getHandlerModule();
 
 $xoops->tpl()->assign('moduletitle', $xoops->module->name());
 $xoops->tpl()->assign('welcome', $tagsConfig['xootags_welcome']);

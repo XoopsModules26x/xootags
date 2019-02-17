@@ -2,7 +2,7 @@
 <{assign var=xootags_colors value=$block.colors}>
 
 <script type="text/javascript" src="<{xoImgUrl 'modules/xootags/assets/js/jquery/jquery.cloud/jqcloud-1.0.2.js'}>"></script>
-<link rel="stylesheet" href="<{xoImgUrl 'modules/xootags/assets/js/jquery/jquery.cloud/jqcloud.css'}>" type="text/css" media="screen"/>
+<link rel="stylesheet" href="<{xoImgUrl 'modules/xootags/assets/js/jquery/jquery.cloud/jqcloud.css'}>" type="text/css" media="screen">
 
 <{include file='module:xootags/xootags_css.tpl' ags=$block.tags}>
 

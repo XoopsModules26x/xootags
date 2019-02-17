@@ -14,8 +14,8 @@
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
+ * @version         $Id: core.php 1429 2013-01-15 01:11:29Z DuGris $
  */
-
 use Xoops\Core\PreloadItem;
 
 /**
@@ -28,11 +28,11 @@ class XooTagsPreload extends PreloadItem
      */
     public static function eventCoreIncludeCommonStart($args)
     {
-        $xoops = Xoops::getInstance();
+        $xoops = \Xoops::getInstance();
         $xoops->registry()->set('XOOTAGS', false);
-        if (XooTagsPreload::isActive()) {
+        if (self::isActive()) {
             $xoops->registry()->set('XOOTAGS', true);
-            XoopsLoad::addMap(array('xoopsformtags' => dirname(__DIR__) . '/class/xoopsformtags.php'));
+            \XoopsLoad::addMap(['xoopsformtags' => dirname(__DIR__) . '/class/xoopsformtags.php']);
         }
     }
 
@@ -41,9 +41,7 @@ class XooTagsPreload extends PreloadItem
      */
     public static function eventCoreIncludeCommonEnd($args)
     {
-        $path = dirname(__DIR__);
-        XoopsLoad::addMap(array(
-                              'xootags' => $path . '/class/helper.php'));
+        require_once __DIR__ . '/autoloader.php';
     }
 
     /**
@@ -51,9 +49,9 @@ class XooTagsPreload extends PreloadItem
      */
     private static function isActive()
     {
-        $xoops         = Xoops::getInstance();
+        $xoops = \Xoops::getInstance();
         $moduleHandler = $xoops->getHandlerModule();
-        $module        = $moduleHandler->getByDirname('xootags');
+        $module = $moduleHandler->getByDirname('xootags');
 
         return ($module && $module->getVar('isactive')) ? true : false;
     }

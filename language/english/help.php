@@ -14,8 +14,8 @@
  * @package         xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
+ * @version         $Id$
  */
-
 define('_HELP_DESCRIPTION_TITLE', 'Description');
 define('_HELP_DEVELOPER_TITLE', 'Developer');
 

@@ -14,24 +14,26 @@
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
+ * @version         $Id$
  */
+use  XoopsModules\Xootags;
 
 include __DIR__ . '/header.php';
 
 switch ($op) {
     case 'save':
         if (!$xoops->security()->check()) {
-            $xoops->redirect('preferences.php', 3, implode('<br />', $xoops->security()->getErrors()));
+            $xoops->redirect('preferences.php', 3, implode('<br>', $xoops->security()->getErrors()));
         }
 
         // Write configuration file
-        $object = new XooTagsPreferences();
+        $object = new \XoopsModules\Xootags\Preferences();
         $object->writeConfig($object->prepare2Save());
         $xoops->redirect('preferences.php', 3, _XOO_CONFIG_SAVED);
         break;
-
     default:
-        $form = $tagsModule->getForm($tagsConfig, 'preferences');
+//        $form = $helper->getForm($tagsConfig, 'preferences');
+        $form = new \XoopsModules\Xootags\Form\PreferencesForm($tagsConfig);
         $form->display();
 }
 include __DIR__ . '/footer.php';

@@ -6,7 +6,7 @@
 
         <{foreach from=$subtitle item=title}>
             <{$title}>
-            <br/>
+            <br>
         <{/foreach}>
     </fieldset>
 <{/if}>

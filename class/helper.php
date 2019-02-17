@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xootags;
+
 /**
  * Xootags module
  *
@@ -14,9 +17,9 @@
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
+ * @version         $Id: xootags.php 1398 2012-12-30 07:37:19Z DuGris $
  */
-
-class Xootags extends Xoops\Module\Helper\HelperAbstract
+class Helper extends \Xoops\Module\Helper\HelperAbstract
 {
     /**
      * Init the module
@@ -28,8 +31,6 @@ class Xootags extends Xoops\Module\Helper\HelperAbstract
         $this->setDirname(basename(dirname(__DIR__)));
         $this->loadLanguage('main');
         $this->loadLanguage('preferences');
-
-        XoopsLoad::load('xoopaginate', $this->_dirname);
     }
 
     /**
@@ -37,13 +38,11 @@ class Xootags extends Xoops\Module\Helper\HelperAbstract
      */
     public function loadConfig()
     {
-        XoopsLoad::load('xoopreferences', $this->_dirname);
-
-        return XooTagsPreferences::getInstance()->getConfig();
+        return \XoopsModules\Xootags\Preferences::getInstance()->getConfig();
     }
 
     /**
-     * @return \Xoops\Module\Helper\XoopsObjectHandler
+     * @return bool|\XoopsObjectHandler|\XoopsPersistableObjectHandler
      */
     public function tagsHandler()
     {
@@ -51,10 +50,28 @@ class Xootags extends Xoops\Module\Helper\HelperAbstract
     }
 
     /**
-     * @return \Xoops\Module\Helper\XoopsObjectHandler
+     * @return bool|\XoopsObjectHandler|\XoopsPersistableObjectHandler
      */
     public function linkHandler()
     {
         return $this->getHandler('Link');
+    }
+
+    /**
+     * Get an Object Handler
+     *
+     * @param string $name name of handler to load
+     *
+     * @return bool|\XoopsObjectHandler|\XoopsPersistableObjectHandler
+     */
+    public function getHandler($name)
+    {
+        $ret = false;
+        //        /** @var Connection $db */
+        $db = \XoopsDatabaseFactory::getConnection();
+        $class = '\\XoopsModules\\' . ucfirst(mb_strtolower(basename(dirname(__DIR__)))) . '\\' . $name . 'Handler';
+        $ret = new $class($db);
+
+        return $ret;
     }
 }

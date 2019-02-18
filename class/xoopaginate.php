@@ -41,11 +41,11 @@ class XooPaginate
         $this->total = (int)$totalItems;
         $this->perpage = (int)$itemsPerPage;
         $this->current = (int)$currentStart;
-        $this->extra = $extraArg;
+        $this->extra   = $extraArg;
         if ('' !== $extraArg && ('&amp;' !== mb_substr($extraArg, -5) || '&' !== mb_substr($extraArg, -1))) {
             $this->extra = '&amp;' . $extraArg;
         }
-        $this->url = Request::getString('PHP_SELF', '', 'SERVER') . '?' . trim($startName) . '=';
+        $this->url    = Request::getString('PHP_SELF', '', 'SERVER') . '?' . trim($startName) . '=';
         $this->offset = (int)$offset;
 
         $this->render();
@@ -75,36 +75,36 @@ class XooPaginate
         $xoops->tpl()->assign('xoopaginate', $this);
 
         $total_pages = ceil($this->total / $this->perpage);
-        $i = 0;
+        $i           = 0;
         if (0 !== $this->total && 0 !== $this->perpage) {
             if (($this->current - $this->perpage) >= 0) {
-                $this->prev = $this->url . ($this->current - $this->perpage) . $this->extra;
+                $this->prev  = $this->url . ($this->current - $this->perpage) . $this->extra;
                 $this->first = $this->url . 0 . $this->extra;
             }
 
-            $counter = 1;
+            $counter      = 1;
             $current_page = (int)floor(($this->current + $this->perpage) / $this->perpage);
             while ($counter <= $total_pages) {
                 if ($counter == $current_page) {
-                    $pages[$i]['text'] = $counter;
-                    $pages[$i]['link'] = $this->url . (($counter - 1) * $this->perpage) . $this->extra;
+                    $pages[$i]['text']  = $counter;
+                    $pages[$i]['link']  = $this->url . (($counter - 1) * $this->perpage) . $this->extra;
                     $pages[$i]['value'] = (($counter - 1) * $this->perpage);
 
                     ++$i;
                 } elseif (($counter > $current_page - $this->offset && $counter < $current_page + $this->offset) || 1 == $counter || $counter == $total_pages) {
                     if ($counter == $total_pages && $current_page < $total_pages - $this->offset) {
-                        $pages[$i]['link'] = false;
-                        $pages[$i]['text'] = '...';
+                        $pages[$i]['link']  = false;
+                        $pages[$i]['text']  = '...';
                         $pages[$i]['value'] = '.';
                         ++$i;
                     }
-                    $pages[$i]['text'] = $counter;
-                    $pages[$i]['link'] = $this->url . (($counter - 1) * $this->perpage) . $this->extra;
+                    $pages[$i]['text']  = $counter;
+                    $pages[$i]['link']  = $this->url . (($counter - 1) * $this->perpage) . $this->extra;
                     $pages[$i]['value'] = (($counter - 1) * $this->perpage);
                     ++$i;
                     if (1 == $counter && $current_page > 1 + $this->offset) {
-                        $pages[$i]['link'] = false;
-                        $pages[$i]['text'] = '...';
+                        $pages[$i]['link']  = false;
+                        $pages[$i]['text']  = '...';
                         $pages[$i]['value'] = '.';
                         ++$i;
                     }

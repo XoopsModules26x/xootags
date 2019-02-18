@@ -126,7 +126,7 @@ class XoopsFormTags extends \Xoops\Form\Element
         $xoops->theme()->addStylesheet('modules/xootags/assets/js/jquery/jquery.tagsinput/jquery.tagsinput.css');
         $xoops->theme()->addStylesheet('media/jquery/ui/base/ui.all.css');
 
-        $name = $this->getName();
+        $name  = $this->getName();
         $class = ('' != $this->getClass() ? " class='" . $this->getClass() . "'" : '');
         if ($this->getCols() > $this->getMaxcols()) {
             $maxcols = 5;
@@ -136,14 +136,14 @@ class XoopsFormTags extends \Xoops\Form\Element
         $class = ('' != $this->getClass() ? " class='span" . $maxcols . ' ' . $this->getClass() . "'" : " class='span" . $maxcols . "'");
         $placeholder = ('' != $this->getPlaceholder() ? " placeholder='" . $this->getPlaceholder() . "'" : '');
         $extra = ('' != $this->getExtra() ? ' ' . $this->getExtra() : '');
-        $required = ($this->isRequired() ? ' required' : '');
+        $required    = ($this->isRequired() ? ' required' : '');
 
         $script
             = "<script type=\"text/javascript\">
         $(function () {
             $('#" . $name . "').tagsInput({
                 width:'auto',
-                autocomplete_url:'" . \XoopsBaseConfig::get('url') . "/modules/xootags/include/jquery.php'
+                autocomplete_url:'" . \XoopsBaseConfig::get('url')  . "/modules/xootags/include/jquery.php'
             });
         });
         </script>";

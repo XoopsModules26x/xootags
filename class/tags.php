@@ -45,7 +45,7 @@ class Tags extends \XoopsObject
      */
     public function getValues($keys = null, $format = null, $maxDepth = null)
     {
-        $ret = parent::getValues();
+        $ret                = parent::getValues();
         $ret['tag_term_js'] = $this->js_escape($this->getVar('tag_term'));
 
         return $ret;

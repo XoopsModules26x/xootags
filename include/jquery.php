@@ -18,7 +18,7 @@
  */
 use Xoops\Core\Request;
 
-include dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+include dirname(dirname(dirname(__DIR__))) .  '/mainfile.php';
 
 \XoopsLoad::load('system', 'system');
 $system = System::getInstance();
@@ -44,7 +44,7 @@ $tags = $tagsHandler->getObjects($criteria, true, false);
 $ret = [];
 if (count($tags) >= 0) {
     foreach ($tags as $k => $tag) {
-        $ret[$k]['id'] = $tag['tag_term'];
+        $ret[$k]['id']    = $tag['tag_term'];
         $ret[$k]['label'] = $tag['tag_term'];
         $ret[$k]['value'] = $tag['tag_term'];
     }

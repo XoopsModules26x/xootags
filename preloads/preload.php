@@ -14,6 +14,7 @@
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
+ * @version         $Id: core.php 1429 2013-01-15 01:11:29Z DuGris $
  */
 use Xoops\Core\PreloadItem;
 

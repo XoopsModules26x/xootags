@@ -46,7 +46,7 @@ $helper = \XoopsModules\Xootags\Helper::getInstance();
 $tagsConfig = $helper->loadConfig();
 $linkHandler = $helper->getHandler('Link');
 $tagsHandler = $helper->getHandler('Tags');
-$moduleHandler = $xoops->getHandlerModule();
+$moduleHandler   = $xoops->getHandlerModule();
 
 $xoops->tpl()->assign('moduletitle', $xoops->module->name());
 $xoops->tpl()->assign('welcome', $tagsConfig['xootags_welcome']);

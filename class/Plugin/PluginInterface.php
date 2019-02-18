@@ -20,10 +20,10 @@ namespace XoopsModules\Xootags\Plugin;
  */
 interface PluginInterface
 {
-    /**
-     * @param $items
-     *
-     * @return mixed
+ /**
+  * @param $items
+  *
+  * @return mixed
      */
     public function xooTags($items);
 }

@@ -57,15 +57,15 @@ class SearchPlugin extends \Xoops\Module\Plugin\PluginAbstract implements \Searc
             }
         }
 
-        $helper = \XoopsModules\Xootags\Helper::getInstance();
-        $tagsHandler = $helper->getHandler('Tags');
+        $tagsModule       = Xootags::getInstance();
+        $tagsTagsHandler = $tagsModule->tagsHandler();
 
         $tags = $tagsHandler->getObjects($criteria, true, false);
 
         $k = 0;
         foreach ($tags as $tag) {
             $ret[$k]['image'] = 'assets/icons/logo_small.png';
-            $ret[$k]['link'] = 'tag.php?tag_id=' . $tag['tag_id'];
+            $ret[$k]['link']  = 'tag.php?tag_id=' . $tag['tag_id'];
             $ret[$k]['title'] = $tag['tag_term'];
             ++$k;
         }

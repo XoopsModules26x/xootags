@@ -68,13 +68,13 @@ $criteria = new \CriteriaCompo();
 $criteria->setGroupBy('tag_modid');
 
 $modules = [];
-$countItems = 0;
+$countItems    = 0;
 $countByModule = $linkHandler->getCounts($criteria);
 foreach ($countByModule as $mid => $count_item) {
     $countItems += $count_item;
-    $module = $moduleHandler->get($mid);
-    $countModule[$mid]['mid'] = $mid;
-    $countModule[$mid]['name'] = $module->getVar('name');
+    $module                     = $moduleHandler->get($mid);
+    $countModule[$mid]['mid']   = $mid;
+    $countModule[$mid]['name']  = $module->getVar('name');
     $countModule[$mid]['count'] = $count_item;
 
     $modules[$mid] = $module->getVar('name');

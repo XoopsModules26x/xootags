@@ -9,20 +9,20 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package         xootags
  * @since           2.6.0
  * @author          Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
  * @author          Laurent JEN (Aka DuGris)
- */
 
+ */
 use Xoops\Core\Request;
 
 require_once dirname(dirname(dirname(__DIR__))) . '/include/cp_header.php';
 
-$tagsModule = Xootags::getInstance();
-$tagsConfig = $tagsModule->loadConfig();
+$helper = \XoopsModules\Xootags\Helper::getInstance();
+$tagsConfig = $helper->loadConfig();
 
 $op = '';
 if (isset($_POST)) {
@@ -38,11 +38,11 @@ if (isset($_GET)) {
 
 $scriptName = basename(Request::getString('SCRIPT_NAME', '', 'SERVER'), '.php');
 
-XoopsLoad::load('system', 'system');
-$system = System::getInstance();
+\XoopsLoad::load('system', 'system');
+$system = \System::getInstance();
 
-$xoops = Xoops::getInstance();
-if ($scriptName !== 'about') {
+$xoops = \Xoops::getInstance();
+if ('about' !== $scriptName) {
     $xoops->header('xootags_' . $scriptName . '.tpl');
 } else {
     $xoops->header();
@@ -50,31 +50,31 @@ if ($scriptName !== 'about') {
 $xoops->theme()->addStylesheet('modules/xootags/assets/css/moduladmin.css');
 
 $adminPage = new \Xoops\Module\Admin();
-if ($scriptName !== 'about' && $scriptName !== 'index') {
+if ('about' !== $scriptName && 'index' !== $scriptName) {
     $adminPage->renderNavigation(basename(Request::getString('SCRIPT_NAME', '', 'SERVER'))); // $_SERVER['SCRIPT_NAME']));
-} elseif ($scriptName !== 'index') {
+} elseif ('index' !== $scriptName) {
     $adminPage->displayNavigation(basename(Request::getString('SCRIPT_NAME', '', 'SERVER'))); //$_SERVER['SCRIPT_NAME']));
 }
 
-$tagsModule      = Xootags::getInstance();
-$tagsConfig      = $tagsModule->loadConfig();
-$tagsLinkHandler = $tagsModule->linkHandler();
-$tagsTagsHandler = $tagsModule->tagsHandler();
+$helper = \XoopsModules\Xootags\Helper::getInstance();
+$tagsConfig = $helper->loadConfig();
+$linkHandler = $helper->getHandler('Link');
+$tagsHandler = $helper->getHandler('Tags');
 
 $moduleHandler = $xoops->getHandlerModule();
 
 // Count by module
-$criteria = new CriteriaCompo();
-$criteria->setGroupby('tag_modid');
+$criteria = new \CriteriaCompo();
+$criteria->setGroupBy('tag_modid');
 
-$modules       = array();
-$countItems    = 0;
-$countByModule = $tagsLinkHandler->getCounts($criteria);
+$modules = [];
+$countItems = 0;
+$countByModule = $linkHandler->getCounts($criteria);
 foreach ($countByModule as $mid => $count_item) {
     $countItems += $count_item;
-    $module                     = $moduleHandler->get($mid);
-    $countModule[$mid]['mid']   = $mid;
-    $countModule[$mid]['name']  = $module->getVar('name');
+    $module = $moduleHandler->get($mid);
+    $countModule[$mid]['mid'] = $mid;
+    $countModule[$mid]['name'] = $module->getVar('name');
     $countModule[$mid]['count'] = $count_item;
 
     $modules[$mid] = $module->getVar('name');

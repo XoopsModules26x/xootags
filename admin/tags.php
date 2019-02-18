@@ -9,14 +9,15 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package         xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
- */
 
+ */
 use Xoops\Core\Request;
+use XoopsModules\Xootags\Form;
 
 include __DIR__ . '/header.php';
 
@@ -24,18 +25,18 @@ switch ($op) {
     case 'del':
         $tag_id = Request::getInt('tag_id', 0); //$system->cleanVars($_REQUEST, 'tag_id', 0, 'int');
         if (isset($tag_id) && $tag_id > 0) {
-            if ($tag = $tagsTagsHandler->get($tag_id)) {
+            if ($tag = $tagsHandler->get($tag_id)) {
                 $delete = Request::getInt('ok', 0, 'POST'); //$system->cleanVars($_POST, 'ok', 0, 'int');
-                if ($delete == 1) {
+                if (1 == $delete) {
                     if (!$xoops->security()->check()) {
                         $xoops->redirect('tags.php', 5, implode(',', $xoops->security()->getErrors()));
                     }
-                    $tagsLinkHandler->deleteByItem($tag_id);
-                    $tagsTagsHandler->delete($tag);
+                    $linkHandler->deleteByItem($tag_id);
+                    $tagsHandler->delete($tag);
                     $xoops->redirect('tags.php', 5, _AM_XOO_TAGS_DELETED);
                 } else {
-                    $xoops->confirm(array('ok' => 1, 'tag_id' => $tag_id, 'op' => 'del'), Request::getString('REQUEST_URI', '', 'SERVER'), //$_SERVER['REQUEST_URI'],
-                                    sprintf(_AM_XOO_TAGS_DELETE_CFM . "<br /><b><span style='color : Red'> %s </span></b><br /><br />", $tag->getVar('tag_term')));
+                    $xoops->confirm(['ok' => 1, 'tag_id' => $tag_id, 'op' => 'del'], Request::getString('REQUEST_URI', '', 'SERVER'), //$_SERVER['REQUEST_URI'],
+                                    sprintf(_AM_XOO_TAGS_DELETE_CFM . "<br><b><span style='color : #ff0000'> %s </span></b><br><br>", $tag->getVar('tag_term')));
                 }
             } else {
                 $xoops->redirect('tags.php', 5);
@@ -44,27 +45,26 @@ switch ($op) {
             $xoops->redirect('tags.php', 5);
         }
         break;
-
     case 'show':
     case 'hide':
         $tag_id = Request::getInt('tag_id', 0); //$system->cleanVars($_REQUEST, 'tag_id', 0, 'int');
-        $tagsTagsHandler->SetOnline($tag_id);
+        $tagsHandler->SetOnline($tag_id);
         $xoops->redirect('tags.php', 5, _AM_XOO_TAGS_SAVED);
         break;
-
     default:
         $module_id = Request::getInt('module_id', 0); //$system->cleanVars($_REQUEST, 'module_id', 0, 'int');
 
-        $form = $tagsModule->getForm(null, 'tags');
+//        $form = $helper->getForm(null, 'tags');
+        $form = new Form\TagsForm();
         $form->TagsFormModules($module_id, $modules);
 
-        if ($module_id == 0) {
-            $criteria = new CriteriaCompo();
+        if (0 == $module_id) {
+            $criteria = new \CriteriaCompo();
             $criteria->setSort('tag_count');
             $criteria->setOrder('DESC');
-            $tags = $tagsTagsHandler->getObjects($criteria, false, false);
+            $tags = $tagsHandler->getObjects($criteria, false, false);
         } else {
-            $tags = $tagsLinkHandler->getbyModule($module_id);
+            $tags = $linkHandler->getbyModule($module_id);
         }
         $xoops->tpl()->assign('form', $form->render());
         $xoops->tpl()->assign('tags', $tags);

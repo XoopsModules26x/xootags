@@ -9,16 +9,15 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package         xootags
  * @since           2.6.0
  * @author          Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
  * @author          Laurent JEN (Aka DuGris)
  */
-
 define('_MI_XOO_TAGS_NAME', 'XooFoo - Tags');
-define('_MI_XOO_TAGS_DESC', 'XooFoo - Tags<br />Module for xoops 2.6.0');
+define('_MI_XOO_TAGS_DESC', 'XooFoo - Tags<br>Module for xoops 2.6.0');
 
 // admin menu
 define('_MI_XOO_TAGS_INDEX', 'Admin Homepage');

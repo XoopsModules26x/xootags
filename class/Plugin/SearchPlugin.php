@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xootags\Plugin;
+
 /**
  * xootags module
  *
@@ -9,7 +12,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package         xootags
  * @since           2.6.0
@@ -18,9 +21,9 @@
  */
 
 /**
- * Class XootagsSearchPlugin
+ * Class SearchPlugin
  */
-class XootagsSearchPlugin extends Xoops\Module\Plugin\PluginAbstract implements SearchPluginInterface
+class SearchPlugin extends \Xoops\Module\Plugin\PluginAbstract implements \SearchPluginInterface
 {
     /**
      * @param $queries
@@ -34,34 +37,34 @@ class XootagsSearchPlugin extends Xoops\Module\Plugin\PluginAbstract implements 
     public function search($queries, $andor, $limit, $start, $uid)
     {
         $searchstring = '';
-        $ret          = array();
+        $ret = [];
 
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
 
         $criteria->setLimit($limit);
         $criteria->setStart($start);
         $criteria->setSort('tag_count');
         $criteria->setOrder('ASC');
 
-        $criteria->add(new Criteria('tag_status', 1));
+        $criteria->add(new \Criteria('tag_status', 1));
 
         if (is_array($queries) && $count = count($queries)) {
             foreach ($queries as $k => $v) {
-                $criteria_content = new CriteriaCompo();
-                $criteria_content->add(new Criteria('tag_term', '%' . $v . '%', 'LIKE'), 'OR');
+                $criteria_content = new \CriteriaCompo();
+                $criteria_content->add(new \Criteria('tag_term', '%' . $v . '%', 'LIKE'), 'OR');
                 $criteria->add($criteria_content, $andor);
             }
         }
 
-        $tagsModule       = Xootags::getInstance();
-        $tagsTagsHandler = $tagsModule->tagsHandler();
+        $helper = \XoopsModules\Xootags\Helper::getInstance();
+        $tagsHandler = $helper->getHandler('Tags');
 
-        $tags = $tagsTagsHandler->getObjects($criteria, true, false);
+        $tags = $tagsHandler->getObjects($criteria, true, false);
 
         $k = 0;
         foreach ($tags as $tag) {
             $ret[$k]['image'] = 'assets/icons/logo_small.png';
-            $ret[$k]['link']  = 'tag.php?tag_id=' . $tag['tag_id'];
+            $ret[$k]['link'] = 'tag.php?tag_id=' . $tag['tag_id'];
             $ret[$k]['title'] = $tag['tag_term'];
             ++$k;
         }

@@ -9,7 +9,7 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package         xootags
  * @since           2.6.0
@@ -18,7 +18,7 @@
  */
 use Xoops\Core\Request;
 
-if (basename(Request::getString('SCRIPT_NAME', '', 'SERVER')) === 'index.php') {
+if ('index.php' === basename(Request::getString('SCRIPT_NAME', '', 'SERVER'))) {
     $adminPage->displayIndex();
 }
 $xoops->footer();

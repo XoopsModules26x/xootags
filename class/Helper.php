@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xootags;
+
 /**
  * Xootags module
  *
@@ -9,14 +12,13 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
  */
-
-class Xootags extends Xoops\Module\Helper\HelperAbstract
+class Helper extends \Xoops\Module\Helper\HelperAbstract
 {
     /**
      * Init the module
@@ -28,8 +30,6 @@ class Xootags extends Xoops\Module\Helper\HelperAbstract
         $this->setDirname(basename(dirname(__DIR__)));
         $this->loadLanguage('main');
         $this->loadLanguage('preferences');
-
-        XoopsLoad::load('xoopaginate', $this->_dirname);
     }
 
     /**
@@ -37,24 +37,24 @@ class Xootags extends Xoops\Module\Helper\HelperAbstract
      */
     public function loadConfig()
     {
-        XoopsLoad::load('xoopreferences', $this->_dirname);
-
-        return XooTagsPreferences::getInstance()->getConfig();
+        return \XoopsModules\Xootags\Preferences::getInstance()->getConfig();
     }
 
     /**
-     * @return \Xoops\Module\Helper\XoopsObjectHandler
+     * Get an Object Handler
+     *
+     * @param string $name name of handler to load
+     *
+     * @return bool|\XoopsObjectHandler|\XoopsPersistableObjectHandler
      */
-    public function tagsHandler()
+    public function getHandler($name)
     {
-        return $this->getHandler('Tags');
-    }
+        $ret = false;
+        //        /** @var Connection $db */
+        $db = \XoopsDatabaseFactory::getConnection();
+        $class = '\\XoopsModules\\' . ucfirst(mb_strtolower(basename(dirname(__DIR__)))) . '\\' . $name . 'Handler';
+        $ret = new $class($db);
 
-    /**
-     * @return \Xoops\Module\Helper\XoopsObjectHandler
-     */
-    public function linkHandler()
-    {
-        return $this->getHandler('Link');
+        return $ret;
     }
 }

@@ -9,23 +9,22 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package         xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
  */
-
 include __DIR__ . '/header.php';
 
 $xoops->tpl()->assign('countModule', $countModule);
 $xoops->tpl()->assign('count_item', $countItems);
-$xoops->tpl()->assign('count_tag', $tagsTagsHandler->getCount());
+$xoops->tpl()->assign('count_tag', $tagsHandler->getCount());
 $adminPage->addInfoBox(_AM_XOO_TAGS_STATS);
 $adminPage->addInfoBoxLine($xoops->tpl()->fetch('admin:xootags/xootags_tags_stats.tpl'));
 
 // extension
-$adminPage->addConfigBoxLine(array('qrcode', 'warning'), 'extension');
-$adminPage->addConfigBoxLine(array('notifications', 'warning'), 'module');
+$adminPage->addConfigBoxLine(['qrcode', 'warning'], 'extension');
+$adminPage->addConfigBoxLine(['notifications', 'warning'], 'module');
 
 include __DIR__ . '/footer.php';

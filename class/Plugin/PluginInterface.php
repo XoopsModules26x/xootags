@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xootags\Plugin;
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -10,16 +13,16 @@
  */
 
 /**
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @author          trabis <lusopoemas@gmail.com>
  */
-interface XootagsPluginInterface
+interface PluginInterface
 {
- /**
-  * @param $items
-  *
-  * @return mixed
+    /**
+     * @param $items
+     *
+     * @return mixed
      */
     public function xooTags($items);
 }

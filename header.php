@@ -9,17 +9,15 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
  */
-
 use Xoops\Core\Request;
 
 include dirname(dirname(__DIR__)) . '/mainfile.php';
-include __DIR__ . '/class/utilities.php';
 
 $op = '';
 if (isset($_POST)) {
@@ -33,21 +31,21 @@ if (isset($_GET)) {
     }
 }
 
-XoopsLoad::load('system', 'system');
-$system = System::getInstance();
+\XoopsLoad::load('system', 'system');
+$system = \System::getInstance();
 
-$xoops = Xoops::getInstance();
+$xoops = \Xoops::getInstance();
 
 $scriptName = basename(Request::getString('SCRIPT_NAME', '', 'SERVER'), '.php'); //$_SERVER['SCRIPT_NAME'], '.php');
 $xoops->header('xootags_' . $scriptName . '.tpl');
 
 $xoops->theme()->addStylesheet('modules/xootags/assets/css/module.css');
 
-$tagsModule      = Xootags::getInstance();
-$tagsConfig      = $tagsModule->loadConfig();
-$tagsLinkHandler = $tagsModule->linkHandler();
-$tagsTagsHandler = $tagsModule->tagsHandler();
-$moduleHandler   = $xoops->getHandlerModule();
+$helper = \XoopsModules\Xootags\Helper::getInstance();
+$tagsConfig = $helper->loadConfig();
+$linkHandler = $helper->getHandler('Link');
+$tagsHandler = $helper->getHandler('Tags');
+$moduleHandler = $xoops->getHandlerModule();
 
 $xoops->tpl()->assign('moduletitle', $xoops->module->name());
 $xoops->tpl()->assign('welcome', $tagsConfig['xootags_welcome']);

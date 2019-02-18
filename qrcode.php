@@ -9,13 +9,12 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
  */
-
 use Xoops\Core\Request;
 
 include __DIR__ . '/header.php';
@@ -60,18 +59,18 @@ if (count($_GET) > 1) {
     $xoops->registry()->set('TAGS_SIZE', Request::getString('size', '', 'GET'));
     $matrixPointSize = ($xoops->registry()->offsetExists('TAGS_SIZE')) ? $xoops->registry()->get('TAGS_SIZE') : $matrixPointSize;
 }
-if ($url != '') {
-    $qrcode = new Xoops_qrcode();
+if ('' != $url) {
+    $qrcode = new \Xoops_qrcode();
     $qrcode->setLevel((int)($CorrectionLevel));
     $qrcode->setSize((int)($matrixPointSize));
     $qrcode->setMargin((int)($whiteMargin));
-    $qrcode->setBackground(constant(strtoupper('_' . $backgroundColor)));
-    $qrcode->setForeground(constant(strtoupper('_' . $foregroundColor)));
+    $qrcode->setBackground(constant(mb_strtoupper('_' . $backgroundColor)));
+    $qrcode->setForeground(constant(mb_strtoupper('_' . $foregroundColor)));
     $qrcode->render($url);
 } else {
     $contents = '';
-    $size     = getimagesize($xoops->url('/images/blank.gif'));
-    $handle   = fopen($xoops->url('/images/blank.gif'), 'rb');
+    $size = getimagesize($xoops->url('/images/blank.gif'));
+    $handle = fopen($xoops->url('/images/blank.gif'), 'rb');
     while (!feof($handle)) {
         $contents .= fread($handle, 1024);
     }

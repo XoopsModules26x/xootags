@@ -1,14 +1,14 @@
 <?php
 
-return $config = array(
-    'xootags_welcome'        => '',
-    'xootags_main_mode'      => 'cloud',
-    'xootags_count'          => true,
+return $config = [
+    'xootags_welcome' => '',
+    'xootags_main_mode' => 'cloud',
+    'xootags_count' => true,
     'xootags_limit_tag_main' => 100,
-    'xootags_limit_tag_tag'  => 10,
-    'xootags_font_min'       => 100,
-    'xootags_font_max'       => 200,
-    'xootags_colors'         => array(
+    'xootags_limit_tag_tag' => 10,
+    'xootags_font_min' => 100,
+    'xootags_font_max' => 200,
+    'xootags_colors' => [
         'Aqua',
         'Black',
         'Blue',
@@ -24,7 +24,6 @@ return $config = array(
         'Silver',
         'Teal',
         'White',
-        'Yellow'
-    )
-
-);
+        'Yellow',
+    ],
+];

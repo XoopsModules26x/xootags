@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xootags;
+
 /**
  * Created by PhpStorm.
  * User: mamba
@@ -6,12 +9,10 @@
  * Time: 00:08
  */
 
-//namespace Xoopsmodules\xoocontact;
-
 /**
- * Class XooTagsUtilities
+ * Class Utility
  */
-class XooTagsUtilities
+class Utility
 {
     /**
      * @param $string
@@ -19,8 +20,8 @@ class XooTagsUtilities
      */
     public function getMetaDescription($string)
     {
-        $xoops = Xoops::getInstance();
-        $myts  = MyTextSanitizer::getInstance();
+        $xoops = \Xoops::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
 
         if (is_array($string)) {
             $string = implode(', ', $string);
@@ -44,28 +45,28 @@ class XooTagsUtilities
      */
     public function getMetaKeywords($string, $limit = 5)
     {
-        $xoops = Xoops::getInstance();
-        $myts  = MyTextSanitizer::getInstance();
-        $keywords = array();
+        $xoops = \Xoops::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
+        $keywords = [];
 
         if (is_array($string)) {
             $string = implode(', ', $string);
         }
-        $string = strtolower($string) . ', ' . strtolower($xoops->getConfig('meta_keywords', 3));
+        $string = mb_strtolower($string) . ', ' . mb_strtolower($xoops->getConfig('meta_keywords', 3));
         $string = $myts->undoHtmlSpecialChars($string);
         $string = str_replace('[breakpage]', '', $string);
         $string = strip_tags($string);
         $string = html_entity_decode($string, ENT_QUOTES);
 
-        $search_pattern  = array("\t", "\r\n", "\r", "\n", ',', '.', "'", ';', ':', ')', '(', '"', '?', '!', '{', '}', '[', ']', '<', '>', '/', '+', '_', '\\', '*', 'pagebreak', 'page');
-        $replace_pattern = array(' ', ' ', ' ', ' ', ' ', ' ', ' ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-        $string          = str_replace($search_pattern, $replace_pattern, $string);
+        $search_pattern = ["\t", "\r\n", "\r", "\n", ',', '.', "'", ';', ':', ')', '(', '"', '?', '!', '{', '}', '[', ']', '<', '>', '/', '+', '_', '\\', '*', 'pagebreak', 'page'];
+        $replace_pattern = [' ', ' ', ' ', ' ', ' ', ' ', ' ', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
+        $string = str_replace($search_pattern, $replace_pattern, $string);
 
         $tmpkeywords = explode(' ', $string);
 
         $tmpkeywords = array_unique($tmpkeywords);
         foreach ($tmpkeywords as $keyword) {
-            if (strlen(trim($keyword)) >= $limit && !is_numeric($keyword)) {
+            if (mb_strlen(trim($keyword)) >= $limit && !is_numeric($keyword)) {
                 $keywords[] = htmlentities(trim($keyword));
             }
         }

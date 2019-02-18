@@ -1,4 +1,7 @@
 <?php
+
+namespace XoopsModules\Xootags;
+
 /**
  * Xootags module
  *
@@ -9,17 +12,18 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright       XOOPS Project (https://xoops.org)
  * @license         GNU GPL 2 (http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
+
  */
 
 /**
  * Class XoopsFormTags
  */
-class XoopsFormTags extends Xoops\Form\Element
+class XoopsFormTags extends \Xoops\Form\Element
 {
     /**
      * number of columns
@@ -87,6 +91,16 @@ class XoopsFormTags extends Xoops\Form\Element
     }
 
     /**
+     * getMaxcols - get the maximum columns for a field
+     *
+     * @return int
+     */
+    public function getMaxcols()
+    {
+        return $this->maxcols;
+    }
+
+    /**
      * Get placeholder for this element
      *
      * @return string
@@ -107,29 +121,29 @@ class XoopsFormTags extends Xoops\Form\Element
      */
     public function render()
     {
-        $xoops = Xoops::getInstance();
+        $xoops = \Xoops::getInstance();
         $xoops->theme()->addScript('modules/xootags/assets/js/jquery/jquery.tagsinput/jquery.tagsinput.js');
         $xoops->theme()->addStylesheet('modules/xootags/assets/js/jquery/jquery.tagsinput/jquery.tagsinput.css');
         $xoops->theme()->addStylesheet('media/jquery/ui/base/ui.all.css');
 
-        $name  = $this->getName();
-        $class = ($this->getClass() != '' ? " class='" . $this->getClass() . "'" : '');
+        $name = $this->getName();
+        $class = ('' != $this->getClass() ? " class='" . $this->getClass() . "'" : '');
         if ($this->getCols() > $this->getMaxcols()) {
             $maxcols = 5;
         } else {
             $maxcols = $this->getCols();
         }
-        $class       = ($this->getClass() != '' ? " class='span" . $maxcols . ' ' . $this->getClass() . "'" : " class='span" . $maxcols . "'");
-        $placeholder = ($this->getPlaceholder() != '' ? " placeholder='" . $this->getPlaceholder() . "'" : '');
-        $extra       = ($this->getExtra() != '' ? ' ' . $this->getExtra() : '');
-        $required    = ($this->isRequired() ? ' required' : '');
+        $class = ('' != $this->getClass() ? " class='span" . $maxcols . ' ' . $this->getClass() . "'" : " class='span" . $maxcols . "'");
+        $placeholder = ('' != $this->getPlaceholder() ? " placeholder='" . $this->getPlaceholder() . "'" : '');
+        $extra = ('' != $this->getExtra() ? ' ' . $this->getExtra() : '');
+        $required = ($this->isRequired() ? ' required' : '');
 
         $script
             = "<script type=\"text/javascript\">
         $(function () {
             $('#" . $name . "').tagsInput({
                 width:'auto',
-                autocomplete_url:'" . \XoopsBaseConfig::get('url')  . "/modules/xootags/include/jquery.php'
+                autocomplete_url:'" . \XoopsBaseConfig::get('url') . "/modules/xootags/include/jquery.php'
             });
         });
         </script>";

@@ -18,7 +18,6 @@ namespace XoopsModules\Xootags;
  * @since           2.6.0
  * @author          Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
  * @author          Laurent JEN (Aka DuGris)
- * @version         $Id: xootagslink.php 1440 2013-01-17 14:15:30Z DuGris $
  */
 
 /**

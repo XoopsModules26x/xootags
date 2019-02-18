@@ -14,7 +14,6 @@
  * @package         Xoositemap
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
-
  */
 if (file_exists('mainfile.php')) {
     include __DIR__ . '/mainfile.php';
@@ -37,12 +36,12 @@ $tpl = new \XoopsTpl();
 
 if ($xoops->isModule()) {
     $plugin = \Xoops\Module\Plugin::getPlugin($dirname, 'xoositemap');
-    $res    = $plugin->Xoositemap_xml(true);
+    $res = $plugin->Xoositemap_xml(true);
     if (is_array($res)) {
-        $time       = isset($res['time']) ? $res['time'] : time();
+        $time = isset($res['time']) ? $res['time'] : time();
         $mod_time[] = ['time' => $time];
         $modules[] = [
-            'time'    => $time,
+            'time' => $time,
             'dirname' => $res['dirname'],
             'date' => gmdate('Y-m-d\TH:i:s\Z', $time), ];
         if (count($res['items']) > 0) {
@@ -60,10 +59,10 @@ if ($xoops->isModule()) {
     foreach ($plugins as $plugin) {
         $res = $plugin->Xoositemap_xml(true);
         if (is_array($res)) {
-            $time       = isset($res['time']) ? $res['time'] : time();
+            $time = isset($res['time']) ? $res['time'] : time();
             $mod_time[] = ['time' => $time];
             $modules[] = [
-                'time'    => $time,
+                'time' => $time,
                 'dirname' => $res['dirname'],
                 'date' => gmdate('Y-m-d\TH:i:s\Z', $time), ];
             if (count($res['items']) > 0) {

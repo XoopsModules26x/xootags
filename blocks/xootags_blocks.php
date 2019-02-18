@@ -61,18 +61,18 @@ function xootags_show($options)
     }
 
     // font size
-    $font_min      = $options[1];
-    $font_max      = $options[2];
+    $font_min = $options[1];
+    $font_max = $options[2];
     $tags_interval = $tags_max - $tags_min;
-    $font_ratio    = ($tags_interval) ? ($font_max - $font_min) / $tags_interval : 1;
+    $font_ratio = ($tags_interval) ? ($font_max - $font_min) / $tags_interval : 1;
     foreach ($tags as $k => $tag) {
         $tags[$k]['font'] = empty($tags_interval) ? 100 : floor(($tag['tag_count'] - $tags_min) * $font_ratio) + $font_min;
         $tags[$k]['size'] = (floor(($tag['tag_count'] - $tags_min) * $font_ratio) + $font_min) / 10;
     }
 
     $block['lineheight'] = $options[2];
-    $block['colors']     = implode(',', $tagsConfig['xootags_colors']);
-    $block['tags']       = $tags;
+    $block['colors'] = implode(',', $tagsConfig['xootags_colors']);
+    $block['tags'] = $tags;
 
     return $block;
 }

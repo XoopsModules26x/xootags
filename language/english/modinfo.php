@@ -15,7 +15,6 @@
  * @since           2.6.0
  * @author          Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
  * @author          Laurent JEN (Aka DuGris)
-
  */
 define('_MI_XOO_TAGS_NAME', 'XooFoo - Tags');
 define('_MI_XOO_TAGS_DESC', 'XooFoo - Tags<br>Module for xoops 2.6.0');

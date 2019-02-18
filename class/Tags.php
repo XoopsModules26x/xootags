@@ -18,7 +18,6 @@ namespace XoopsModules\Xootags;
  * @since           2.6.0
  * @author          Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
  * @author          Laurent JEN (Aka DuGris)
-
  */
 
 /**
@@ -45,7 +44,7 @@ class Tags extends \XoopsObject
      */
     public function getValues($keys = null, $format = null, $maxDepth = null)
     {
-        $ret                = parent::getValues();
+        $ret = parent::getValues();
         $ret['tag_term_js'] = $this->js_escape($this->getVar('tag_term'));
 
         return $ret;

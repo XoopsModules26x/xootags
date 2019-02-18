@@ -16,14 +16,13 @@ namespace XoopsModules\Xootags\Plugin;
  * @copyright       XOOPS Project (https://xoops.org)
  * @license         http://www.fsf.org/copyleft/gpl.html GNU public license
  * @author          trabis <lusopoemas@gmail.com>
-
  */
 interface PluginInterface
 {
- /**
-  * @param $items
-  *
-  * @return mixed
+    /**
+     * @param $items
+     *
+     * @return mixed
      */
     public function xooTags($items);
 }

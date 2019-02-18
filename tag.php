@@ -14,7 +14,6 @@
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
-
  */
 use Xoops\Core\Request;
 

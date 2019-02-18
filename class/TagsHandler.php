@@ -18,7 +18,6 @@ namespace XoopsModules\Xootags;
  * @since           2.6.0
  * @author          Taiwen Jiang (phppp or D.J.) <php_pp@hotmail.com>
  * @author          Laurent JEN (Aka DuGris)
-
  */
 use Xoops\Core\Database\Connection;
 use Xoops\Core\Request;

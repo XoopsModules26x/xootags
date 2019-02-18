@@ -17,7 +17,6 @@ namespace XoopsModules\Xootags\Form;
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
-
  */
 
 /**
@@ -39,7 +38,7 @@ class TagsForm extends \Xoops\Form\ThemeForm
     {
         $xoops = \Xoops::getInstance();
         $moduleHandler = $xoops->getHandlerModule();
-        $module         = $moduleHandler->getByDirname('xooTags');
+        $module = $moduleHandler->getByDirname('xooTags');
 
         return ($module && $module->getVar('isactive')) ? true : false;
     }
@@ -72,7 +71,7 @@ class TagsForm extends \Xoops\Form\ThemeForm
 
             return new \XoopsModules\Xootags\XoopsFormTags(_XOO_TAGS_TAGS, $name, $value, $size, $maxlength);
         }
-            $xoops->logger->handleError(2, '<strong><span class="red">' . _XOO_TAGS_TAGS_ERROR . '</span></strong>', $xoops->getEnv('PHP_SELF'), 'TagsForm(...)');
+        $xoops->logger->handleError(2, '<strong><span class="red">' . _XOO_TAGS_TAGS_ERROR . '</span></strong>', $xoops->getEnv('PHP_SELF'), 'TagsForm(...)');
 
         return new \Xoops\Form\Text(_XOO_TAGS_TAGS, $name, $size, $maxlength, _XOO_TAGS_TAGS_ERROR);
     }

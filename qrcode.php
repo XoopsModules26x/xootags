@@ -14,7 +14,6 @@
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
-
  */
 use Xoops\Core\Request;
 
@@ -70,8 +69,8 @@ if ('' != $url) {
     $qrcode->render($url);
 } else {
     $contents = '';
-    $size     = getimagesize($xoops->url('/images/blank.gif'));
-    $handle   = fopen($xoops->url('/images/blank.gif'), 'rb');
+    $size = getimagesize($xoops->url('/images/blank.gif'));
+    $handle = fopen($xoops->url('/images/blank.gif'), 'rb');
     while (!feof($handle)) {
         $contents .= fread($handle, 1024);
     }

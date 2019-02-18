@@ -14,7 +14,6 @@
  * @package         Xootags
  * @since           2.6.0
  * @author          Laurent JEN (Aka DuGris)
-
  */
 use Xoops\Core\Request;
 
@@ -30,29 +29,29 @@ $criteria->setLimit($tagsConfig['xootags_limit_tag_main']);
 
 $tags = $tagsHandler->getObjects($criteria, false, false);
 $tags_count = $tagsHandler->getCount($criteria);
-$tags_max   = 1;
-$tags_min   = 1;
+$tags_max = 1;
+$tags_min = 1;
 $keywords = [];
 foreach ($tags as $k => $tag) {
     $keywords[] = $tag['tag_term'];
-    $tags_max   = ($tag['tag_count'] > $tags_max) ? $tag['tag_count'] : $tags_max;
-    $tags_min   = ($tag['tag_count'] < $tags_min) ? $tag['tag_count'] : $tags_min;
+    $tags_max = ($tag['tag_count'] > $tags_max) ? $tag['tag_count'] : $tags_max;
+    $tags_min = ($tag['tag_count'] < $tags_min) ? $tag['tag_count'] : $tags_min;
     $bytags = $linkHandler->getByTag($tag['tag_id']);
     foreach ($bytags as $j => $mod) {
-        $mid                                  = $mod['tag_modid'];
-        $module                               = $moduleHandler->get($mid);
-        $tags[$k]['modules'][$mid]['mid']     = $mid;
-        $tags[$k]['modules'][$mid]['name']    = $module->getVar('name');
+        $mid = $mod['tag_modid'];
+        $module = $moduleHandler->get($mid);
+        $tags[$k]['modules'][$mid]['mid'] = $mid;
+        $tags[$k]['modules'][$mid]['name'] = $module->getVar('name');
         $tags[$k]['modules'][$mid]['dirname'] = $module->getVar('dirname');
-        $tags[$k]['modules'][$mid]['image']   = $xoops->url('/modules/' . $module->getVar('dirname') . '/assets/icons/logo_small.png');
+        $tags[$k]['modules'][$mid]['image'] = $xoops->url('/modules/' . $module->getVar('dirname') . '/assets/icons/logo_small.png');
     }
 }
 
 // font size
-$font_max      = $tagsConfig['xootags_font_max'];
-$font_min      = $tagsConfig['xootags_font_min'];
+$font_max = $tagsConfig['xootags_font_max'];
+$font_min = $tagsConfig['xootags_font_min'];
 $tags_interval = $tags_max - $tags_min;
-$font_ratio    = ($tags_interval) ? ($font_max - $font_min) / $tags_interval : 1;
+$font_ratio = ($tags_interval) ? ($font_max - $font_min) / $tags_interval : 1;
 foreach ($tags as $k => $tag) {
     $tags[$k]['font'] = empty($tags_interval) ? 100 : floor(($tag['tag_count'] - $tags_min) * $font_ratio) + $font_min;
     $tags[$k]['size'] = (floor(($tag['tag_count'] - $tags_min) * $font_ratio) + $font_min) / 10;
